@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   let registeredUsers =
     JSON.parse(localStorage.getItem("registeredUsers")) || [];
-    let userIdCounter = localStorage.getItem("userIdCounter") || 0 ;
+  let userIdCounter = localStorage.getItem("userIdCounter") || 0;
 
   let registerBtn = document.getElementById("registerBtn");
 
@@ -15,6 +15,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
     registerBtn.addEventListener("click", () => {
       let newUsername = usernameInput.value;
       let newPassword = passwordInput.value;
+      let id;
 
       userIdCounter++;
 
@@ -22,6 +23,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         id: userIdCounter,
         newUsername,
         newPassword,
+        id,
       };
 
       registeredUsers.push(newUser);
@@ -31,7 +33,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
       localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
     });
   }
-//   localStorage.clear();
+  //   localStorage.clear();
 
   let loginBtn = document.getElementById("loginBtn");
   if (loginBtn) {
@@ -51,28 +53,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
   }
 
-  let toDoList =[];
+  let toDoList = [];
   let addTodoBtn = document.getElementById("addTodoBtn");
   if (addTodoBtn) {
     addTodoBtn.addEventListener("click", () => {
-        
-
       let todoInputValue = todoInput.value;
 
-    //   toDoList.forEach(user => {
-        //   toDoList.push(user);
-          let todoLi = document.createElement("li");
-          todoLi.innerHTML = todoInputValue;
-          todoUl.append(todoLi);
-          console.log(toDoList);
-      });
-    
+      //   toDoList.forEach(user => {
+      //   toDoList.push(user);
+      let todoLi = document.createElement("li");
+      todoLi.innerHTML = todoInputValue;
+      todoUl.append(todoLi);
+      console.log(toDoList);
+    });
+
     // });
   }
 
-
-
+  //Siri kommenterar
 });
-
-
-
