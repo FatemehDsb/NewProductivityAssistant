@@ -7,6 +7,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   let registeredUsers =
     JSON.parse(localStorage.getItem("registeredUsers")) || [];
+    let userIdCounter = localStorage.getItem("userIdCounter") || 0 ;
 
   let registerBtn = document.getElementById("registerBtn");
 
@@ -15,17 +16,22 @@ window.addEventListener("DOMContentLoaded", (event) => {
       let newUsername = usernameInput.value;
       let newPassword = passwordInput.value;
 
+      userIdCounter++;
+
       let newUser = {
+        id: userIdCounter,
         newUsername,
         newPassword,
       };
 
       registeredUsers.push(newUser);
 
+      localStorage.setItem("userIdCounter", userIdCounter);
+
       localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
     });
   }
-  //localStorage.clear();
+//   localStorage.clear();
 
   let loginBtn = document.getElementById("loginBtn");
   if (loginBtn) {
@@ -45,13 +51,28 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
   }
 
+  let toDoList =[];
   let addTodoBtn = document.getElementById("addTodoBtn");
   if (addTodoBtn) {
     addTodoBtn.addEventListener("click", () => {
+        
+
       let todoInputValue = todoInput.value;
-      let todoLi = document.createElement("li");
-      todoLi.innerHTML = todoInputValue;
-      todoUl.append(todoLi);
-    });
+
+    //   toDoList.forEach(user => {
+        //   toDoList.push(user);
+          let todoLi = document.createElement("li");
+          todoLi.innerHTML = todoInputValue;
+          todoUl.append(todoLi);
+          console.log(toDoList);
+      });
+    
+    // });
   }
+
+
+
 });
+
+
+
