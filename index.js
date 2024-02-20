@@ -14,10 +14,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
     registerBtn.addEventListener("click", () => {
       let newUsername = usernameInput.value;
       let newPassword = passwordInput.value;
+      let id;
 
       let newUser = {
         newUsername,
         newPassword,
+        id,
       };
 
       registeredUsers.push(newUser);
