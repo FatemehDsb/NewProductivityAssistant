@@ -4,6 +4,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   let todoInput = document.getElementById("todoInput");
   let todoUl = document.getElementById("todoUl");
+  let toDoList;
 
   let registeredUsers =
     JSON.parse(localStorage.getItem("registeredUsers")) || [];
@@ -24,6 +25,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
         newUsername,
         newPassword,
         id,
+        toDoList: []
       };
 
       registeredUsers.push(newUser);
@@ -50,25 +52,34 @@ window.addEventListener("DOMContentLoaded", (event) => {
       } else {
         console.log("fail");
       }
+
     });
   }
 
-  let toDoList = [];
+  
   let addTodoBtn = document.getElementById("addTodoBtn");
   if (addTodoBtn) {
+    
     addTodoBtn.addEventListener("click", () => {
+      toDoList = JSON.parse(localStorage.getItem("toDoList")) || []; 
       let todoInputValue = todoInput.value;
 
-      //   toDoList.forEach(user => {
-      //   toDoList.push(user);
+      //toDoList.forEach(user => {
+
       let todoLi = document.createElement("li");
-      todoLi.innerHTML = todoInputValue;
+      todoLi.textContent = todoInputValue;
       todoUl.append(todoLi);
-      console.log(toDoList);
+      
+
+      toDoList.push(todoLi.textContent);
+
+      localStorage.setItem("toDoList", JSON.stringify(toDoList));
+
+      //registeredUsers.push(toDoList);
+      console.log(registeredUsers);
+      
     });
 
-    // });
-  }
-
-  //Siri kommenterar
+    };
+  
 });
