@@ -25,3 +25,13 @@ body {
   justify-content: start;
   align-items: start;
 }
+
+#todosContainer{
+  border: 2px solid black;
+  margin: 5px;
+}
+
+#todoUl{
+  border: 2px solid red;
+  margin: 5px;
+}
