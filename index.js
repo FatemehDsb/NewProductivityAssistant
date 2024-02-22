@@ -69,7 +69,27 @@ if (loginBtn) {
       console.log("fail");
     }
   });
+
+
+  //function - to show currentusers.addtoList 
+  //when click on log in => localstorage.getitem("currentcuser") - userboject.todolist
+  //if currentuser har todolistarray => om det inte finns, skapa ett tomt array
+  //om det finns => append currentuser.todolist 
+  //create element li och sätta dem stringar 
+  //penda li i ul 
+
+  currentUser = JSON.parse(localStorage.getItem("currentUser"));
+//if there is anything in array
+if ((currentUser.toDoList).length>0){
+currentUser.toDoList.forEach((todoItems) => {
+let todoLi = document.createElement("li");
+todoLi.textContent = todoItems;
+todoUl.appendChild(todoLi);
+});
 }
+
+}
+
 
 let addTodoBtn = document.getElementById("addTodoBtn");
 if (addTodoBtn) {
@@ -77,8 +97,8 @@ if (addTodoBtn) {
     let todoInputValue = todoInput.value;
     //check if there is any inputvalue
     if (todoInputValue){
-      // Retrieve the current user
       currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      // Retrieve the current user
       // Find and update the current user's toDoList in registeredUsers
       //Assigning the result of .map() back to registeredUsers 
       //effectively updates the entire array with any changes made during the .map() 
