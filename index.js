@@ -2,10 +2,13 @@
 //Declaring username and password input
 let usernameInput = document.getElementById("userName");
 let passwordInput = document.getElementById("password");
+let todosContainer = document.getElementById("todosContainer");
 //declaring todo input 
 let todoInput = document.getElementById("todoInput");
 //declaring todo <ul>
 let todoUl = document.getElementById("todoUl");
+
+
 //Declaring todoList array
 let toDoList;
 
@@ -44,7 +47,8 @@ if (registerBtn) {
 
 let loginBtn = document.getElementById("loginBtn");
 if (loginBtn) {
-  loginBtn.addEventListener("click", () => {
+  loginBtn.addEventListener("click", (event) => {
+    event.preventDefault();
     let userName = usernameInput.value;
     let password = passwordInput.value;
 
@@ -65,31 +69,41 @@ if (loginBtn) {
       localStorage.setItem("currentUser", JSON.stringify(user)); // Save current user 
       window.location.assign("todo.html");
       console.log("success");
+      currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if(currentUser){
+        //if there is anything in array
+      if (currentUser.toDoList.length>0){
+      console.log(currentUser.toDoList);
+      currentUser.toDoList.forEach((todoItems) => {
+      let todoLi = document.createElement("li");
+      todoLi.textContent = todoItems;
+      console.log(todoUl);
+      todoUl.appendChild(todoLi);
+      });
+    }
+       else {
+      console.log("error");
+      }
+    } else {
+      console.log("No user");
+    }
     } else {
       console.log("fail");
     }
   });
-
-
+  
+  
   //function - to show currentusers.addtoList 
   //when click on log in => localstorage.getitem("currentcuser") - userboject.todolist
   //if currentuser har todolistarray => om det inte finns, skapa ett tomt array
   //om det finns => append currentuser.todolist 
   //create element li och sätta dem stringar 
   //penda li i ul 
-
-  currentUser = JSON.parse(localStorage.getItem("currentUser"));
-//if there is anything in array
-if ((currentUser.toDoList).length>0){
-currentUser.toDoList.forEach((todoItems) => {
-let todoLi = document.createElement("li");
-todoLi.textContent = todoItems;
-todoUl.appendChild(todoLi);
-});
-}
+  
+  
+  
 
 }
-
 
 let addTodoBtn = document.getElementById("addTodoBtn");
 if (addTodoBtn) {
