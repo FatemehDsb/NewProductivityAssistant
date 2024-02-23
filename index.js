@@ -1,3 +1,4 @@
+window.onload = () => {
 //Declaring username and password input
 let usernameInput = document.getElementById("userName");
 let passwordInput = document.getElementById("password");
@@ -8,11 +9,7 @@ let todoInput = document.getElementById("todoInput");
 let todoUl = document.getElementById("todoUl");
 let logOutBtn = document.getElementById("logOutBtn");
 
-//Declaring todoList array
-let toDoList;
-
 let newUser;
-let currentUser;
 
 let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
 let userIdCounter = localStorage.getItem("userIdCounter") || 0;
@@ -20,8 +17,7 @@ let userIdCounter = localStorage.getItem("userIdCounter") || 0;
 let registerBtn = document.getElementById("registerBtn");
 
 //when register user, it creates a new object called newuser.
-if (registerBtn) {
-  registerBtn.addEventListener("click", () => {
+  registerBtn?.addEventListener("click", () => {
     let newUsername = usernameInput.value;
     let newPassword = passwordInput.value;
     userIdCounter++;
@@ -41,12 +37,11 @@ if (registerBtn) {
 
     console.log("New user registered:", newUser); // Add this line to check newUser
   });
-}
+
 //   localStorage.clear();
 
 let loginBtn = document.getElementById("loginBtn");
-if (loginBtn) {
-  loginBtn.addEventListener("click", (event) => {
+  loginBtn?.addEventListener("click", (event) => {
     event.preventDefault();
     let userName = usernameInput.value;
     let password = passwordInput.value;
@@ -63,31 +58,27 @@ if (loginBtn) {
     //currentUser's data is stored in localStorage using user's details.
     //key : currentUser - value: currentuserObject-string
 
+
+    //modified functions for todo ul
     if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user)); // Save current user
+      localStorage.setItem("currentUser", JSON.stringify(user)); // Save current user 
       window.location.assign("todo.html");
-      console.log("success");
-      currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (currentUser) {
-        //if there is anything in array
-        if (currentUser.toDoList.length > 0) {
-          console.log(currentUser.toDoList);
-          currentUser.toDoList.forEach((todoItems) => {
-            let todoLi = document.createElement("li");
-            todoLi.textContent = todoItems;
-            console.log(todoUl);
-            todoUl.appendChild(todoLi);
-          });
-        } else {
-          console.log("error");
-        }
-      } else {
-        console.log("No user");
-      }
+      console.log("assigned todo.html");
     } else {
-      console.log("fail");
+        console.log("Error: User not found");
     }
-  });
+  
+});
+
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && currentUser.toDoList && currentUser.toDoList.length > 0) {
+        currentUser.toDoList.forEach(todoItem => {
+            const todoLi = document.createElement("li");
+            todoLi.textContent = todoItem;
+            todoUl.appendChild(todoLi);
+        });
+    };
+  
 
   //function - to show currentusers.addtoList
   //when click on log in => localstorage.getitem("currentcuser") - userboject.todolist
@@ -95,52 +86,46 @@ if (loginBtn) {
   //om det finns => append currentuser.todolist
   //create element li och sätta dem stringar
   //penda li i ul
-}
 
-let addTodoBtn = document.getElementById("addTodoBtn");
-if (addTodoBtn) {
-  addTodoBtn.addEventListener("click", () => {
-    let todoInputValue = todoInput.value;
-    //check if there is any inputvalue
-    if (todoInputValue) {
-      currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      // Retrieve the current user
-      // Find and update the current user's toDoList in registeredUsers
-      //Assigning the result of .map() back to registeredUsers
-      //effectively updates the entire array with any changes made during the .map()
-      registeredUsers = registeredUsers.map((user) => {
-        if (user.id === currentUser.id) {
-          if (!user.toDoList) user.toDoList = []; // Ensure toDoList exists
-          user.toDoList.push(todoInputValue);
-          currentUser = user; // Update currentUser with the new toDoList
+const addTodoBtn = document.getElementById("addTodoBtn");
+    addTodoBtn?.addEventListener("click", () => {
+        const todoInputValue = todoInput.value;
+        if (!todoInputValue) 
+            return;
+
+        // Get current user from localstorage
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (currentUser) {
+          currentUser.toDoList.push(todoInputValue);
+
+          // Update registered users array with changes
+          registeredUsers = registeredUsers.map(user =>
+              user.id === currentUser.id ? currentUser : user
+          );
+
+            // Save the updated registered users array to localStorage
+            localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+
+            const todoLi = document.createElement("li");
+            todoLi.textContent = todoInputValue;
+            todoUl.appendChild(todoLi);
+
+            todoInput.value = "";
         }
-        return user;
-      });
-
-      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers)); // Save updated users
-      localStorage.setItem("currentUser", JSON.stringify(currentUser)); // Update current user in storage
-
-      // Add the to-do item to the DOM
-      let todoLi = document.createElement("li");
-      todoLi.textContent = todoInputValue;
-      todoUl.appendChild(todoLi);
-    }
-  });
-}
+    });
 
 // localStorage.clear();
 
 // Checking if the element logOutBtn exists in the HTML file
 if (logOutBtn) {
-  // Event Listener
   logOutBtn.addEventListener("click", () => {
     // Moves the user to the first page
     window.location.assign("index.html");
 
-    // Empties the currentUser array
     currentUser = [];
 
     // Updates the current user in Local storage
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
   });
+}
 }
