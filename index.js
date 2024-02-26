@@ -3,6 +3,29 @@ window.onload = () => {
   let usernameInput = document.getElementById("userName");
   let passwordInput = document.getElementById("password");
   let todosContainer = document.getElementById("todosContainer");
+  let quoteContainer = document.getElementById("quoteContainer");
+  let apiUrl = 'https://api.quotable.io/random';
+  let fetchData;
+
+   //Sharlin - Function for api greeting
+
+  fetchData = async () => {
+    const res = await fetch(apiUrl);
+    const quote = await res.json();
+    console.log(quote.content);
+    console.log(`- ${quote.author}`);
+    
+    let finalquote = quote.content;
+    let author = quote.author;
+    let greeting = (finalquote+'\n'+ '- '+author);
+    
+    let quoteParagraph = document.createElement('p');
+    quoteParagraph.innerText = greeting;
+    quoteContainer.appendChild(quoteParagraph);
+   } //Fetch ends
+
+
+
   //declaring todo input
   let todoInput = document.getElementById("todoInput");
   //declaring todo <ul>
@@ -28,13 +51,13 @@ window.onload = () => {
       newUsername,
       newPassword,
       toDoList: [
-        { title,
+        /*{ title,
           category,
           todostatus,
           description,
           deadline,
           timestimited,
-        }
+        }*/
       ],
     };
     //add new object to registeredusers array.
@@ -61,12 +84,17 @@ window.onload = () => {
       (user) => user.newUsername === userName && user.newPassword === password
     );
 
+    
+
     //Fatemeh Comment :
     //if the user variable finds a match in the registeredUsers array
     //set currentUser to reference this user
     //currentUser's data is stored in localStorage using user's details.
     //key : currentUser - value: currentuserObject-string
 
+    
+
+    
     //modified functions for todo ul
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user)); // Save current user
@@ -76,6 +104,11 @@ window.onload = () => {
       console.log("Error: User not found");
     }
   });
+
+  //Display greeting
+  if (quoteContainer){
+    fetchData();
+  } 
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (currentUser && currentUser.toDoList && currentUser.toDoList.length > 0) {
