@@ -27,7 +27,15 @@ window.onload = () => {
       id: userIdCounter,
       newUsername,
       newPassword,
-      toDoList: [],
+      toDoList: [
+        { title,
+          category,
+          todostatus,
+          description,
+          deadline,
+          timestimited,
+        }
+      ],
     };
     //add new object to registeredusers array.
     registeredUsers.push(newUser);
