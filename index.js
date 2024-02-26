@@ -4,27 +4,60 @@ window.onload = () => {
   let passwordInput = document.getElementById("password");
   let todosContainer = document.getElementById("todosContainer");
   let quoteContainer = document.getElementById("quoteContainer");
-  let apiUrl = 'https://api.quotable.io/random';
+  let apiUrl = "https://api.quotable.io/random";
   let fetchData;
 
-   //Sharlin - Function for api greeting
+  //Sharlin - Function for api greeting
 
   fetchData = async () => {
     const res = await fetch(apiUrl);
     const quote = await res.json();
     console.log(quote.content);
     console.log(`- ${quote.author}`);
-    
+
     let finalquote = quote.content;
     let author = quote.author;
-    let greeting = (finalquote+'\n'+ '- '+author);
-    
-    let quoteParagraph = document.createElement('p');
+    let greeting = finalquote + "\n" + "- " + author;
+
+    let quoteParagraph = document.createElement("p");
     quoteParagraph.innerText = greeting;
     quoteContainer.appendChild(quoteParagraph);
-   } //Fetch ends
+  }; //Fetch ends
 
+  // Modal begins here
 
+  // Get the modal
+  const modal = document.getElementById("todoModal");
+
+  // Get the button that opens the modal
+  const openModalBtn = document.getElementById("openModalBtn");
+
+  // Get the <span> element that closes the modal
+  const modalSpan = document.getElementsByClassName("close")[0];
+
+  // Btn onclick funktion
+  let openModal = () => {
+    modal.style.display = "block";
+  };
+
+  // When the user clicks the button, open the modal
+  if (openModalBtn) {
+    openModalBtn.onclick = openModal;
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  if (modalSpan) {
+    modalSpan.onclick = function () {
+      modal.style.display = "none";
+    };
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
 
   //declaring todo input
   let todoInput = document.getElementById("todoInput");
@@ -84,17 +117,12 @@ window.onload = () => {
       (user) => user.newUsername === userName && user.newPassword === password
     );
 
-    
-
     //Fatemeh Comment :
     //if the user variable finds a match in the registeredUsers array
     //set currentUser to reference this user
     //currentUser's data is stored in localStorage using user's details.
     //key : currentUser - value: currentuserObject-string
 
-    
-
-    
     //modified functions for todo ul
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user)); // Save current user
@@ -106,9 +134,9 @@ window.onload = () => {
   });
 
   //Display greeting
-  if (quoteContainer){
+  if (quoteContainer) {
     fetchData();
-  } 
+  }
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if (currentUser && currentUser.toDoList && currentUser.toDoList.length > 0) {
