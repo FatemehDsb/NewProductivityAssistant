@@ -8,14 +8,25 @@
     <script src="index.js" defer></script>
   </head>
   <body>
+    <div id="quoteContainer"></div>
+    <!-- Trigger/Open The Modal -->
+    <button id="openModalBtn">+</button>
+
+    <!-- The Modal -->
+    <div id="todoModal" class="todo-modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <input type="text" id="todoInput" placeholder="Add Todo" />
+        <button id="addTodoBtn">Add Todo</button>
+      </div>
+    </div>
+    <h1>Your Todos</h1>
     <div id="todosContainer">
-      <h1>Your Todos</h1>
-      <input type="text" id="todoInput" placeholder="Add Todo" />
-      <button id="addTodoBtn">Add Todo</button>
       <ul id="todoUl"></ul>
       <br />
       <br />
-      <button id="logOutBtn">Log out</button>
     </div>
+    <button id="logOutBtn">Log out</button>
   </body>
 </html>
