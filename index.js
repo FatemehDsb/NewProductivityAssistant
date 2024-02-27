@@ -6,9 +6,22 @@ window.onload = () => {
   let quoteContainer = document.getElementById("quoteContainer");
   let apiUrl = "https://api.quotable.io/random";
   let fetchData;
+  
+  /*  >>>>>>>>> ==================Fatemeh's code starts Here============== <<<<<<<<<<<<< */
+  //Get inputs 
+ let  titleInput = document.getElementById("input-title");
+ const deadlineInput = document.getElementById("deadline-input");
+ const estimatedTimeInput = document.getElementById("estimated-time-input");
+ const descriptionInput = document.getElementById("description-input");
+ const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
+
+  let toDoList=[];
+
+ /*  >>>>>>>>>================= Fatemeh's code ENDS Here ===================<<<<<<<<<<<<< */
+
 
   //Sharlin - Function for api greeting
-
+  
   fetchData = async () => {
     const res = await fetch(apiUrl);
     const quote = await res.json();
@@ -18,7 +31,7 @@ window.onload = () => {
     let finalquote = quote.content;
     let author = quote.author;
     let greeting = finalquote + "\n" + "- " + author;
-
+    
     let quoteParagraph = document.createElement("p");
     quoteParagraph.innerText = greeting;
     quoteContainer.appendChild(quoteParagraph);
@@ -35,42 +48,42 @@ window.onload = () => {
   // Get the <span> element that closes the modal
   const modalSpan = document.getElementsByClassName("close")[0];
 
+  
   // Btn onclick funktion
   let openModal = () => {
-    modal.style.display = "block";
+      modal.style.display = "block";
   };
 
   // When the user clicks the button, open the modal
   if (openModalBtn) {
-    openModalBtn.onclick = openModal;
+      openModalBtn.onclick = openModal;
   }
 
   // When the user clicks on <span> (x), close the modal
   if (modalSpan) {
-    modalSpan.onclick = function () {
-      modal.style.display = "none";
-    };
+      modalSpan.onclick = function () {
+          modal.style.display = "none";
+      };
   }
-
+  
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
-    }
-  };
+  }
+};
 
   //declaring todo input
-  let todoInput = document.getElementById("todoInput");
+  // let todoInput = document.getElementById("todoInput");
   //declaring todo <ul>
   let todoUl = document.getElementById("todoUl");
   let logOutBtn = document.getElementById("logOutBtn");
-
   let newUser;
 
   let registeredUsers =
-    JSON.parse(localStorage.getItem("registeredUsers")) || [];
+  JSON.parse(localStorage.getItem("registeredUsers")) || [];
   let userIdCounter = localStorage.getItem("userIdCounter") || 0;
-
+  
   let registerBtn = document.getElementById("registerBtn");
 
   //when register user, it creates a new object called newuser.
@@ -78,20 +91,14 @@ window.onload = () => {
     let newUsername = usernameInput.value;
     let newPassword = passwordInput.value;
     userIdCounter++;
-    //*****change newUserName to userName
+   
+   
     newUser = {
       id: userIdCounter,
       newUsername,
       newPassword,
-      toDoList: [
-        /*{ title,
-          category,
-          todostatus,
-          description,
-          deadline,
-          timestimited,
-        }*/
-      ],
+      /* Fatemeh : deleted empty array*/
+      toDoList,
     };
     //add new object to registeredusers array.
     registeredUsers.push(newUser);
@@ -99,15 +106,15 @@ window.onload = () => {
     localStorage.setItem("userIdCounter", userIdCounter);
     //save registeredusersarray in local storage
     localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-
+    
     console.log("New user registered:", newUser); // Add this line to check newUser
   });
 
   //   localStorage.clear();
-
+  
   let loginBtn = document.getElementById("loginBtn");
   loginBtn?.addEventListener("click", (event) => {
-    event.preventDefault();
+      event.preventDefault();
     let userName = usernameInput.value;
     let password = passwordInput.value;
 
@@ -116,51 +123,81 @@ window.onload = () => {
     let user = registeredUsers.find(
       (user) => user.newUsername === userName && user.newPassword === password
     );
-
+    
     //Fatemeh Comment :
     //if the user variable finds a match in the registeredUsers array
     //set currentUser to reference this user
     //currentUser's data is stored in localStorage using user's details.
     //key : currentUser - value: currentuserObject-string
-
+    
     //modified functions for todo ul
     if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user)); // Save current user
-      window.location.assign("todo.html");
-      console.log("assigned todo.html");
-    } else {
-      console.log("Error: User not found");
-    }
+        localStorage.setItem("currentUser", JSON.stringify(user)); // Save current user
+        window.location.assign("todo.html");
+        console.log("assigned todo.html");
+      } else {
+          console.log("Error: User not found");
+      }
   });
-
+  
   //Display greeting
   if (quoteContainer) {
-    fetchData();
+      fetchData();
   }
-
+  
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  
   if (currentUser && currentUser.toDoList && currentUser.toDoList.length > 0) {
-    currentUser.toDoList.forEach((todoItem) => {
+      currentUser.toDoList.forEach((item) => {
       const todoLi = document.createElement("li");
-      todoLi.textContent = todoItem;
+       //changed-Fatemeh
+      todoLi.textContent = item.title;
+      // todoLi.textContent = todoItem;   How it was earlier
       todoUl.appendChild(todoLi);
-    });
-  }
+  });
+}
 
-  //function - to show currentusers.addtoList
-  //when click on log in => localstorage.getitem("currentcuser") - userboject.todolist
-  //if currentuser har todolistarray => om det inte finns, skapa ett tomt array
-  //om det finns => append currentuser.todolist
-  //create element li och sätta dem stringar
-  //penda li i ul
+//function - to show currentusers.addtoList
+//when click on log in => localstorage.getitem("currentcuser") - userboject.todolist
+//if currentuser har todolistarray => om det inte finns, skapa ett tomt array
+//om det finns => append currentuser.todolist
+//create element li och sätta dem stringar
+//penda li i ul
 
-  const addTodoBtn = document.getElementById("addTodoBtn");
-  addTodoBtn?.addEventListener("click", () => {
-    const todoInputValue = todoInput.value;
-    if (!todoInputValue) return;
+const addTodoBtn = document.getElementById("addTodoBtn");
+addTodoBtn?.addEventListener("click", () => {
+  // const todoInputValue = todoInput.value
+  /*  >>>>>>>>> Fatemeh's code STARTS Here <<<<<<<<<<<<< */
+  //Get inputs 
+  let title = titleInput.value;
+  const categoryCheckbox = document.querySelector('input[name="category"]:checked');
+  const category = categoryCheckbox.value ;
+  const deadline = deadlineInput.value;
+  const estimatedTime = estimatedTimeInput.value;
+  const description = descriptionInput.value;
+  const statusValue = todoStatusInput.checked;
+  /*  >>>>>>>>> Fatemeh's code ENDS Here <<<<<<<<<<<<< */
+
+    if (!title ) return;
+  //   if (!todoInputValue ) return;
+
+
+   let toDoItem = {
+      title,
+      category,
+      deadline,
+      estimatedTime,
+      description,
+      statusValue,
+   }
+
+  //  toDoList.push(todoItem);
+  //  console.log(toDoList);
+
+      /*  >>>>>>>>> Fatemeh's code ENDS Here <<<<<<<<<<<<< */
 
     const todoLi = document.createElement("li");
-    todoLi.textContent = todoInputValue;
+    todoLi.textContent = title;
     todoUl.appendChild(todoLi);
 
     // Get current user from localstorage
@@ -169,11 +206,15 @@ window.onload = () => {
     // Siri: Create a copy of currentUser to avoid modifying the original object
     const updatedUser = { ...currentUser };
 
+    if (!updatedUser.toDoList) {
+      updatedUser.toDoList = []; // Initialize toDoList if it does not exist
+  }
+
     //Siri: previous version
     // currentUser.toDoList.push(todoInputValue);
 
     // Siri: Pushes todoInputValue to updatedUser (earlier currentUser)
-    updatedUser.toDoList.push(todoInputValue);
+    updatedUser.toDoList.push(toDoItem);
 
     // Siri: Previous version: Update registered users array with changes
     // registeredUsers = registeredUsers.map((user) =>
@@ -197,7 +238,7 @@ window.onload = () => {
       JSON.stringify(updatedRegisteredUsers)
     );
 
-    todoInput.value = "";
+    title = "";
   });
 
   // localStorage.clear();
@@ -212,3 +253,8 @@ window.onload = () => {
     });
   }
 };
+
+//   console.log(currentUser);
+
+
+//   
