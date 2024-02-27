@@ -150,10 +150,11 @@ window.onload = () => {
   if (currentUser && currentUser.toDoList && currentUser.toDoList.length > 0) {
       currentUser.toDoList.forEach((item) => {
       const todoLi = document.createElement("li");
-       //changed-Fatemeh
-      todoLi.textContent = item.title;
-      // todoLi.textContent = todoItem;   How it was earlier
+       todoLi.textContent = item.title;
+    if(todoUl){
+
       todoUl.appendChild(todoLi);
+    }
   });
 }
 
@@ -171,7 +172,7 @@ addTodoBtn?.addEventListener("click", () => {
   //Get inputs 
   let title = titleInput.value;
   const categoryCheckbox = document.querySelector('input[name="category"]:checked');
-  const category = categoryCheckbox.value ;
+  const category = categoryCheckbox ? categoryCheckbox.value : undefined;
   const deadline = deadlineInput.value;
   const estimatedTime = estimatedTimeInput.value;
   const description = descriptionInput.value;
