@@ -172,7 +172,7 @@ addTodoBtn?.addEventListener("click", () => {
   //Get inputs 
   let title = titleInput.value;
   const categoryCheckbox = document.querySelector('input[name="category"]:checked');
-  const category = categoryCheckbox ? categoryCheckbox.value : undefined;
+  const category = categoryCheckbox ? categoryCheckbox.value: " ";
   const deadline = deadlineInput.value;
   const estimatedTime = estimatedTimeInput.value;
   const description = descriptionInput.value;
@@ -239,7 +239,7 @@ addTodoBtn?.addEventListener("click", () => {
       JSON.stringify(updatedRegisteredUsers)
     );
 
-    title = "";
+    titleInput.value = "";
   });
 
   // localStorage.clear();
