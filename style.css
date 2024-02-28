@@ -33,7 +33,7 @@ body {
 }
 
 #todosContainer {
-  border: 2px solid black;
+  
   border-radius: 10px;
   margin: 5px;
   padding: 20px;
@@ -120,20 +120,53 @@ nav a:hover {
   height: 400px;
 }
 
-/* todocart*/
+
+#todosContainer {
+  border-radius: 10px;
+  margin: 5px;
+  padding: 20px;
+  background-color: rgb(238, 238, 238);
+}
+
+#completedTodosContainer {
+  border-radius: 10px;
+  margin: 5px;
+  padding: 20px;
+  background-color: lightgray;
+}
+
 .todo-card {
-  border: 1px solid #1f52c0;
+  border-radius: 10px;
   padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
+  margin: 5px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   
 }
+.todo-info{
+  border-radius: 20px;
+  background-color: rgb(204, 138, 246);
+  width: 100%;
+  padding: 10px 20px;
+}
 .todo-details{
+  border-radius: 20px;
  display: flex;
  flex-direction: row;
-  border: 1px solid rgb(208, 21, 21);
+  padding: 10px 20px;
+  justify-content: space-between;
+}
+.todo-title-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ 
+}
+.todo-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
 }
+
