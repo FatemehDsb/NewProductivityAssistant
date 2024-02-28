@@ -39,10 +39,6 @@ body {
   padding: 20px;
 }
 
-#todoUl {
-  border: 2px solid red;
-  margin: 5px;
-}
 
 /* The Modal (background) */
 .modal {
@@ -65,7 +61,7 @@ body {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 50%;
 }
 
 /* The Close Button */
@@ -124,10 +120,20 @@ nav a:hover {
   height: 400px;
 }
 
-#sortContainer{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border: 1px solid gray;
-  border-radius: 8px;
-  padding: 0.8rem;
-  margin: 0.2em;
+/* todocart*/
+.todo-card {
+  border: 1px solid #1f52c0;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
+}
+.todo-details{
+ display: flex;
+ flex-direction: row;
+  border: 1px solid rgb(208, 21, 21);
+
 }

@@ -6,24 +6,78 @@ window.onload = () => {
   let quoteContainer = document.getElementById("quoteContainer");
   let apiUrl = "https://api.quotable.io/random";
   let fetchData;
-
-  // New code sorting - Sharlin
-  let estimatedTimeContainer = document.getElementById('estimatedTimeContainer');
-  let estimatedTimeBtn = document.getElementById('estimatedTimeBtn');
-  let sortContainer = document.getElementById('sortContainer');
-  let deadlineBtn = document.getElementById('deadlineBtn');
-  let deadlineContainer = document.getElementById('deadlineContainer');
-  //New code sorting - Sharlin ENDS!
   
   /*  >>>>>>>>> ==================Fatemeh's code starts Here============== <<<<<<<<<<<<< */
   //Get inputs 
  let  titleInput = document.getElementById("input-title");
  const deadlineInput = document.getElementById("deadline-input");
- const estimatedTimeInput = document.getElementById("estimated-time-input");
  const descriptionInput = document.getElementById("description-input");
  const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
 
   let toDoList=[];
+ 
+
+  function convertToMinutes(hours, minutes) {
+    return hours * 60 + minutes;
+  }
+
+  let renderToDoCard = (toDoItem) => {
+    // Destructuring toDoItem for ease of use, including the category
+    const { title,category, deadline, estimatedTime, description, statusValue } = toDoItem;
+     
+    const todoCard = document.createElement("div");
+    todoCard.classList.add("todo-card");
+
+    const titleElement = document.createElement("h4");
+    titleElement.textContent = title;
+
+    const todoDetails=  document.createElement("div");
+    todoDetails.classList.add("todo-details");
+
+    const descriptionElement = document.createElement("p");
+    descriptionElement.textContent = description;
+
+    // Assuming estimatedTime is in minutes, converting to a more readable format
+    const hours = Math.floor(estimatedTime / 60);
+    const minutes = estimatedTime % 60;
+    const estimatedTimeElement = document.createElement("p");
+    estimatedTimeElement.textContent = `Estimated Time: ${hours}h ${minutes}m`;
+
+    const deadlineElement = document.createElement("p");
+    deadlineElement.textContent = `Deadline: ${deadline}`;
+
+    const categoryElement = document.createElement("p");
+    categoryElement.textContent = `Category: ${category}`;
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    
+    const statusElement = document.createElement("input");
+    statusElement.type = "checkbox";
+    statusElement.checked = statusValue;
+    statusElement.addEventListener('change', () => {
+      toDoItem.statusValue = statusElement.checked;
+      updateTodoInStorage(toDoItem);
+    });
+    
+    todosContainer.appendChild(todoCard);
+    todoCard.append(todoDetails)
+    todoCard.append(titleElement)
+    todoCard.appendChild(editBtn, deleteBtn);
+    todoDetails.append(descriptionElement, estimatedTimeElement, deadlineElement, categoryElement, statusElement);
+  };
+
+  
+ // Placeholder for updateTodoInStorage function
+ function updateTodoInStorage(updatedToDoItem) {
+  // Implement logic to update the todo item in your storage mechanism (e.g., localStorage)
+  console.log("Updated todo item in storage:", updatedToDoItem);
+  // This could involve finding the item in an array, updating it, and then saving the array back to localStorage
+}
+
 
  /*  >>>>>>>>>================= Fatemeh's code ENDS Here ===================<<<<<<<<<<<<< */
 
@@ -105,7 +159,6 @@ window.onload = () => {
       id: userIdCounter,
       newUsername,
       newPassword,
-      /* Fatemeh : deleted empty array*/
       toDoList,
     };
     //add new object to registeredusers array.
@@ -156,50 +209,12 @@ window.onload = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   
   if (currentUser && currentUser.toDoList && currentUser.toDoList.length > 0) {
-      currentUser.toDoList.forEach((item) => {
-      const todoLi = document.createElement("li");
-       todoLi.textContent = item.title;
-    if(todoUl){
-
-      todoUl.appendChild(todoLi);
-    }
+      currentUser.toDoList.forEach((toDoItem) => {
+        renderToDoCard(toDoItem);
   });
 }
 
-//----------------Sharlins code for sorting starts---------------------------------
 
-const renderTodoList = (sortContainer, sortingFunc) => {
-  sortContainer.innerHTML = "";
-
-  if (currentUser && currentUser.toDoList) {
-    const sortedTodoList = currentUser.toDoList.slice().sort(sortingFunc);
-
-    if (sortedTodoList.length > 0){
-      const userHeader = document.createElement('h3');
-      userHeader.textContent = `User: ${currentUser.newUsername}`;
-      sortContainer.appendChild(userHeader);
-  }
-
-    sortedTodoList.forEach(todo => {
-      const todoItem = document.createElement('p');
-      todoItem.textContent = `
-                              - ${todo.title}
-                              Deadline: ${new Date(todo.deadline).toDateString()} ${new Date(todo.deadline).toLocaleTimeString()}`;
-      sortContainer.appendChild(todoItem);
-
-    });
-  }
-};
-
-deadlineBtn.addEventListener('click', () => {
-  renderTodoList(deadlineContainer, (a,b) => new Date(a.deadline) - new Date(b.deadline));
-})
-
-estimatedTimeBtn.addEventListener('click', () =>{
-  renderTodoList(estimatedTimeContainer, (a,b) => a.estimatedTime - b.estimatedTime);
-});
-
-//------------------Sharlins code for sorting ends---------------------------
 
 //function - to show currentusers.addtoList
 //when click on log in => localstorage.getitem("currentcuser") - userboject.todolist
@@ -209,43 +224,43 @@ estimatedTimeBtn.addEventListener('click', () =>{
 //penda li i ul
 
 const addTodoBtn = document.getElementById("addTodoBtn");
-addTodoBtn?.addEventListener("click", () => {
-  // const todoInputValue = todoInput.value
-  /*  >>>>>>>>> Fatemeh's code STARTS Here <<<<<<<<<<<<< */
-  //Get inputs 
-  let title = titleInput.value;
-  const categoryCheckbox = document.querySelector('input[name="category"]:checked');
-  const category = categoryCheckbox ? categoryCheckbox.value: " ";
-  const deadline = deadlineInput.value;
-  const estimatedTime = estimatedTimeInput.value;
-  const description = descriptionInput.value;
-  const statusValue = todoStatusInput.checked;
-  /*  >>>>>>>>> Fatemeh's code ENDS Here <<<<<<<<<<<<< */
 
-    if (!title ) return;
-  //   if (!todoInputValue ) return;
+  addTodoBtn.addEventListener("click", () => {
+    let title = titleInput.value;
+    const categoryCheckbox = document.querySelector('input[name="category"]:checked');
+    let category = categoryCheckbox ? categoryCheckbox.value : "General"; // Default category if none selected
+    let deadline = deadlineInput.value;
 
+    // Collect hours and minutes input for estimated time, convert to minutes
+    let hoursInput = document.getElementById("estimatedTimeHours").value;
+    let minutesInput = document.getElementById("estimatedTimeMinutes").value;
 
-   let toDoItem = {
+    let hours = parseInt(hoursInput) || 0;
+    let minutes = parseInt(minutesInput) || 0;
+
+    let estimatedTime = convertToMinutes(hours, minutes);
+
+    let description = descriptionInput.value;
+    let statusValue = todoStatusInput.checked;
+
+    if (!title) return;
+    
+    let toDoItem = {
       title,
       category,
       deadline,
       estimatedTime,
       description,
       statusValue,
-   }
+    };
 
-  //  toDoList.push(todoItem);
-  //  console.log(toDoList);
+    renderToDoCard(toDoItem);
 
-      /*  >>>>>>>>> Fatemeh's code ENDS Here <<<<<<<<<<<<< */
-
-    const todoLi = document.createElement("li");
-    todoLi.textContent = title;
-    todoUl.appendChild(todoLi);
-
-    // Get current user from localstorage
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    // Clear form fields after adding
+    titleInput.value = "";
+    // Reset other fields as necessary...
+    
+  
 
     // Siri: Create a copy of currentUser to avoid modifying the original object
     const updatedUser = { ...currentUser };
