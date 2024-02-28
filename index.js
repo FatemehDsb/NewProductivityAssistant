@@ -9,13 +9,14 @@ window.onload = () => {
   // let todoUl = document.getElementById("todoUl");
   let logOutBtn = document.getElementById("logOutBtn");
   let newUser;
+  const addTodoBtn = document.getElementById("addTodoBtn");
   
   //Get inputs 
  let  titleInput = document.getElementById("input-title");
  const deadlineInput = document.getElementById("deadline-input");
  const descriptionInput = document.getElementById("description-input");
  const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
-let toDoList=[];
+ let toDoList=[];
  
 function updateLocalStorage() {
   localStorage.setItem('toDoList', JSON.stringify(toDoList));
@@ -33,8 +34,23 @@ function convertToMinutes(hours, minutes) {
 
     todoCard.setAttribute('data-id', toDoItem.itemId); // Use the data-id attribute to store the unique ID
 
+    const todoInfo = document.createElement("div");
+    todoInfo.classList.add("todo-info");
+    
+    const todoTitleInfo = document.createElement("div");
+    todoTitleInfo.classList.add("todo-title-info");
+
     const titleElement = document.createElement("h4");
     titleElement.textContent = title;
+
+    const todoBtn = document.createElement("div");
+    todoBtn.classList.add("todo-btn");
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
 
     const todoDetails=  document.createElement("div");
     todoDetails.classList.add("todo-details");
@@ -54,33 +70,50 @@ function convertToMinutes(hours, minutes) {
     const categoryElement = document.createElement("p");
     categoryElement.textContent = `Category: ${category}`;
 
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
-    
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
     
     const statusElement = document.createElement("input");
     statusElement.type = "checkbox";
     statusElement.checked = statusValue;
     statusElement.addEventListener('change', () => {
-      toDoItem.statusValue = statusElement.checked;
-      updateTodoInStorage(toDoItem);
+    toDoItem.statusValue = statusElement.checked;
+    updateTodoInStorage(toDoItem);
     });
     
+    // todocontainer=>todocard=>todoStatus + todoInfo (todoTitleInfo(todobtn+titleElement) + todoDetails)
+
     todosContainer.appendChild(todoCard);
-    todoCard.append(titleElement)
-    todoCard.append(todoDetails)
-    todoCard.appendChild(editBtn)
-    todoCard.appendChild(deleteBtn);
-    todoDetails.append(descriptionElement, estimatedTimeElement, deadlineElement, categoryElement, statusElement);
+    todoCard.append(statusElement);
+    todoCard.append(todoInfo);
     
+    todoInfo.append(todoTitleInfo);
+    todoInfo.append(todoDetails);
+    todoInfo.append(todoDetails);
+   
+    todoTitleInfo.append(titleElement)
+    todoTitleInfo.append(todoBtn);
+
+    todoBtn.appendChild(editBtn);
+    todoBtn.appendChild(deleteBtn);
+
+    todoDetails.append(categoryElement, descriptionElement, estimatedTimeElement, deadlineElement );
+    
+   deleteBtn.style.width="50px";
+   editBtn.style.width="50px";
+
     deleteBtn.addEventListener("click", ()=>{
       todoCard.remove();  
       // Remove the to-do item from the toDoList array using the unique ID
       toDoList = toDoList.filter(item => item.itemId !== toDoItem.itemId);
       updateLocalStorage();
     });
+
+    editBtn.addEventListener("click", ()=>{
+      //i want that add to do items button opens
+      addTodoBtn.addEventListener("click", ()=>{
+
+      })
+
+    })
   };
 
   
@@ -214,7 +247,6 @@ function convertToMinutes(hours, minutes) {
 }
 
 
-const addTodoBtn = document.getElementById("addTodoBtn");
 
   addTodoBtn.addEventListener("click", () => {
     let title = titleInput.value;
@@ -256,8 +288,6 @@ const addTodoBtn = document.getElementById("addTodoBtn");
       updatedUser.toDoList = []; // Initialize toDoList if it does not exist
   }
 
-    //Siri: previous version
-    // currentUser.toDoList.push(todoInputValue);
 
     // Siri: Pushes todoInputValue to updatedUser (earlier currentUser)
     updatedUser.toDoList.push(toDoItem);
