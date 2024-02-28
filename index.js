@@ -6,6 +6,14 @@ window.onload = () => {
   let quoteContainer = document.getElementById("quoteContainer");
   let apiUrl = "https://api.quotable.io/random";
   let fetchData;
+
+  // New code sorting - Sharlin
+  let estimatedTimeContainer = document.getElementById('estimatedTimeContainer');
+  let estimatedTimeBtn = document.getElementById('estimatedTimeBtn');
+  let sortContainer = document.getElementById('sortContainer');
+  let deadlineBtn = document.getElementById('deadlineBtn');
+  let deadlineContainer = document.getElementById('deadlineContainer');
+  //New code sorting - Sharlin ENDS!
   
   /*  >>>>>>>>> ==================Fatemeh's code starts Here============== <<<<<<<<<<<<< */
   //Get inputs 
@@ -157,6 +165,41 @@ window.onload = () => {
     }
   });
 }
+
+//----------------Sharlins code for sorting starts---------------------------------
+
+const renderTodoList = (sortContainer, sortingFunc) => {
+  sortContainer.innerHTML = "";
+
+  if (currentUser && currentUser.toDoList) {
+    const sortedTodoList = currentUser.toDoList.slice().sort(sortingFunc);
+
+    if (sortedTodoList.length > 0){
+      const userHeader = document.createElement('h3');
+      userHeader.textContent = `User: ${currentUser.newUsername}`;
+      sortContainer.appendChild(userHeader);
+  }
+
+    sortedTodoList.forEach(todo => {
+      const todoItem = document.createElement('p');
+      todoItem.textContent = `
+                              - ${todo.title}
+                              Deadline: ${new Date(todo.deadline).toDateString()} ${new Date(todo.deadline).toLocaleTimeString()}`;
+      sortContainer.appendChild(todoItem);
+
+    });
+  }
+};
+
+deadlineBtn.addEventListener('click', () => {
+  renderTodoList(deadlineContainer, (a,b) => new Date(a.deadline) - new Date(b.deadline));
+})
+
+estimatedTimeBtn.addEventListener('click', () =>{
+  renderTodoList(estimatedTimeContainer, (a,b) => a.estimatedTime - b.estimatedTime);
+});
+
+//------------------Sharlins code for sorting ends---------------------------
 
 //function - to show currentusers.addtoList
 //when click on log in => localstorage.getitem("currentcuser") - userboject.todolist
