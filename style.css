@@ -4,9 +4,15 @@ body {
   box-sizing: border-box;
 }
 
-/* .container {
-  width: 60%;
-} */
+
+.container{
+  
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
 
 .signInContainer {
   background-color: darkgray;
@@ -79,18 +85,10 @@ body {
 
 
 /* <<<<<<<<<<<<<<<<<<<<<<<Fatemehs code STARTS HERE>>>>>>>>>>>>>>>>>>>>>>>>>>><*/
-/*TODOS*/
+                                   /*TODOS*/
 
 
 
-.container{
-  
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
 
 nav {
   background-color: #f2f2f2;
