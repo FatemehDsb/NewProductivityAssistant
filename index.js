@@ -6,18 +6,21 @@ window.onload = () => {
   let quoteContainer = document.getElementById("quoteContainer");
   let apiUrl = "https://api.quotable.io/random";
   let fetchData;
+  // let todoUl = document.getElementById("todoUl");
+  let logOutBtn = document.getElementById("logOutBtn");
+  let newUser;
   
-  /*  >>>>>>>>> ==================Fatemeh's code starts Here============== <<<<<<<<<<<<< */
   //Get inputs 
  let  titleInput = document.getElementById("input-title");
  const deadlineInput = document.getElementById("deadline-input");
  const descriptionInput = document.getElementById("description-input");
  const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
-
-  let toDoList=[];
+let toDoList=[];
  
-
-  function convertToMinutes(hours, minutes) {
+function updateLocalStorage() {
+  localStorage.setItem('toDoList', JSON.stringify(toDoList));
+}
+function convertToMinutes(hours, minutes) {
     return hours * 60 + minutes;
   }
 
@@ -27,6 +30,8 @@ window.onload = () => {
      
     const todoCard = document.createElement("div");
     todoCard.classList.add("todo-card");
+
+    todoCard.setAttribute('data-id', toDoItem.itemId); // Use the data-id attribute to store the unique ID
 
     const titleElement = document.createElement("h4");
     titleElement.textContent = title;
@@ -41,7 +46,7 @@ window.onload = () => {
     const hours = Math.floor(estimatedTime / 60);
     const minutes = estimatedTime % 60;
     const estimatedTimeElement = document.createElement("p");
-    estimatedTimeElement.textContent = `Estimated Time: ${hours}h ${minutes}m`;
+    estimatedTimeElement.textContent = `${hours}h ${minutes}m`;
 
     const deadlineElement = document.createElement("p");
     deadlineElement.textContent = `Deadline: ${deadline}`;
@@ -64,10 +69,18 @@ window.onload = () => {
     });
     
     todosContainer.appendChild(todoCard);
-    todoCard.append(todoDetails)
     todoCard.append(titleElement)
-    todoCard.appendChild(editBtn, deleteBtn);
+    todoCard.append(todoDetails)
+    todoCard.appendChild(editBtn)
+    todoCard.appendChild(deleteBtn);
     todoDetails.append(descriptionElement, estimatedTimeElement, deadlineElement, categoryElement, statusElement);
+    
+    deleteBtn.addEventListener("click", ()=>{
+      todoCard.remove();  
+      // Remove the to-do item from the toDoList array using the unique ID
+      toDoList = toDoList.filter(item => item.itemId !== toDoItem.itemId);
+      updateLocalStorage();
+    });
   };
 
   
@@ -77,10 +90,6 @@ window.onload = () => {
   console.log("Updated todo item in storage:", updatedToDoItem);
   // This could involve finding the item in an array, updating it, and then saving the array back to localStorage
 }
-
-
- /*  >>>>>>>>>================= Fatemeh's code ENDS Here ===================<<<<<<<<<<<<< */
-
 
   //Sharlin - Function for api greeting
   
@@ -135,12 +144,8 @@ window.onload = () => {
   }
 };
 
-  //declaring todo input
-  // let todoInput = document.getElementById("todoInput");
-  //declaring todo <ul>
-  let todoUl = document.getElementById("todoUl");
-  let logOutBtn = document.getElementById("logOutBtn");
-  let newUser;
+ 
+  
 
   let registeredUsers =
   JSON.parse(localStorage.getItem("registeredUsers")) || [];
@@ -185,12 +190,6 @@ window.onload = () => {
       (user) => user.newUsername === userName && user.newPassword === password
     );
     
-    //Fatemeh Comment :
-    //if the user variable finds a match in the registeredUsers array
-    //set currentUser to reference this user
-    //currentUser's data is stored in localStorage using user's details.
-    //key : currentUser - value: currentuserObject-string
-    
     //modified functions for todo ul
     if (user) {
         localStorage.setItem("currentUser", JSON.stringify(user)); // Save current user
@@ -215,14 +214,6 @@ window.onload = () => {
 }
 
 
-
-//function - to show currentusers.addtoList
-//when click on log in => localstorage.getitem("currentcuser") - userboject.todolist
-//if currentuser har todolistarray => om det inte finns, skapa ett tomt array
-//om det finns => append currentuser.todolist
-//create element li och sätta dem stringar
-//penda li i ul
-
 const addTodoBtn = document.getElementById("addTodoBtn");
 
   addTodoBtn.addEventListener("click", () => {
@@ -246,6 +237,7 @@ const addTodoBtn = document.getElementById("addTodoBtn");
     if (!title) return;
     
     let toDoItem = {
+      itemId:Date.now().toString(), // Unique ID for each to-do item
       title,
       category,
       deadline,
@@ -255,13 +247,8 @@ const addTodoBtn = document.getElementById("addTodoBtn");
     };
 
     renderToDoCard(toDoItem);
-
-    // Clear form fields after adding
     titleInput.value = "";
-    // Reset other fields as necessary...
-    
-  
-
+ 
     // Siri: Create a copy of currentUser to avoid modifying the original object
     const updatedUser = { ...currentUser };
 
