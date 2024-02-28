@@ -124,3 +124,10 @@ nav a:hover {
   height: 400px;
 }
 
+#sortContainer{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid gray;
+  border-radius: 8px;
+  padding: 0.8rem;
+  margin: 0.2em;
+}
