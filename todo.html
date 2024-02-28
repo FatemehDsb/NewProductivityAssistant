@@ -8,79 +8,155 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-   <main class="container">
-     <div id="quoteContainer"></div>
-     <!-- Trigger/Open The Modal -->
-     <button id="logOutBtn">Log out</button>
-     <!-------------------------------------Fatemeh code Starts here---------------------------------->
-     <!--------KNAPPAR--HABITS/TODOS------->
-       <nav class="header-container">
-         <a href="todo.html" id="todosTab">Todos</a>
-         <a href="habits.html" id="habitsTab">Habits</a>
-        </nav>
-        <!--------------------------------------Fatemeh code ENDs here---------------------------------->
-        <!-- The Modal -->
-        <div id="todoModal" class="modal">
-          <!-- Modal content -->
-          <div class="modal-content">
-           <span class="close">&times;</span>
-           <button id="addTodoBtn">Add Todo</button> 
-           <!--*******************************-->
-           <button id="delete">Delete</button>
-        
-        <!-------------------------------------Fatemeh code Starts here---------------------------------->
-        <!------------------MODAL--------------->
-           <div class="modal-details">
-          
-          <label for="input-title">Title</label>
-          <input type="text" placeholder="Title" id="input-title">
-          
-          <label for="status-checkbox">Status</label>
-          <input type="checkbox" id="status-checkbox">
-          
-          <!--category-->
-          <fieldset>
-            <legend>Categories</legend>
-            <label for="category-health">Health</label>
-            <input type="radio" id="category-health" name="category" value="Health">
-            
-            <label for="category-home">Home</label>
-            <input type="radio" id="category-home" name="category" value="Home">
-            
-            <label for="category-work">Work</label>
-            <input type="radio" id="category-work" name="category" value="Work">
-          </fieldset>
-          
-          <!--Deadline-->
-          
-          <label for="deadline-input">Deadline</label>
-          <input type="date" id="deadline-input" name="deadline">
-          
-           <!--##################################################33333-->
+    <main class="container">
+      <div id="quoteContainer"></div>
+      <!-- Trigger/Open The Modal -->
+      <button id="logOutBtn">Log out</button>
+      <!-------------------------------------Fatemeh code Starts here---------------------------------->
+      <!--------KNAPPAR--HABITS/TODOS------->
+      <nav class="header-container">
+        <a href="todo.html" id="todosTab">Todos</a>
+        <a href="habits.html" id="habitsTab">Habits</a>
+      </nav>
+      <!--------------------------------------Fatemeh code ENDs here---------------------------------->
+      <!-- The Modal -->
+      <div id="todoModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <button id="addTodoBtn">Add Todo</button>
+          <!--*******************************-->
+          <button id="delete">Delete</button>
 
-          <label for="estimatedTimeHours">Hours:</label>
-          <input type="number" id="estimatedTimeHours" name="estimatedTimeHours" min="0" placeholder="Hours">
+          <!-------------------------------------Fatemeh code Starts here---------------------------------->
+          <!------------------MODAL--------------->
+          <div class="modal-details">
+            <label for="input-title">Title</label>
+            <input type="text" placeholder="Title" id="input-title" />
 
-          <label for="estimatedTimeMinutes">Minutes:</label>
-          <input type="number" id="estimatedTimeMinutes" name="estimatedTimeMinutes" min="0" max="59" placeholder="Minutes">
+            <label for="status-checkbox">Status</label>
+            <input type="checkbox" id="status-checkbox" />
 
+            <!--category-->
+            <fieldset>
+              <legend>Categories</legend>
 
-          <!--##################################################33333-->
+              <label for="category-shopping">Shopping</label>
+              <input
+                type="radio"
+                id="category-shopping"
+                name="category"
+                value="Shopping"
+              />
 
-          <!--Description-->
-          <label for="description-input">Description</label>
-          <textarea id="description-input" name="description" rows="4" cols="50" placeholder="Enter task description here..."></textarea>
+              <label for="category-health">Health</label>
+              <input
+                type="radio"
+                id="category-health"
+                name="category"
+                value="Health"
+              />
+
+              <label for="category-home">Home</label>
+              <input
+                type="radio"
+                id="category-home"
+                name="category"
+                value="Home"
+              />
+
+              <label for="category-work">Work</label>
+              <input
+                type="radio"
+                id="category-work"
+                name="category"
+                value="Work"
+              />
+            </fieldset>
+
+            <!--Deadline-->
+
+            <label for="deadline-input">Deadline</label>
+            <input type="date" id="deadline-input" name="deadline" />
+
+            <!--##################################################33333-->
+
+            <label for="estimatedTimeHours">Hours:</label>
+            <input
+              type="number"
+              id="estimatedTimeHours"
+              name="estimatedTimeHours"
+              min="0"
+              placeholder="Hours"
+            />
+
+            <label for="estimatedTimeMinutes">Minutes:</label>
+            <input
+              type="number"
+              id="estimatedTimeMinutes"
+              name="estimatedTimeMinutes"
+              min="0"
+              max="59"
+              placeholder="Minutes"
+            />
+
+            <!--##################################################33333-->
+
+            <!--Description-->
+            <label for="description-input">Description</label>
+            <textarea
+              id="description-input"
+              name="description"
+              rows="4"
+              cols="50"
+              placeholder="Enter task description here..."
+            ></textarea>
           </div>
-         <!-------------------------------------Fatemeh code ENDS here---------------------------------->
+          <!-------------------------------------Fatemeh code ENDS here---------------------------------->
         </div>
-        
-        </div>
-      <h1>Your Todos</h1>
-        <!-------------------------------------Fatemeh code STARTS here---------------------------------->
-      <div id="todosContainer">
-      
       </div>
-      
+
+      <!----------------------------Siris code starts here-->
+      <div class="wrapper">
+        <fieldset>
+          <legend>Filtrera</legend>
+          <input
+            type="checkbox"
+            name="chooseCategory"
+            id="shopping"
+            value="shopping"
+          />
+          <label for="shopping">Shopping</label>
+          <input
+            type="checkbox"
+            name="chooseCategory"
+            id="household"
+            value="household"
+          />
+          <label for="household">Household</label>
+          <input type="checkbox" name="chooseCategory" id="work" value="work" />
+          <label for="work">Work</label>
+          <input
+            type="checkbox"
+            name="chooseCategory"
+            id="health"
+            value="health"
+          />
+          <label for="health">Health</label>
+        </fieldset>
+      </div>
+      <!---------------------------------Siris code ends here-->
+      <h1>Your Todos</h1>
+      <!-------------------------------------Fatemeh code STARTS here---------------------------------->
+      <div id="todosContainer"></div>
+      <div id="todoDiv"></div>
+      <br />
+      <br />
+    </div>
+    <!----------------------------------Siris code starts here-->
+    <h2>Completed Todos</h2>
+    <div id="completedTodosContainer"></div>
+    <!----------------------------------Siris code ends here-->
       <button id="openModalBtn">+</button>
     </main>
   </body>
