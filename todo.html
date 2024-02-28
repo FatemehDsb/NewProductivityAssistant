@@ -8,79 +8,69 @@
     <script src="index.js" defer></script>
   </head>
   <body>
-    <div id="quoteContainer"></div>
-    <!-- Trigger/Open The Modal -->
-    <button id="openModalBtn">+</button>
-
-    <!-------------------------------------Fatemeh code Starts here---------------------------------->
-                                  <!--------KNAPPAR--HABITS/TODOS------->
-  
-    <div class="container">
-      <nav class="header-container">
-          <a href="todo.html" id="todosTab">Todos</a>
-          <a href="habits.html" id="habitsTab">Habits</a>
-      </nav>
-    </div>
-
-     <!--------------------------------------Fatemeh code ENDs here---------------------------------->
-
-    <!-- The Modal -->
-    <div id="todoModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close">&times;</span>
-
+   <main class="container">
+     <div id="quoteContainer"></div>
+     <!-- Trigger/Open The Modal -->
+     <button id="openModalBtn">+</button>
+     <!-------------------------------------Fatemeh code Starts here---------------------------------->
+     <!--------KNAPPAR--HABITS/TODOS------->
+       <nav class="header-container">
+         <a href="todo.html" id="todosTab">Todos</a>
+         <a href="habits.html" id="habitsTab">Habits</a>
+        </nav>
+        <!--------------------------------------Fatemeh code ENDs here---------------------------------->
+        <!-- The Modal -->
+        <div id="todoModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+           <span class="close">&times;</span>
+           <button id="addTodoBtn">Add Todo</button> 
+        
         <!-------------------------------------Fatemeh code Starts here---------------------------------->
-                                  <!--------KNAPPAR--HABITS/TODOS------->
-        <!--Fatemeh deleted :-->
-       <!-- <input type="text" id="todoInput" placeholder="Add Todo" /> -->
-        <button id="addTodoBtn">Add Todo</button> 
-        
-                                  <!------------------MODAL--------------->
-        <div class="modal-details">
-       
-            <label for="input-title">Title</label>
-            <input type="text" placeholder="Title" id="input-title">
-       
-            <label for="status-checkbox">Status</label>
-            <input type="checkbox" id="status-checkbox">
-
-            <!--category-->
-            <fieldset>
-                <legend>Categories</legend>
-                <label for="category-health">Health</label>
-                <input type="radio" id="category-health" name="category" value="Health">
-        
-                <label for="category-home">Home</label>
-                <input type="radio" id="category-home" name="category" value="Home">
-        
-                <label for="category-work">Work</label>
-                <input type="radio" id="category-work" name="category" value="Work">
-            </fieldset>
-
-            <!--Deadline-->
-
-            <label for="deadline-input">Deadline</label>
-            <input type="date" id="deadline-input" name="deadline">
-
-            <!--Tidestimated-->
-            <label for="estimated-time-input">Estimated Time</label>
-            <input type="time" id="estimated-time-input" name="estimatedTime">
-
-            <!--Description-->
-            <label for="description-input">Description</label>
-            <textarea id="description-input" name="description" rows="4" cols="50" placeholder="Enter task description here..."></textarea>
+        <!------------------MODAL--------------->
+           <div class="modal-details">
+          
+          <label for="input-title">Title</label>
+          <input type="text" placeholder="Title" id="input-title">
+          
+          <label for="status-checkbox">Status</label>
+          <input type="checkbox" id="status-checkbox">
+          
+          <!--category-->
+          <fieldset>
+            <legend>Categories</legend>
+            <label for="category-health">Health</label>
+            <input type="radio" id="category-health" name="category" value="Health">
+            
+            <label for="category-home">Home</label>
+            <input type="radio" id="category-home" name="category" value="Home">
+            
+            <label for="category-work">Work</label>
+            <input type="radio" id="category-work" name="category" value="Work">
+          </fieldset>
+          
+          <!--Deadline-->
+          
+          <label for="deadline-input">Deadline</label>
+          <input type="date" id="deadline-input" name="deadline">
+          
+          <!--Tidestimated-->
+          <label for="estimated-time-input">Estimated Time</label>
+          <input type="time" id="estimated-time-input" name="estimatedTime">
+          
+          <!--Description-->
+          <label for="description-input">Description</label>
+          <textarea id="description-input" name="description" rows="4" cols="50" placeholder="Enter task description here..."></textarea>
+          </div>
+         <!-------------------------------------Fatemeh code ENDS here---------------------------------->
         </div>
-         <!-------------------------------------Fatemeh code Starts here---------------------------------->
+        
+        </div>
+      <h1>Your Todos</h1>
+      <div id="todosContainer">
+        <ul id="todoUl"></ul>
       </div>
-      
-    </div>
-    <h1>Your Todos</h1>
-    <div id="todosContainer">
-      <ul id="todoUl"></ul>
-      <br />
-      <br />
-    </div>
-    <button id="logOutBtn">Log out</button>
+      <button id="logOutBtn">Log out</button>
+    </main>
   </body>
 </html>
