@@ -1,10 +1,26 @@
+:root {
+  --color-brand-primary: rgb(204, 138, 246);
+  --color-brand-secondary: rgb(121, 116, 147);
+}
+
+* {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h1,
+h4 {
+  font-weight: 600;
+}
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.container{
+.container {
   max-width: 600px;
   margin: 50px auto;
   padding: 20px;
@@ -14,11 +30,13 @@ body {
 
 .signInContainer {
   background-color: darkgray;
-  padding: 10px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  background-color: var(--color-brand-primary);
+  border-radius: 20px;
 }
 
 .registerContainer {
@@ -35,7 +53,6 @@ body {
   margin: 5px;
   padding: 20px;
 }
-
 
 /* The Modal (background) */
 .modal {
@@ -85,17 +102,17 @@ nav {
 
 nav a {
   border: 1px solid #ccc;
-  border-bottom: none; 
+  border-bottom: none;
   padding: 10px 10px;
-  text-decoration: none; 
-  color: black; 
+  text-decoration: none;
+  color: black;
 }
 
 nav a:hover {
-  background-color: #e7e7e7; 
+  background-color: #e7e7e7;
 }
 
-.filterAndSort{
+.filterAndSort {
   border: 0.01px solid #ccc;
   width: 100%;
   height: 100px;
@@ -104,7 +121,8 @@ nav a:hover {
   flex-direction: row;
 }
 
-.toDoItems, .hibitsItems{
+.toDoItems,
+.hibitsItems {
   border: 0.1px solid #ccc;
   width: 100%;
   height: 400px;
@@ -131,31 +149,47 @@ nav a:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  gap: 10px;
 }
 
-.todo-info{
+.todo-info {
   border-radius: 20px;
-  background-color: rgb(204, 138, 246);
+  background-color: var(--color-brand-primary);
   width: 100%;
   padding: 10px 20px;
 }
 
-.todo-details{
+#completed-todo-info {
   border-radius: 20px;
- display: flex;
- flex-direction: row;
+  background-color: var(--color-brand-secondary);
+  width: 100%;
+  padding: 10px 20px;
+}
+
+.todo-details {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
   padding: 10px 20px;
   justify-content: space-between;
 }
-.todo-title-info{
+.todo-title-info {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.todo-btn{
+.todo-btn {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
+.edit-btn,
+.delete-btn {
+  border: 0px;
+  border-radius: 5px;
+  margin: 4px;
+  padding: 0px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
