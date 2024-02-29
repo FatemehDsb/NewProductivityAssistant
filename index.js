@@ -1,4 +1,5 @@
 window.onload = () => {
+
   //Declaring username and password input
   let usernameInput = document.getElementById("userName");
   let passwordInput = document.getElementById("password");
@@ -22,9 +23,9 @@ window.onload = () => {
   let toDoList = [];
 
   function updateLocalStorage(updatedToDoList) {
-    let registeredUsers =
-      JSON.parse(localStorage.getItem("registeredUsers")) || [];
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    // let registeredUsers =
+    //   JSON.parse(localStorage.getItem("registeredUsers")) || [];
+    // let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser && registeredUsers.length > 0) {
       currentUser.toDoList = updatedToDoList;
       console.log(currentUser.toDoList);
@@ -116,8 +117,6 @@ window.onload = () => {
       // set to true.
       toDoItem.statusValue = true;
       //-----------------Siris kod slutar här
-
-      // updateTodoInStorage(toDoItem); //Kan raderas?
     });
 
     // todocontainer=>todocard=>todoStatus + todoInfo (todoTitleInfo(todobtn+titleElement) + todoDetails)
