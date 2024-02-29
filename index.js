@@ -6,21 +6,19 @@ window.onload = () => {
   let quoteContainer = document.getElementById("quoteContainer");
   let apiUrl = "https://api.quotable.io/random";
   let fetchData;
-  // let todoUl = document.getElementById("todoUl");
   let logOutBtn = document.getElementById("logOutBtn");
   let newUser;
   const addTodoBtn = document.getElementById("addTodoBtn");
-  
+  let registerBtn = document.getElementById("registerBtn");  
   
   //Get inputs 
- let  titleInput = document.getElementById("input-title");
- const deadlineInput = document.getElementById("deadline-input");
- const descriptionInput = document.getElementById("description-input");
- const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
- let toDoList=[];
- //*********************************************************************************************** */
- function updateLocalStorage(updatedToDoList) {
-
+  let  titleInput = document.getElementById("input-title");
+  const deadlineInput = document.getElementById("deadline-input");
+  const descriptionInput = document.getElementById("description-input");
+  const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
+  let toDoList=[];
+   
+  function updateLocalStorage(updatedToDoList) {
   let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
   let currentUser = JSON.parse(localStorage.getItem('currentUser'));
   if (currentUser && registeredUsers.length > 0) {
@@ -29,7 +27,6 @@ window.onload = () => {
     registeredUsers = registeredUsers.map(user =>
       user.id === currentUser.id ? currentUser : user
     );
-    
   
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
     localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
@@ -87,7 +84,6 @@ function convertToMinutes(hours, minutes) {
     const categoryElement = document.createElement("p");
     categoryElement.textContent = `Category: ${category}`;
 
-    
     const statusElement = document.createElement("input");
     statusElement.type = "checkbox";
     statusElement.checked = statusValue;
@@ -116,10 +112,9 @@ function convertToMinutes(hours, minutes) {
 
     todoDetails.append(categoryElement, descriptionElement, estimatedTimeElement, deadlineElement );
     
-   deleteBtn.style.width="50px";
-   editBtn.style.width="50px";
+    deleteBtn.style.width="50px";
+    editBtn.style.width="50px";
 
-   //********************************************************** */NEED TO UPDATE USERSTODOLIST IN LOCAL STORAGE AFTER DELETING
     deleteBtn.addEventListener("click", ()=>{
       todoCard.remove();  
        updatedToDoList = currentUser.toDoList.filter(item => item.itemId !== toDoItem.itemId);
@@ -129,17 +124,11 @@ function convertToMinutes(hours, minutes) {
     editBtn.addEventListener("click", ()=>{
       //i want that add to do items button opens
       addTodoBtn.addEventListener("click", ()=>{
-
       })
-
     })
   };
 
-  
-
-
-  //Sharlin - Function for api greeting
-  
+  // Api greeting
   fetchData = async () => {
     const res = await fetch(apiUrl);
     const quote = await res.json();
@@ -153,10 +142,9 @@ function convertToMinutes(hours, minutes) {
     let quoteParagraph = document.createElement("p");
     quoteParagraph.innerText = greeting;
     quoteContainer.appendChild(quoteParagraph);
-  }; //Fetch ends
+  }; 
 
   // Modal begins here
-
   // Get the modal
   const modal = document.getElementById("todoModal");
 
@@ -165,7 +153,6 @@ function convertToMinutes(hours, minutes) {
 
   // Get the <span> element that closes the modal
   const modalSpan = document.getElementsByClassName("close")[0];
-
   
   // Btn onclick funktion
   let openModal = () => {
@@ -191,21 +178,15 @@ function convertToMinutes(hours, minutes) {
   }
 };
 
- 
-  
-
   let registeredUsers =
   JSON.parse(localStorage.getItem("registeredUsers")) || [];
   let userIdCounter = localStorage.getItem("userIdCounter") || 0;
   
-  let registerBtn = document.getElementById("registerBtn");
-
   //when register user, it creates a new object called newuser.
   registerBtn?.addEventListener("click", () => {
     let newUsername = usernameInput.value;
     let newPassword = passwordInput.value;
     userIdCounter++;
-   
    
     newUser = {
       id: userIdCounter,
@@ -224,7 +205,7 @@ function convertToMinutes(hours, minutes) {
   });
 
   //   localStorage.clear();
-  
+
   let loginBtn = document.getElementById("loginBtn");
   loginBtn?.addEventListener("click", (event) => {
       event.preventDefault();
@@ -232,7 +213,6 @@ function convertToMinutes(hours, minutes) {
     let password = passwordInput.value;
 
     //temporarily variable within scope of login function
-
     let user = registeredUsers.find(
       (user) => user.newUsername === userName && user.newPassword === password
     );
@@ -259,8 +239,6 @@ function convertToMinutes(hours, minutes) {
         renderToDoCard(toDoItem);
   });
 }
-
-
 
   addTodoBtn.addEventListener("click", () => {
     let title = titleInput.value;
@@ -295,34 +273,25 @@ function convertToMinutes(hours, minutes) {
     renderToDoCard(toDoItem);
     titleInput.value = "";
  
-    // Siri: Create a copy of currentUser to avoid modifying the original object
+    //Create a copy of currentUser to avoid modifying the original object
     const updatedUser = { ...currentUser };
 
     if (!updatedUser.toDoList) {
       updatedUser.toDoList = []; // Initialize toDoList if it does not exist
   }
 
-
-    // Siri: Pushes todoInputValue to updatedUser (earlier currentUser)
+    //Pushes todoInputValue to updatedUser (earlier currentUser)
     updatedUser.toDoList.push(toDoItem);
 
-    // Siri: Previous version: Update registered users array with changes
-    // registeredUsers = registeredUsers.map((user) =>
-    //   user.id === currentUser.id ? currentUser : user
-    // );
-
-    // Siri: Update registered users array with changes
+    //Update registered users array with changes
     const updatedRegisteredUsers = registeredUsers.map((user) =>
       user.id === updatedUser.id ? updatedUser : user
     );
 
-    // Siri: previous version: Save the updated registered users array to localStorage
-    // localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-
-    // Siri: Save the updatedUser to JSON string representing currentUser object in the Local Storage
+    //Save the updatedUser to JSON string representing currentUser object in the Local Storage
     localStorage.setItem("currentUser", JSON.stringify(updatedUser));
 
-    // Siri: Save the updated registered users array as JSON string to the registeredUsers array localStorage
+    //Save the updated registered users array as JSON string to the registeredUsers array localStorage
     localStorage.setItem(
       "registeredUsers",
       JSON.stringify(updatedRegisteredUsers)
@@ -343,8 +312,3 @@ function convertToMinutes(hours, minutes) {
     });
   }
 };
-
-//   console.log(currentUser);
-
-
-//   

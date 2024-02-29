@@ -13,13 +13,13 @@
       <!-- Trigger/Open The Modal -->
       <button id="logOutBtn">Log out</button>
       <button id="openModalBtn">+</button>
-  
+
       <!--------KNAPPAR--HABITS/TODOS------->
       <nav class="header-container">
         <a href="todo.html" id="todosTab">Todos</a>
         <a href="habits.html" id="habitsTab">Habits</a>
       </nav>
-      
+
       <div id="todoModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
@@ -72,11 +72,8 @@
             </fieldset>
 
             <!--Deadline-->
-
             <label for="deadline-input">Deadline</label>
             <input type="date" id="deadline-input" name="deadline" />
-
-
             <label for="estimatedTimeHours">Hours:</label>
             <input
               type="number"
@@ -96,7 +93,6 @@
               placeholder="Minutes"
             />
 
-
             <!--Description-->
             <label for="description-input">Description</label>
             <textarea
@@ -107,11 +103,10 @@
               placeholder="Enter task description here..."
             ></textarea>
           </div>
-         
         </div>
       </div>
 
-      <!----------------------------Siris code starts here-->
+      <!---------Filter------>
       <div class="wrapper">
         <fieldset>
           <legend>Filtrera</legend>
@@ -140,19 +135,15 @@
           <label for="health">Health</label>
         </fieldset>
       </div>
-      <!---------------------------------Siris code ends here-->
+      <!----------Filter ends------------->
+
       <h1>Your Todos</h1>
-      <!-------------------------------------Fatemeh code STARTS here---------------------------------->
       <div id="todosContainer"></div>
       <div id="todoDiv"></div>
       <br />
       <br />
-    </div>
-    <!----------------------------------Siris code starts here-->
-    <h2>Completed Todos</h2>
-    <div id="completedTodosContainer"></div>
-    <!----------------------------------Siris code ends here-->
-      
+      <h2>Completed Todos</h2>
+      <div id="completedTodosContainer"></div>
     </main>
   </body>
 </html>
