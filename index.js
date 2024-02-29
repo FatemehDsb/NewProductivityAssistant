@@ -11,16 +11,33 @@ window.onload = () => {
   let newUser;
   const addTodoBtn = document.getElementById("addTodoBtn");
   
+  
   //Get inputs 
  let  titleInput = document.getElementById("input-title");
  const deadlineInput = document.getElementById("deadline-input");
  const descriptionInput = document.getElementById("description-input");
  const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
  let toDoList=[];
- 
-function updateLocalStorage() {
-  localStorage.setItem('toDoList', JSON.stringify(toDoList));
+ //*********************************************************************************************** */
+ function updateLocalStorage(updatedToDoList) {
+
+  let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || [];
+  let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  if (currentUser && registeredUsers.length > 0) {
+    currentUser.toDoList = updatedToDoList;
+    console.log(currentUser.toDoList)
+    registeredUsers = registeredUsers.map(user =>
+      user.id === currentUser.id ? currentUser : user
+    );
+    
+  
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+  } else {
+    console.error('error');
+  }
 }
+
 function convertToMinutes(hours, minutes) {
     return hours * 60 + minutes;
   }
@@ -76,7 +93,9 @@ function convertToMinutes(hours, minutes) {
     statusElement.checked = statusValue;
     statusElement.addEventListener('change', () => {
     toDoItem.statusValue = statusElement.checked;
+
     updateTodoInStorage(toDoItem);
+
     });
     
     // todocontainer=>todocard=>todoStatus + todoInfo (todoTitleInfo(todobtn+titleElement) + todoDetails)
@@ -100,11 +119,11 @@ function convertToMinutes(hours, minutes) {
    deleteBtn.style.width="50px";
    editBtn.style.width="50px";
 
+   //********************************************************** */NEED TO UPDATE USERSTODOLIST IN LOCAL STORAGE AFTER DELETING
     deleteBtn.addEventListener("click", ()=>{
       todoCard.remove();  
-      // Remove the to-do item from the toDoList array using the unique ID
-      toDoList = toDoList.filter(item => item.itemId !== toDoItem.itemId);
-      updateLocalStorage();
+       updatedToDoList = currentUser.toDoList.filter(item => item.itemId !== toDoItem.itemId);
+      updateLocalStorage(updatedToDoList);
     });
 
     editBtn.addEventListener("click", ()=>{
@@ -117,12 +136,7 @@ function convertToMinutes(hours, minutes) {
   };
 
   
- // Placeholder for updateTodoInStorage function
- function updateTodoInStorage(updatedToDoItem) {
-  // Implement logic to update the todo item in your storage mechanism (e.g., localStorage)
-  console.log("Updated todo item in storage:", updatedToDoItem);
-  // This could involve finding the item in an array, updating it, and then saving the array back to localStorage
-}
+
 
   //Sharlin - Function for api greeting
   
