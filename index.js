@@ -1,5 +1,4 @@
 window.onload = () => {
-
   //Declaring username and password input
   let usernameInput = document.getElementById("userName");
   let passwordInput = document.getElementById("password");
@@ -73,10 +72,12 @@ window.onload = () => {
     todoBtn.classList.add("todo-btn");
 
     const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
+    editBtn.innerHTML = `<i class="fa-solid fa-pen" style="color: #ffffff;"></i>`;
+    editBtn.classList.add("edit-btn");
 
     const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
+    deleteBtn.innerHTML = `<i class="fa-solid fa-trash" style="color: #ffffff;"></i>`;
+    deleteBtn.classList.add("delete-btn");
 
     const todoDetails = document.createElement("div");
     todoDetails.classList.add("todo-details");
@@ -99,6 +100,7 @@ window.onload = () => {
     const statusElement = document.createElement("input");
     // statusElement.type = "checkbox"; //Fatemehs
     statusElement.setAttribute("type", "radio"); //Siris
+    statusElement.classList.add("status-element");
     statusElement.checked = statusValue;
     // statusElement.addEventListener("change", () => { //Fatemehs
     statusElement.addEventListener("click", () => {
@@ -106,6 +108,8 @@ window.onload = () => {
       // toDoItem.statusValue = statusElement.checked; //Fatemehs
 
       //-----------------Siris kod börjar här
+      todoCard.classList.add("completed-todo-info");
+      todoCard.classList.remove("todo-info");
       completedTodosContainer.prepend(todoCard);
 
       //if item has been checked before, move back item
@@ -219,6 +223,8 @@ window.onload = () => {
     let newPassword = passwordInput.value;
     userIdCounter++;
 
+    alert("User registered!");
+
     newUser = {
       id: userIdCounter,
       newUsername,
@@ -254,7 +260,7 @@ window.onload = () => {
       window.location.assign("todo.html");
       console.log("assigned todo.html");
     } else {
-      console.log("Error: User not found");
+      alert("Error: User not found");
     }
   });
 
@@ -271,7 +277,7 @@ window.onload = () => {
     });
   }
 
-  addTodoBtn.addEventListener("click", () => {
+  addTodoBtn?.addEventListener("click", () => {
     let title = titleInput.value;
     const categoryCheckbox = document.querySelector(
       'input[name="category"]:checked'
