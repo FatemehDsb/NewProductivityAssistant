@@ -23,7 +23,7 @@ window.onload = () => {
 
   function updateLocalStorage(updatedToDoList) {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (currentUser ) {
+    if (currentUser) {
       currentUser.toDoList = updatedToDoList;
       console.log(currentUser.toDoList);
       registeredUsers = registeredUsers.map((user) =>
@@ -277,10 +277,39 @@ window.onload = () => {
     });
   }
 
-   //----------------SORTERING-------------------------------------
+  //----------------FILTRERING------------------------------------
 
-   const sortByDeadline = (order) => {
-    const sortedTodos = currentUser.toDoList.slice().sort((a,b) => {
+  //Filtrera med checkboxar
+  let checkBoxes = document.querySelectorAll("[name ='filterCategory']");
+  checkBoxes.forEach((checkbox) => {
+    checkbox.addEventListener("click", function () {
+      todosContainer.innerHTML = "";
+
+      let selectedCategories = document.querySelectorAll(
+        "[name ='filterCategory']:checked"
+      );
+
+      let pickedCategories = Array.from(selectedCategories).map(
+        (box) => box.value
+      );
+
+      let filteredTodos = currentUser.toDoList.filter((todo) => {
+        return pickedCategories.includes(todo.category);
+      });
+      console.log(filteredTodos);
+      // renderFilteredTodos(filteredTodos);
+
+      filteredTodos.forEach((toDoItem) => {
+        renderToDoCard(toDoItem);
+      });
+    });
+  });
+
+  //----------------FILTRERING SLUT-------------------------------
+  //----------------SORTERING-------------------------------------
+
+  const sortByDeadline = (order) => {
+    const sortedTodos = currentUser.toDoList.slice().sort((a, b) => {
       const deadlineA = new Date(a.deadline);
       const deadlineB = new Date(b.deadline);
       return order === "asc" ? deadlineA - deadlineB : deadlineB - deadlineA;
@@ -292,7 +321,9 @@ window.onload = () => {
 
   const sortByEstimatedTime = (order) => {
     const sortedTodos = currentUser.toDoList.slice().sort((a, b) => {
-      return order === "asc" ? a.estimatedTime - b.estimatedTime : b.estimatedTime - a.estimatedTime;
+      return order === "asc"
+        ? a.estimatedTime - b.estimatedTime
+        : b.estimatedTime - a.estimatedTime;
     });
     console.log("Sorted by estimated time:", sortedTodos);
 
@@ -301,23 +332,24 @@ window.onload = () => {
 
   const renderSortedTodos = (sortedTodos) => {
     todosContainer.innerHTML = "";
-    sortedTodos.forEach(todo => renderToDoCard(todo));
+    sortedTodos.forEach((todo) => renderToDoCard(todo));
   };
 
-  const deadlineSortDropdown = document.getElementById('deadlineSortDropdown');
+  const deadlineSortDropdown = document.getElementById("deadlineSortDropdown");
   deadlineSortDropdown?.addEventListener("change", () => {
     const order = deadlineSortDropdown.value;
     sortByDeadline(order, toDoList);
   });
 
-  const estimatedTimeSortDropdown = document.getElementById('estimatedTimeSortDropdown');
+  const estimatedTimeSortDropdown = document.getElementById(
+    "estimatedTimeSortDropdown"
+  );
   estimatedTimeSortDropdown?.addEventListener("change", () => {
     const order = estimatedTimeSortDropdown.value;
     sortByEstimatedTime(order, toDoList);
   });
 
-
-//----------------SORTERING-------------------------------------
+  //----------------SORTERING-------------------------------------
 
   addTodoBtn?.addEventListener("click", () => {
     let title = titleInput.value;
@@ -353,32 +385,27 @@ window.onload = () => {
 
     renderToDoCard(toDoItem);
     //**************************************************************************************** */
-    // titleInput.value = "";  kommentera ut 
+    // titleInput.value = "";  kommentera ut
 
+    let registeredUsers =
+      JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
-    
-      let registeredUsers =
-        JSON.parse(localStorage.getItem("registeredUsers")) || [];
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser) {
+      currentUser.toDoList.push(toDoItem);
+      console.log(currentUser.toDoList);
 
-      if (currentUser ) {
-        
-          currentUser.toDoList.push(toDoItem);
-            console.log(currentUser.toDoList);
-        
-            registeredUsers = registeredUsers.map((user) =>
-              user.id === currentUser.id ? currentUser : user
-            );
-            
-        
-            localStorage.setItem("currentUser", JSON.stringify(currentUser));
-            localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-          } else {
-              console.error("error");
-            }
-       //}
-  
+      registeredUsers = registeredUsers.map((user) =>
+        user.id === currentUser.id ? currentUser : user
+      );
+
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+    } else {
+      console.error("error");
+    }
+    //}
 
     // //Create a copy of currentUser to avoid modifying the original object
     // const updatedUser = { ...currentUser };
@@ -405,15 +432,17 @@ window.onload = () => {
     // );
 
     // Collect hours and minutes input for estimated time, convert to minutes
-    
+
     titleInput.value = "";
     //////////////////////////////*****************2024-03-01******************************* */
-   if (categoryCheckbox){ categoryCheckbox.checked= false;}
-    deadlineInput.value="";
-    descriptionInput.value="";
-    todoStatusInput.checked="";
-    document.getElementById("estimatedTimeHours").value="";
-    document.getElementById("estimatedTimeMinutes").value="";
+    if (categoryCheckbox) {
+      categoryCheckbox.checked = false;
+    }
+    deadlineInput.value = "";
+    descriptionInput.value = "";
+    todoStatusInput.checked = "";
+    document.getElementById("estimatedTimeHours").value = "";
+    document.getElementById("estimatedTimeMinutes").value = "";
   });
   //////////////////////////////*****************2024-03-01******************************* */
 
