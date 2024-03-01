@@ -277,6 +277,48 @@ window.onload = () => {
     });
   }
 
+   //----------------SORTERING-------------------------------------
+
+   const sortByDeadline = (order) => {
+    const sortedTodos = currentUser.toDoList.slice().sort((a,b) => {
+      const deadlineA = new Date(a.deadline);
+      const deadlineB = new Date(b.deadline);
+      return order === "asc" ? deadlineA - deadlineB : deadlineB - deadlineA;
+    });
+    console.log("Sorted by deadline:", sortedTodos);
+
+    renderSortedTodos(sortedTodos);
+  };
+
+  const sortByEstimatedTime = (order) => {
+    const sortedTodos = currentUser.toDoList.slice().sort((a, b) => {
+      return order === "asc" ? a.estimatedTime - b.estimatedTime : b.estimatedTime - a.estimatedTime;
+    });
+    console.log("Sorted by estimated time:", sortedTodos);
+
+    renderSortedTodos(sortedTodos);
+  };
+
+  const renderSortedTodos = (sortedTodos) => {
+    todosContainer.innerHTML = "";
+    sortedTodos.forEach(todo => renderToDoCard(todo));
+  };
+
+  const deadlineSortDropdown = document.getElementById('deadlineSortDropdown');
+  deadlineSortDropdown?.addEventListener("change", () => {
+    const order = deadlineSortDropdown.value;
+    sortByDeadline(order, toDoList);
+  });
+
+  const estimatedTimeSortDropdown = document.getElementById('estimatedTimeSortDropdown');
+  estimatedTimeSortDropdown?.addEventListener("change", () => {
+    const order = estimatedTimeSortDropdown.value;
+    sortByEstimatedTime(order, toDoList);
+  });
+
+
+//----------------SORTERING-------------------------------------
+
   addTodoBtn?.addEventListener("click", () => {
     let title = titleInput.value;
     const categoryCheckbox = document.querySelector(

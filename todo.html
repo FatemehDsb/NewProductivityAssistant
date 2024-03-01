@@ -145,6 +145,34 @@
       </div>
       <!----------Filter ends------------->
 
+      <!----------Sorting---------->
+
+      <div id="sortContainer">
+        <div id="deadlineContainer">
+          <label for="deadlineSortDropdown">Sort by Deadline:</label>
+          <select id="deadlineSortDropdown">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
+        <div id="estimatedTimeContainer">
+          <label for="estimatedTimeSortDropdown">Sort by Estimated Time:</label>
+          <select id="estimatedTimeSortDropdown">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="deadlineContainer">
+        <h2>Deadline</h2>
+      </div>
+
+      <div id="estimatedTimeContainer">
+        <h2>Estimated Time</h2>
+      </div>
+      <!-----------------Sorting ends-------------->
+
       <h1>Your Todos</h1>
       <div id="todosContainer"></div>
       <div id="todoDiv"></div>
