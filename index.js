@@ -95,35 +95,56 @@ window.onload = () => {
     const categoryElement = document.createElement("p");
     categoryElement.textContent = `Category: ${category}`;
 
+    //-----------------Status function starts here
+
     const statusElement = document.createElement("input");
     // statusElement.type = "checkbox"; //Fatemehs
     statusElement.setAttribute("type", "radio"); //Siris
     statusElement.classList.add("status-element");
     statusElement.checked = statusValue;
     // statusElement.addEventListener("change", () => { //Fatemehs
+
     statusElement.addEventListener("click", () => {
       //Siris
       // toDoItem.statusValue = statusElement.checked; //Fatemehs
 
-      //-----------------Siris kod börjar här
-      todoCard.classList.add("completed-todo-info");
-      todoCard.classList.remove("todo-info");
-      completedTodosContainer.prepend(todoCard);
+      toDoItem.statusValue = !toDoItem.statusValue;
+
+      statusElement.checked = toDoItem.statusValue;
 
       //if item has been checked before, move back item
-      if (toDoItem.statusValue == true) {
-        toDoItem.statusValue = false;
+      if (toDoItem.statusValue) {
+        todoCard.classList.add("completed-todo-info");
+        todoCard.classList.remove("todo-info");
+        completedTodosContainer.prepend(todoCard);
+      } else {
+        todoCard.classList.remove("completed-todo-info");
         todosContainer.append(todoCard);
-        return; // return or will set to true value
       }
-      // set to true.
-      toDoItem.statusValue = true;
-      //-----------------Siris kod slutar här
+
+      // testar spara till local storage
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      let updatedToDoList = currentUser.toDoList.map((item) => {
+        if (item.itemId === toDoItem.itemId) {
+          // Update the specific key-value pair here
+          item.statusValue = toDoItem.statusValue;
+        }
+        return item;
+      });
+      updateLocalStorage(updatedToDoList);
     });
+    //-----------------Status function ends here
 
     // todocontainer=>todocard=>todoStatus + todoInfo (todoTitleInfo(todobtn+titleElement) + todoDetails)
 
-    todosContainer.appendChild(todoCard);
+    // Checking if saved toDoItem has statusValue == true or false
+    // and putting it in "My todos" or "Completed todos" because of that
+    if (toDoItem.statusValue === false) {
+      todosContainer.appendChild(todoCard);
+    } else {
+      completedTodosContainer.appendChild(todoCard);
+    }
+
     todoCard.append(statusElement);
     todoCard.append(todoInfo);
 
@@ -296,8 +317,6 @@ window.onload = () => {
       let filteredTodos = currentUser.toDoList.filter((todo) => {
         return pickedCategories.includes(todo.category);
       });
-      console.log(filteredTodos);
-      // renderFilteredTodos(filteredTodos);
 
       filteredTodos.forEach((toDoItem) => {
         renderToDoCard(toDoItem);
