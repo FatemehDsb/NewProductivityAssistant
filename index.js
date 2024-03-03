@@ -13,6 +13,8 @@ window.onload = () => {
   let completedTodosContainer = document.getElementById(
     "completedTodosContainer"
   );
+  let arrowRight = document.querySelector(".arrow-right");
+  let arrowDown = document.querySelector("arrow-down");
 
   //Get inputs
   let titleInput = document.getElementById("input-title");
@@ -99,7 +101,7 @@ window.onload = () => {
 
     const statusElement = document.createElement("input");
     // statusElement.type = "checkbox"; //Fatemehs
-    statusElement.setAttribute("type", "radio"); //Siris
+    statusElement.setAttribute("type", "checkbox"); //Siris
     statusElement.classList.add("status-element");
     statusElement.checked = statusValue;
     // statusElement.addEventListener("change", () => { //Fatemehs
@@ -114,15 +116,16 @@ window.onload = () => {
 
       //if item has been checked before, move back item
       if (toDoItem.statusValue) {
-        todoCard.classList.add("completed-todo-info");
-        todoCard.classList.remove("todo-info");
+        todoInfo.classList.add("completed-todo-info");
+        todoInfo.classList.remove("todo-info");
         completedTodosContainer.prepend(todoCard);
       } else {
-        todoCard.classList.remove("completed-todo-info");
+        todoInfo.classList.add("todo-info");
+        todoInfo.classList.remove("completed-todo-info");
         todosContainer.append(todoCard);
       }
 
-      // testar spara till local storage
+      // Saving to Local storage
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
       let updatedToDoList = currentUser.toDoList.map((item) => {
         if (item.itemId === toDoItem.itemId) {
@@ -143,6 +146,7 @@ window.onload = () => {
       todosContainer.appendChild(todoCard);
     } else {
       completedTodosContainer.appendChild(todoCard);
+      todoInfo.classList.add("completed-todo-info");
     }
 
     todoCard.append(statusElement);
@@ -300,11 +304,12 @@ window.onload = () => {
 
   //----------------FILTRERING------------------------------------
 
-  //Filtrera med checkboxar
   let checkBoxes = document.querySelectorAll("[name ='filterCategory']");
+
   checkBoxes.forEach((checkbox) => {
     checkbox.addEventListener("click", function () {
       todosContainer.innerHTML = "";
+      completedTodosContainer.innerHTML = "";
 
       let selectedCategories = document.querySelectorAll(
         "[name ='filterCategory']:checked"
@@ -351,6 +356,7 @@ window.onload = () => {
 
   const renderSortedTodos = (sortedTodos) => {
     todosContainer.innerHTML = "";
+    completedTodosContainer.innerHTML = "";
     sortedTodos.forEach((todo) => renderToDoCard(todo));
   };
 
@@ -466,6 +472,16 @@ window.onload = () => {
   //////////////////////////////*****************2024-03-01******************************* */
 
   // localStorage.clear();
+
+  // Arrows hiding and showing Completed Todos container
+
+  arrowRight.addEventListener("click", () => {
+    completedTodosContainer.classList.add("hide-element");
+  });
+
+  arrowDown.addEventListener("click", () => {
+    completedTodosContainer.classList.remove("hide-element");
+  });
 
   // Checking if the element logOutBtn exists in the HTML file
   if (logOutBtn) {

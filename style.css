@@ -1,6 +1,6 @@
 :root {
   --color-brand-primary: rgb(204, 138, 246);
-  --color-brand-secondary: rgb(121, 116, 147);
+  --color-brand-secondary: rgb(156, 141, 228);
 }
 
 * {
@@ -159,7 +159,7 @@ nav a:hover {
   padding: 10px 20px;
 }
 
-#completed-todo-info {
+.completed-todo-info {
   border-radius: 20px;
   background-color: var(--color-brand-secondary);
   width: 100%;
@@ -173,10 +173,12 @@ nav a:hover {
   padding: 10px 20px;
   justify-content: space-between;
 }
+
 .todo-title-info {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 10px 20px;
 }
 
 .todo-btn {
