@@ -19,7 +19,10 @@
   </head>
   <body>
     <main class="container">
-      <div id="quoteContainer"></div>
+      <div id="quoteContainer">
+        <p id="quote"></p>
+        <p id="author"></p>
+      </div>
       <!-- Trigger/Open The Modal -->
       <button id="logOutBtn">Log out</button>
       <button id="openModalBtn">+</button>
@@ -155,30 +158,26 @@
       <!----------Filter ends------------->
 
       <!----------Sorting---------->
-
-      <div id="sortContainer">
-        <div id="deadlineContainer">
-          <label for="deadlineSortDropdown">Sort by Deadline:</label>
-          <select id="deadlineSortDropdown">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-        </div>
-        <div id="estimatedTimeContainer">
-          <label for="estimatedTimeSortDropdown">Sort by Estimated Time:</label>
-          <select id="estimatedTimeSortDropdown">
-            <option value="asc">Ascending</option>
-            <option value="desc">Descending</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="deadlineContainer">
-        <h2>Deadline</h2>
-      </div>
-
-      <div id="estimatedTimeContainer">
-        <h2>Estimated Time</h2>
+      <div class="sortContainer">
+        <fieldset>
+          <legend id="sort">Sortera</legend>
+          <div id="deadlineContainer">
+            <label for="deadlineSortDropdown">Sort by Deadline:</label>
+            <select id="deadlineSortDropdown">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+          <div id="estimatedTimeContainer">
+            <label for="estimatedTimeSortDropdown"
+              >Sort by Estimated Time:</label
+            >
+            <select id="estimatedTimeSortDropdown">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+        </fieldset>
       </div>
       <!-----------------Sorting ends-------------->
 

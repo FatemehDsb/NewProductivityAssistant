@@ -48,6 +48,17 @@ body {
   align-items: start;
 }
 
+#quoteContainer{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#author{
+  font-size: 0.8em;
+  font-style: italic;
+}
+
 #todosContainer {
   border-radius: 10px;
   margin: 5px;
@@ -119,6 +130,26 @@ nav a:hover {
   border-radius: 5px;
   display: flex;
   flex-direction: row;
+}
+
+.sortContainer{
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+#deadlineContainer,
+#estimatedTimeContainer {
+  display: flex;
+  background: #f4f5f4;
+  margin: 0.2rem;
+  justify-content: space-between;
+}
+
+#estimatedTimeSortDropdown,
+#deadlineSortDropdown{
+  border-radius: 5px;
 }
 
 .toDoItems,

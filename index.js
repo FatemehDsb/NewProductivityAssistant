@@ -189,19 +189,21 @@ window.onload = () => {
   };
 
   // Api greeting
+  let quoteParagraph = document.getElementById("quote");
+  let authorParagraph = document.getElementById("author");
+
   fetchData = async () => {
     const res = await fetch(apiUrl);
     const quote = await res.json();
     console.log(quote.content);
     console.log(`- ${quote.author}`);
 
-    let finalquote = quote.content;
+    let finalQuote = quote.content;
     let author = quote.author;
-    let greeting = finalquote + "\n" + "- " + author;
+    //let greeting = finalquote + "\n" + "- " + author;
 
-    let quoteParagraph = document.createElement("p");
-    quoteParagraph.innerText = greeting;
-    quoteContainer.appendChild(quoteParagraph);
+    quoteParagraph.innerText = finalQuote;
+    authorParagraph.innerText = "- "+ author;
   };
 
   // Modal begins here
