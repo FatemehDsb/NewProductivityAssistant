@@ -12,10 +12,11 @@ window.onload = () => {
   let registerBtn = document.getElementById("registerBtn");
   let completedTodosContainer = document.getElementById(
     "completedTodosContainer"
-  );
-  let arrowRight = document.querySelector(".arrow-right");
-  let arrowDown = document.querySelector("arrow-down");
-
+    );
+    let arrowRight = document.querySelector(".arrow-right");
+    let arrowDown = document.querySelector("arrow-down");
+    
+    const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
   let titleInput = document.getElementById("input-title");
   const deadlineInput = document.getElementById("deadline-input");
@@ -41,6 +42,42 @@ window.onload = () => {
 
   function convertToMinutes(hours, minutes) {
     return hours * 60 + minutes;
+  }
+
+  /**********FUNCTION TO SAVE CHANGES ************************ */
+
+  function saveTodoChanges(itemId) {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    let todoItem = currentUser.toDoList.find(item => item.itemId === itemId);
+    if (todoItem) {
+      // 
+      todoItem.title = titleInput.value;
+      const checkedCategoryInput = document.querySelector('input[name="category"]:checked');
+      if (checkedCategoryInput) {
+        todoItem.category = checkedCategoryInput.value;
+      }
+
+      todoItem.deadline = deadlineInput.value;
+      todoItem.estimatedTime = (parseInt(document.getElementById("estimatedTimeHours").value) || 0) * 60 + (parseInt(document.getElementById("estimatedTimeMinutes").value) || 0);
+      todoItem.description = descriptionInput.value;
+      todoItem.statusValue = todoStatusInput.checked;
+
+      // 
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers.map(user => user.id === currentUser.id ? currentUser : user)));
+
+      // 
+      modal.style.display = "none";
+
+      //
+      todosContainer.innerHTML = '';
+      completedTodosContainer.innerHTML = '';
+      currentUser.toDoList.forEach(todoItem => {
+        renderToDoCard(todoItem);
+      });
+    } else {
+      console.error("Todo item not found.");
+    }
   }
 
   let renderToDoCard = (toDoItem) => {
@@ -182,9 +219,43 @@ window.onload = () => {
       updateLocalStorage(updatedToDoList);
     });
 
-    editBtn.addEventListener("click", () => {
-      //i want that add to do items button opens
-      addTodoBtn.addEventListener("click", () => {});
+
+
+    editBtn?.addEventListener("click", (e) => {
+      e.preventDefault();
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      const todoItem = currentUser.toDoList.find(item => item.itemId === toDoItem.itemId);
+      if (!todoItem) return;
+
+      //
+      titleInput.value = todoItem.title;
+     
+// 
+const categoryInput = document.querySelector('input[name="category"][value="' + todoItem.category + '"]');
+
+// 
+if (categoryInput) {
+    categoryInput.checked = true;
+}
+      
+      deadlineInput.value = todoItem.deadline;
+      document.getElementById("estimatedTimeHours").value = Math.floor(todoItem.estimatedTime / 60);
+      document.getElementById("estimatedTimeMinutes").value = todoItem.estimatedTime % 60;
+      descriptionInput.value = todoItem.description;
+      todoStatusInput.checked = todoItem.statusValue;
+
+      //
+      modal.style.display = "block";
+      addTodoBtn.style.display="none";
+
+
+      saveBtn.style.display = "block";
+
+      // 
+      saveBtn.onclick = () => {
+        saveTodoChanges(todoItem.itemId);
+        modal.style.display="none";
+      };
     });
   };
 
@@ -224,6 +295,7 @@ window.onload = () => {
   // When the user clicks the button, open the modal
   if (openModalBtn) {
     openModalBtn.onclick = openModal;
+    saveBtn.style.display="none";
   }
 
   // When the user clicks on <span> (x), close the modal
@@ -258,14 +330,14 @@ window.onload = () => {
       newPassword,
       toDoList,
     };
-    //add new object to registeredusers array.
+  
     registeredUsers.push(newUser);
 
     localStorage.setItem("userIdCounter", userIdCounter);
-    //save registeredusersarray in local storage
+   
     localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
 
-    console.log("New user registered:", newUser); // Add this line to check newUser
+    console.log("New user registered:", newUser); 
   });
 
   //   localStorage.clear();
@@ -412,14 +484,15 @@ window.onload = () => {
 
     renderToDoCard(toDoItem);
     //**************************************************************************************** */
-    // titleInput.value = "";  kommentera ut
+
 
     let registeredUsers =
       JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    if (currentUser) {
+    
+    if (currentUser.toDoList) {
       currentUser.toDoList.push(toDoItem);
       console.log(currentUser.toDoList);
 
@@ -432,7 +505,10 @@ window.onload = () => {
     } else {
       console.error("error");
     }
-    //}
+
+
+
+  
 
     // //Create a copy of currentUser to avoid modifying the original object
     // const updatedUser = { ...currentUser };
@@ -477,11 +553,11 @@ window.onload = () => {
 
   // Arrows hiding and showing Completed Todos container
 
-  arrowRight.addEventListener("click", () => {
+  arrowRight?.addEventListener("click", () => {
     completedTodosContainer.classList.add("hide-element");
   });
 
-  arrowDown.addEventListener("click", () => {
+  arrowDown?.addEventListener("click", () => {
     completedTodosContainer.classList.remove("hide-element");
   });
 
