@@ -96,6 +96,7 @@ window.onload = () => {
 
     deleteBtn.style.width = "50px";
     editBtn.style.width = "50px";
+    habitContainer.appendChild(habitCard);
 
     //*****************************************DELETE BUTTON*/
     deleteBtn.addEventListener("click", () => {
@@ -140,8 +141,6 @@ window.onload = () => {
     currentUser.habitList.forEach((habitItem) => {
       renderHabitCard(habitItem);
     });
-
-    habitContainer.appendChild(habitCard);
   }
 
   // Modal begins here
