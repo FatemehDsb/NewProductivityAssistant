@@ -12,17 +12,18 @@ window.onload = () => {
   let registerBtn = document.getElementById("registerBtn");
   let completedTodosContainer = document.getElementById(
     "completedTodosContainer"
-    );
-    let arrowRight = document.querySelector(".arrow-right");
-    let arrowDown = document.querySelector("arrow-down");
-    
-    const saveBtn = document.getElementById("saveTodoBtn");
+  );
+  let arrowRight = document.querySelector(".arrow-right");
+  let arrowDown = document.querySelector(".arrow-down");
+
+  const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
   let titleInput = document.getElementById("input-title");
   const deadlineInput = document.getElementById("deadline-input");
   const descriptionInput = document.getElementById("description-input");
   const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
   let toDoList = [];
+  let habitList = [];
 
   function updateLocalStorage(updatedToDoList) {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -48,32 +49,51 @@ window.onload = () => {
 
   function saveTodoChanges(itemId) {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    let todoItem = currentUser.toDoList.find(item => item.itemId === itemId);
+    let todoItem = currentUser.toDoList.find((item) => item.itemId === itemId);
     if (todoItem) {
-      // 
+      //
       todoItem.title = titleInput.value;
-      const checkedCategoryInput = document.querySelector('input[name="category"]:checked');
+      const checkedCategoryInput = document.querySelector(
+        'input[name="category"]:checked'
+      );
       if (checkedCategoryInput) {
         todoItem.category = checkedCategoryInput.value;
       }
 
       todoItem.deadline = deadlineInput.value;
-      todoItem.estimatedTime = (parseInt(document.getElementById("estimatedTimeHours").value) || 0) * 60 + (parseInt(document.getElementById("estimatedTimeMinutes").value) || 0);
+      todoItem.estimatedTime =
+        (parseInt(document.getElementById("estimatedTimeHours").value) || 0) *
+          60 +
+        (parseInt(document.getElementById("estimatedTimeMinutes").value) || 0);
       todoItem.description = descriptionInput.value;
       todoItem.statusValue = todoStatusInput.checked;
 
-      // 
+      //
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers.map(user => user.id === currentUser.id ? currentUser : user)));
+      localStorage.setItem(
+        "registeredUsers",
+        JSON.stringify(
+          registeredUsers.map((user) =>
+            user.id === currentUser.id ? currentUser : user
+          )
+        )
+      );
 
-      // 
+      //
       modal.style.display = "none";
-     
+
+/*Siris radera?
+      //
+      todosContainer.innerHTML = "";
+      completedTodosContainer.innerHTML = "";
+      currentUser.toDoList.forEach((todoItem) => {
+*/     
     
       todosContainer.innerHTML = '';
       completedTodosContainer.innerHTML = '';
 
       currentUser.toDoList.forEach(todoItem => {
+
         renderToDoCard(todoItem);
 
       });
@@ -221,8 +241,6 @@ window.onload = () => {
       updateLocalStorage(updatedToDoList);
     });
 
-
-
     editBtn?.addEventListener("click", (e) => {
       e.preventDefault();
       //
@@ -231,10 +249,13 @@ window.onload = () => {
       saveBtn.style.display = "block";
       // 
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      const todoItem = currentUser.toDoList.find(item => item.itemId === toDoItem.itemId);
+      const todoItem = currentUser.toDoList.find(
+        (item) => item.itemId === toDoItem.itemId
+      );
       if (!todoItem) return;
       //
       titleInput.value = todoItem.title;
+
 // 
       const categoryInput = document.querySelector('input[name="category"][value="' + todoItem.category + '"]');
 
@@ -244,8 +265,11 @@ window.onload = () => {
      }
       
       deadlineInput.value = todoItem.deadline;
-      document.getElementById("estimatedTimeHours").value = Math.floor(todoItem.estimatedTime / 60);
-      document.getElementById("estimatedTimeMinutes").value = todoItem.estimatedTime % 60;
+      document.getElementById("estimatedTimeHours").value = Math.floor(
+        todoItem.estimatedTime / 60
+      );
+      document.getElementById("estimatedTimeMinutes").value =
+        todoItem.estimatedTime % 60;
       descriptionInput.value = todoItem.description;
       todoStatusInput.checked = todoItem.statusValue;
 
@@ -267,6 +291,7 @@ window.onload = () => {
    addTodoBtn.style.display="block";
    saveBtn.style.display="none";
   //*****************************Jag behöver nollställa modal efter click på save eller innan öpp */
+
       };
     });
   };
@@ -286,7 +311,7 @@ window.onload = () => {
     //let greeting = finalquote + "\n" + "- " + author;
 
     quoteParagraph.innerText = finalQuote;
-    authorParagraph.innerText = "- "+ author;
+    authorParagraph.innerText = "- " + author;
   };
 
   // Modal begins here
@@ -307,7 +332,7 @@ window.onload = () => {
   // When the user clicks the button, open the modal
   if (openModalBtn) {
     openModalBtn.onclick = openModal;
-    saveBtn.style.display="none";
+    saveBtn.style.display = "none";
   }
 
   // When the user clicks on <span> (x), close the modal
@@ -341,15 +366,16 @@ window.onload = () => {
       newUsername,
       newPassword,
       toDoList,
+      habitList,
     };
-  
+
     registeredUsers.push(newUser);
 
     localStorage.setItem("userIdCounter", userIdCounter);
-   
+
     localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
 
-    console.log("New user registered:", newUser); 
+    console.log("New user registered:", newUser);
   });
 
   //   localStorage.clear();
@@ -507,13 +533,11 @@ window.onload = () => {
     renderToDoCard(toDoItem);
     //**************************************************************************************** */
 
-
     // let registeredUsers =
     //   JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
     // let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    
     // if (currentUser.toDoList) {
     //   currentUser.toDoList.push(toDoItem);
     //   console.log(currentUser.toDoList);
@@ -527,10 +551,6 @@ window.onload = () => {
     // } else {
     //   console.error("error");
     // }
-
-
-
-  
 
     //Create a copy of currentUser to avoid modifying the original object
     const updatedUser = { ...currentUser };

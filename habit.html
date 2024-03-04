@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habits</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="habit.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/74a3d29713.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <div id="quoteContainer">
+        <p id="quote"></p>
+        <p id="author"></p>
+      </div>
+      <!-- Trigger/Open The Modal -->
+      <button id="logOutBtn">Log out</button>
+      <button id="openModalBtn">+</button>
+
+      <!--------KNAPPAR--HABITS/TODOS------->
+      <nav class="header-container">
+        <a href="todo.html" id="todosTab">Todos</a>
+        <a href="habit.html" id="habitTab">Habits</a>
+      </nav>
+
+      <div id="habitModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <button id="addHabitBtn">Add Habit</button>
+
+          <!--2024-03-03 FATEMEH--Deleting delete button and ADDING SAVE BUTTON****************-->
+          <!-- <button id="delete">Delete</button> -->
+          <button id="saveHabitBtn">Save changes</button>
+
+          <div class="modal-details">
+            <label for="input-title">Title</label>
+            <input type="text" placeholder="Title" id="input-title" />
+
+            <!-- <label for="status-checkbox">Status</label>
+            <input type="checkbox" id="status-checkbox" /> -->
+
+            <!--priority-->
+            <fieldset>
+              <legend>Priority</legend>
+              <div id="prioritySortInputContainer">
+                <label for="priorityInput">Set Priority:</label>
+                <select id="priorityInput">
+                  <option value="sortHigh">High</option>
+                  <option value="sortMedium">Medium</option>
+                  <option value="sortLow">Low</option>
+                </select>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+
+      <!---------MODAL ENDS-->
+
+      <!---------Filter------>
+      <div class="filterContainer">
+        <fieldset>
+          <legend>Filtering</legend>
+
+          <div id="priorityFilterContainer">
+            <label for="priorityFilterDropdown">Sort by Priority:</label>
+            <select id="priorityFilterDropdown">
+              <option value="filterHigh">High</option>
+              <option value="filterMedium">Medium</option>
+              <option value="filterLow">Low</option>
+            </select>
+          </div>
+        </fieldset>
+      </div>
+      <!----------Filter ends------------->
+
+      <!----------Sorting---------->
+      <div class="sortContainer">
+        <fieldset>
+          <legend id="sort">Sortera</legend>
+          <div id="prioritySortContainer">
+            <label for="prioritySortDropdown">Sort by Priority:</label>
+            <select id="prioritySortDropdown">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+          <div id="streakSortContainer">
+            <label for="streakSortDropdown">Sort by Estimated Time:</label>
+            <select id="streakSortDropdown">
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+        </fieldset>
+      </div>
+      <!-----------------Sorting ends-------------->
+
+      <h1>Your Habits</h1>
+      <div id="habitContainer"></div>
+      <div id="habitDiv"></div>
+      <br />
+      <br />
+    </main>
+  </body>
+</html>
