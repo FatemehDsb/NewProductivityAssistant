@@ -48,13 +48,13 @@ body {
   align-items: start;
 }
 
-#quoteContainer{
+#quoteContainer {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
-#author{
+#author {
   font-size: 0.8em;
   font-style: italic;
 }
@@ -132,7 +132,7 @@ nav a:hover {
   flex-direction: row;
 }
 
-.sortContainer{
+.sortContainer {
   display: flex;
   flex-direction: column;
   margin-top: 0.5rem;
@@ -140,7 +140,11 @@ nav a:hover {
 }
 
 #deadlineContainer,
-#estimatedTimeContainer {
+#estimatedTimeContainer,
+#priorityFilterContainer,
+#prioritySortContainer,
+#prioritySortInputContainer,
+#streakSortContainer {
   display: flex;
   background: #f4f5f4;
   margin: 0.2rem;
@@ -148,7 +152,7 @@ nav a:hover {
 }
 
 #estimatedTimeSortDropdown,
-#deadlineSortDropdown{
+#deadlineSortDropdown {
   border-radius: 5px;
 }
 
@@ -226,3 +230,15 @@ nav a:hover {
   padding: 0px;
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+/* Habits
+
+.habit-card
+
+.habit-info
+
+.habit-title-info
+
+.habit-btn
+
+.habit-details
