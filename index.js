@@ -486,53 +486,53 @@ if (categoryInput) {
     //**************************************************************************************** */
 
 
-    let registeredUsers =
-      JSON.parse(localStorage.getItem("registeredUsers")) || [];
+    // let registeredUsers =
+    //   JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    // let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     
-    if (currentUser.toDoList) {
-      currentUser.toDoList.push(toDoItem);
-      console.log(currentUser.toDoList);
+    // if (currentUser.toDoList) {
+    //   currentUser.toDoList.push(toDoItem);
+    //   console.log(currentUser.toDoList);
 
-      registeredUsers = registeredUsers.map((user) =>
-        user.id === currentUser.id ? currentUser : user
-      );
+    //   registeredUsers = registeredUsers.map((user) =>
+    //     user.id === currentUser.id ? currentUser : user
+    //   );
 
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-    } else {
-      console.error("error");
-    }
+    //   localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    //   localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+    // } else {
+    //   console.error("error");
+    // }
 
 
 
   
 
-    // //Create a copy of currentUser to avoid modifying the original object
-    // const updatedUser = { ...currentUser };
+    //Create a copy of currentUser to avoid modifying the original object
+    const updatedUser = { ...currentUser };
 
-    // if (!updatedUser.toDoList) {
-    //   updatedUser.toDoList = []; // Initialize toDoList if it does not exist
-    // }
+    if (!updatedUser.toDoList) {
+      updatedUser.toDoList = []; // Initialize toDoList if it does not exist
+    }
 
-    // //Pushes todoInputValue to updatedUser (earlier currentUser)
-    // updatedUser.toDoList.push(toDoItem);
+    //Pushes todoInputValue to updatedUser (earlier currentUser)
+    updatedUser.toDoList.push(toDoItem);
 
-    // //Update registered users array with changes
-    // const updatedRegisteredUsers = registeredUsers.map((user) =>
-    //   user.id === updatedUser.id ? updatedUser : user
-    // );
+    //Update registered users array with changes
+    const updatedRegisteredUsers = registeredUsers.map((user) =>
+      user.id === updatedUser.id ? updatedUser : user
+    );
 
-    // //Save the updatedUser to JSON string representing currentUser object in the Local Storage
-    // localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+    //Save the updatedUser to JSON string representing currentUser object in the Local Storage
+    localStorage.setItem("currentUser", JSON.stringify(updatedUser));
 
-    // //Save the updated registered users array as JSON string to the registeredUsers array localStorage
-    // localStorage.setItem(
-    //   "registeredUsers",
-    //   JSON.stringify(updatedRegisteredUsers)
-    // );
+    //Save the updated registered users array as JSON string to the registeredUsers array localStorage
+    localStorage.setItem(
+      "registeredUsers",
+      JSON.stringify(updatedRegisteredUsers)
+    );
 
     // Collect hours and minutes input for estimated time, convert to minutes
 
