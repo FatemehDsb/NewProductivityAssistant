@@ -82,11 +82,20 @@ window.onload = () => {
       //
       modal.style.display = "none";
 
+/*Siris radera?
       //
       todosContainer.innerHTML = "";
       completedTodosContainer.innerHTML = "";
       currentUser.toDoList.forEach((todoItem) => {
+*/     
+    
+      todosContainer.innerHTML = '';
+      completedTodosContainer.innerHTML = '';
+
+      currentUser.toDoList.forEach(todoItem => {
+
         renderToDoCard(todoItem);
+
       });
     } else {
       console.error("Todo item not found.");
@@ -234,25 +243,27 @@ window.onload = () => {
 
     editBtn?.addEventListener("click", (e) => {
       e.preventDefault();
+      //
+      modal.style.display = "block";
+      addTodoBtn.style.display="none";
+      saveBtn.style.display = "block";
+      // 
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
       const todoItem = currentUser.toDoList.find(
         (item) => item.itemId === toDoItem.itemId
       );
       if (!todoItem) return;
-
       //
       titleInput.value = todoItem.title;
 
-      //
-      const categoryInput = document.querySelector(
-        'input[name="category"][value="' + todoItem.category + '"]'
-      );
+// 
+      const categoryInput = document.querySelector('input[name="category"][value="' + todoItem.category + '"]');
 
-      //
+// 
       if (categoryInput) {
-        categoryInput.checked = true;
-      }
-
+    categoryInput.checked = true;
+     }
+      
       deadlineInput.value = todoItem.deadline;
       document.getElementById("estimatedTimeHours").value = Math.floor(
         todoItem.estimatedTime / 60
@@ -262,16 +273,25 @@ window.onload = () => {
       descriptionInput.value = todoItem.description;
       todoStatusInput.checked = todoItem.statusValue;
 
-      //
-      modal.style.display = "block";
-      addTodoBtn.style.display = "none";
-
-      saveBtn.style.display = "block";
-
-      //
       saveBtn.onclick = () => {
         saveTodoChanges(todoItem.itemId);
-        modal.style.display = "none";
+      /*********************Nullställa alla input fält- nullställa hela modalen? */
+      //when we click on savebutton, it deletes all input fields, it should
+    const checkedCategoryInput = document.querySelector('input[name="category"]:checked');
+   if (checkedCategoryInput) {
+     checkedCategoryInput.checked = false;
+   }
+   titleInput.value="";
+   deadlineInput.value = "";
+   descriptionInput.value = "";
+   todoStatusInput.checked = "";
+   document.getElementById("estimatedTimeHours").value = "";
+   document.getElementById("estimatedTimeMinutes").value = "";
+   modal.style.display="none";
+   addTodoBtn.style.display="block";
+   saveBtn.style.display="none";
+  //*****************************Jag behöver nollställa modal efter click på save eller innan öpp */
+
       };
     });
   };
@@ -469,6 +489,14 @@ window.onload = () => {
   //----------------SORTERING-------------------------------------
 
   addTodoBtn?.addEventListener("click", () => {
+
+
+
+   addTodoBtn.style.display="block";
+   saveBtn.style.display = "none";
+
+   //******************************************************************************* */
+  
     let title = titleInput.value;
     const categoryCheckbox = document.querySelector(
       'input[name="category"]:checked'
@@ -489,6 +517,8 @@ window.onload = () => {
     let statusValue = todoStatusInput.checked;
 
     if (!title) return;
+
+     
 
     let toDoItem = {
       itemId: Date.now().toString(), // Unique ID for each to-do item
