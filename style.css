@@ -187,7 +187,7 @@ nav a:hover {
   gap: 10px;
 }
 
-.todo-info {
+.todo-info, .habit-info {
   border-radius: 20px;
   background-color: var(--color-brand-primary);
   width: 100%;
