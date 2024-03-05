@@ -65,7 +65,7 @@ window.onload = () => {
 
     const streakElement = document.createElement("div");
     streakElement.classList.add("streak-element");
-    streakElement.textContent = streak;
+    //streakElement.textContent = streak;
 
     const habitBtn = document.createElement("div");
     habitBtn.classList.add("habit-btn");
@@ -80,6 +80,34 @@ window.onload = () => {
 
     const habitDetails = document.createElement("div");
     habitDetails.classList.add("habit-details");
+
+    
+    //-------------STREAK STARTS---------------
+  
+    streakElement.textContent = "Streak: " + (streak || 0);
+
+    const streakCheckbox = document.createElement("input");
+    streakCheckbox.setAttribute("type", "checkbox");
+    let streakCounter = 0;
+
+    const streakText = document.createElement('span');
+    streakText.textContent = `Current Streak: ${streakCounter}`;
+
+    const updateStreak = () => {
+        streakCounter++;
+        streakText.textContent = `Streak: ${streakCounter}`;
+    };
+
+    streakCheckbox.addEventListener('click', () => {
+        updateStreak();
+    });
+
+    streakElement.appendChild(streakCheckbox);
+    streakElement.appendChild(streakText);
+    habitDetails.appendChild(streakElement);
+    habitCard.appendChild(habitDetails);
+
+    //-------------STREAK ENDS---------------
 
     // Saving to Local storage
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
