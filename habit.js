@@ -336,4 +336,34 @@ prioritySortDropdown?.addEventListener("change", ()=>{
   console.log(sortOrder)
   sortedHabitsByPriority(sortOrder)
 });
+
+
+//streak
+
+
+const sortedHabitsByStreak =(order)=>{
+  const sortedStreak= currentUser.habitList.slice().sort((a,b)=>{
+    return order ==='lowToHigh' 
+    ? a.streak - b.streak
+    : b.streak - a.streak;
+    
+  })
+  renderSortedStreak(sortedStreak);
+}
+
+const renderSortedStreak = (sortedStreak) => {
+  habitContainer.innerHTML = "";
+  sortedStreak.forEach((habitItem) => renderHabitCard(habitItem));
+
+};
+
+let streakSortedDropdown= document.getElementById("streakSortDropdown");
+
+streakSortedDropdown?.addEventListener("change", ()=>{
+
+  const sortOrder = streakSortedDropdown.value;
+ 
+  sortedHabitsByStreak(sortOrder)
+});
+
 };
