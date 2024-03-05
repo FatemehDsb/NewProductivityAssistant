@@ -291,6 +291,5 @@ nav a:hover {
 
 .streak-element {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row-reverse;
 }
