@@ -56,9 +56,13 @@
               <div id="prioritySortInputContainer">
                 <label for="priorityInput">Set Priority:</label>
                 <select id="priorityInput">
-                  <option value="sortHigh">High</option>
-                  <option value="sortMedium">Medium</option>
-                  <option value="sortLow">Low</option>
+
+                  <!--     03-05 *********              Fetemeh changed value to high, medium, etcc -->
+                  <option value="" selected disabled>Priority</option>
+                  <!--     adding priority option-->
+                  <option value="high">High</option>
+                  <option value="medium">Medium</option>
+                  <option value="low">Low</option>
                 </select>
               </div>
             </fieldset>
@@ -74,11 +78,14 @@
           <legend>Filtering</legend>
 
           <div id="priorityFilterContainer">
-            <label for="priorityFilterDropdown">Sort by Priority:</label>
+            <label for="priorityFilterDropdown">Filtered by Priority:</label>
             <select id="priorityFilterDropdown">
-              <option value="filterHigh">High</option>
-              <option value="filterMedium">Medium</option>
-              <option value="filterLow">Low</option>
+              <!--    03-05------Fatemeh : changing values from filterx to x-->
+              <option value="" selected disabled>Priority</option>
+              <!--     adding priority option-->
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
             </select>
           </div>
         </fieldset>

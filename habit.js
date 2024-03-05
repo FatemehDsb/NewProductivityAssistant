@@ -111,13 +111,13 @@ window.onload = () => {
     editBtn?.addEventListener("click", (e) => {
       e.preventDefault();
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      const habitItem = currentUser.habitList.find(
+      const editHabitItem = currentUser.habitList.find(
         (item) => item.itemId === habitItem.itemId
       );
-      if (!habitItem) return;
+      if (!editHabitItem) return;
 
       //
-      titleInput.value = habitItem.title;
+      titleInput.value = editHabitItem.title;
 
       //
       modal.style.display = "block";
@@ -127,7 +127,7 @@ window.onload = () => {
 
       //
       saveBtn.onclick = () => {
-        saveHabitChanges(habitItem.itemId);
+        saveHabitChanges(editHabitItem.itemId);
         modal.style.display = "none";
       };
     });
@@ -232,4 +232,70 @@ window.onload = () => {
       localStorage.removeItem("currentUser");
     });
   }
+
+
+  //----------------FILTRERING------------------------------------//
+
+
+  
+  let priorityFilter= document.getElementById("priorityFilterDropdown");
+  priorityFilter?.addEventListener("change",()=>{
+  let selectedPriority= priorityFilter.value;
+
+//   for (let i = 0; i < currentUser.habitList.length; i++) {
+//     if (currentUser.habitList[i].priority === selectedPriority) {
+//         filteredHabits.push(currentUser.habitList[i]);
+//     }
+// }
+
+  let filteredHabits= currentUser.habitList.filter((habitItem)=>{
+    return habitItem.priority ===selectedPriority
+  });
+
+  const habitContainer = document.getElementById("habitContainer");
+  habitContainer.innerHTML = '';
+
+  filteredHabits.forEach(habitItem=>{
+    renderHabitCard(habitItem);
+  })
+
+  })
+//----------------FILTRERING SLUT ------------------------------------//
+
+//----------------SORTERING------------------------------------------//
+
+//sorting by priority 
+
+
+const priorityValues = {
+"High": 3,
+"Medium": 2,
+"Low": 1
 };
+
+//sorting function
+let sortedHabitsByPriority =(order)=>{
+currentUser.habitList.sort((a,b)=>{
+  // Get numerical priority values for comparison
+  //for each habit, (a), find its priority level, and then look at the number value in priorityvaluse objects
+  let priorityA = priorityValues[a.priority];
+  let priorityB = priorityValues[b.priority];
+
+  return priorityA - priorityB;
+});
+}
+
+//get value of selected dropdown 
+let prioritySortDropdown = document.getElementById("prioritySortDropdown");
+prioritySortDropdown?.addEventListener("change", ()=>{
+sortedHabitsByPriority();
+})
+
+
+
+
+
+
+};
+
+

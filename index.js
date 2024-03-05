@@ -49,24 +49,24 @@ window.onload = () => {
 
   function saveTodoChanges(itemId) {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    let todoItem = currentUser.toDoList.find((item) => item.itemId === itemId);
-    if (todoItem) {
+    let editedTodoItem = currentUser.toDoList.find((item) => item.itemId === itemId);
+    if (editedTodoItem) {
       //
-      todoItem.title = titleInput.value;
+      editedTodoItem.title = titleInput.value;
       const checkedCategoryInput = document.querySelector(
         'input[name="category"]:checked'
       );
       if (checkedCategoryInput) {
-        todoItem.category = checkedCategoryInput.value;
+        editedTodoItem.category = checkedCategoryInput.value;
       }
 
-      todoItem.deadline = deadlineInput.value;
-      todoItem.estimatedTime =
+      editedTodoItem.deadline = deadlineInput.value;
+      editedTodoItem.estimatedTime =
         (parseInt(document.getElementById("estimatedTimeHours").value) || 0) *
           60 +
         (parseInt(document.getElementById("estimatedTimeMinutes").value) || 0);
-      todoItem.description = descriptionInput.value;
-      todoItem.statusValue = todoStatusInput.checked;
+        editedTodoItem.description = descriptionInput.value;
+        editedTodoItem.statusValue = todoStatusInput.checked;
 
       //
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -92,9 +92,9 @@ window.onload = () => {
       todosContainer.innerHTML = '';
       completedTodosContainer.innerHTML = '';
 
-      currentUser.toDoList.forEach(todoItem => {
+      currentUser.toDoList.forEach(editedTodoItem => {
 
-        renderToDoCard(todoItem);
+        renderToDoCard(editedTodoItem);
 
       });
     } else {
@@ -249,32 +249,32 @@ window.onload = () => {
       saveBtn.style.display = "block";
       // 
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      const todoItem = currentUser.toDoList.find(
+      const editedTodoItem = currentUser.toDoList.find(
         (item) => item.itemId === toDoItem.itemId
       );
-      if (!todoItem) return;
+      if (!editedTodoItem) return;
       //
-      titleInput.value = todoItem.title;
+      titleInput.value = editedTodoItem.title;
 
 // 
-      const categoryInput = document.querySelector('input[name="category"][value="' + todoItem.category + '"]');
+      const categoryInput = document.querySelector('input[name="category"][value="' + editedTodoItem.category + '"]');
 
 // 
       if (categoryInput) {
     categoryInput.checked = true;
      }
       
-      deadlineInput.value = todoItem.deadline;
+      deadlineInput.value = editedTodoItem.deadline;
       document.getElementById("estimatedTimeHours").value = Math.floor(
-        todoItem.estimatedTime / 60
+        editedTodoItem.estimatedTime / 60
       );
       document.getElementById("estimatedTimeMinutes").value =
-        todoItem.estimatedTime % 60;
-      descriptionInput.value = todoItem.description;
-      todoStatusInput.checked = todoItem.statusValue;
+      editedTodoItem.estimatedTime % 60;
+      descriptionInput.value = editedTodoItem.description;
+      todoStatusInput.checked = editedTodoItem.statusValue;
 
       saveBtn.onclick = () => {
-        saveTodoChanges(todoItem.itemId);
+        saveTodoChanges(editedTodoItem.itemId);
       /*********************Nullställa alla input fält- nullställa hela modalen? */
       //when we click on savebutton, it deletes all input fields, it should
     const checkedCategoryInput = document.querySelector('input[name="category"]:checked');
