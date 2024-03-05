@@ -39,14 +39,14 @@ window.onload = () => {
     habitCard.setAttribute("data-id", habitItem.itemId); // Use the data-id attribute to store the unique ID
 
     const habitPriorityCover = document.createElement("div");
-    if (priorityInput.value == "sortHigh") {
-      habitPriorityCover.innerText = "High";
+    if (priority == "high") {
+      habitPriorityCover.innerText = "PRIORITY: HIGH";
       habitPriorityCover.classList.add("habit-priority-high-cover");
-    } else if (priorityInput.value == "sortMedium") {
-      habitPriorityCover.innerText = "Medium";
+    } else if (priority == "medium") {
+      habitPriorityCover.innerText = "PRIORITY: MEDIUM";
       habitPriorityCover.classList.add("habit-priority-medium-cover");
-    } else if (priorityInput.value == "sortLow") {
-      habitPriorityCover.innerText = "Low";
+    } else if (priority == "low") {
+      habitPriorityCover.innerText = "PRIORITY: LOW";
       habitPriorityCover.classList.add("habit-priority-low-cover");
     }
 
@@ -105,7 +105,7 @@ window.onload = () => {
     habitBtn.appendChild(editBtn);
     habitBtn.appendChild(deleteBtn);
 
-    habitDetails.append(priorityElement, streakElement);
+    habitDetails.append(streakElement);
 
     deleteBtn.style.width = "50px";
     editBtn.style.width = "50px";
