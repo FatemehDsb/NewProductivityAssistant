@@ -299,31 +299,41 @@ window.onload = () => {
   });
   //----------------FILTRERING SLUT ------------------------------------//
 
-  //----------------SORTERING------------------------------------------//
+                     //sorting by priority
 
-  //sorting by priority
+//giving number to each of priorities by having them in array to use their index
 
-  const priorityValues = {
-    High: 3,
-    Medium: 2,
-    Low: 1,
-  };
+const priorityOrder = ['low', 'medium', 'high'];
+let prioritySortDropdown = document.getElementById("prioritySortDropdown");
 
-  //sorting function
-  let sortedHabitsByPriority = (order) => {
-    currentUser.habitList.sort((a, b) => {
-      // Get numerical priority values for comparison
-      //for each habit, (a), find its priority level, and then look at the number value in priorityvaluse objects
-      let priorityA = priorityValues[a.priority];
-      let priorityB = priorityValues[b.priority];
 
-      return priorityA - priorityB;
-    });
-  };
+const sortedHabitsByPriority = (sortOrder) => {
+  const sortedPriority = currentUser.habitList.slice().sort((a, b) => {
+    let indexA = priorityOrder.indexOf(a.priority);
+    let indexB = priorityOrder.indexOf(b.priority);
 
-  //get value of selected dropdown
-  let prioritySortDropdown = document.getElementById("prioritySortDropdown");
-  prioritySortDropdown?.addEventListener("change", () => {
-    sortedHabitsByPriority();
+    console.log("indexa"+ indexA);
+
+    console.log("indexB" + indexB)
+    
+    return sortOrder === 'lowToHigh' 
+    ? indexA - indexB 
+    : indexB - indexA;
   });
+
+  renderSortedPriority(sortedPriority);
+};
+
+const renderSortedPriority = (sortedPriority) => {
+  habitContainer.innerHTML = "";
+  sortedPriority.forEach((habitItem) => renderHabitCard(habitItem));
+
+};
+
+prioritySortDropdown?.addEventListener("change", ()=>{
+
+  const sortOrder = prioritySortDropdown.value;
+  console.log(sortOrder)
+  sortedHabitsByPriority(sortOrder)
+});
 };
