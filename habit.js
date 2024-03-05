@@ -63,8 +63,8 @@ window.onload = () => {
     priorityElement.classList.add("priority-element");
     priorityElement.textContent = priority;
 
-    const streakElement = document.createElement("div");
-    streakElement.classList.add("streak-element");
+    //const streakElement = document.createElement("div");
+    //streakElement.classList.add("streak-element");
     //streakElement.textContent = streak;
 
     const habitBtn = document.createElement("div");
@@ -84,24 +84,43 @@ window.onload = () => {
     
     //-------------STREAK STARTS---------------
   
-    streakElement.textContent = "Streak: " + (streak || 0);
+    let streakCounter = habitItem.streak || 0;
+    const streakElement = document.createElement("div");
+    streakElement.classList.add("streak-element");
+    streakElement.textContent = `Streak: ${streakCounter}`;
 
     const streakCheckbox = document.createElement("input");
     streakCheckbox.setAttribute("type", "checkbox");
-    let streakCounter = 0;
 
     const streakText = document.createElement('span');
     streakText.textContent = `Current Streak: ${streakCounter}`;
 
+    //streakCheckbox.checked = habitItem.completed || false;
+
     const updateStreak = () => {
+      habitItem.completed = streakCheckbox.checked;
+
+      if(streakCheckbox.checked) {
         streakCounter++;
-        streakText.textContent = `Streak: ${streakCounter}`;
+      } else {
+        streakCounter = 0;
+      }
+
+      streakText.textContent = `Streak: ${streakCounter}`;
+      habitItem.streak = streakCounter;
+
+      currentUser.habitList = currentUser.habitList.map(item => {
+        if(item.itemId === habitItem.itemId) {
+          return habitItem;
+        }
+        return item;
+      });
+
+      updateLocalStorage(currentUser.habitList);
     };
 
-    streakCheckbox.addEventListener('click', () => {
-        updateStreak();
-    });
-
+    streakCheckbox.addEventListener('click', updateStreak);
+    
     streakElement.appendChild(streakCheckbox);
     streakElement.appendChild(streakText);
     habitDetails.appendChild(streakElement);
