@@ -1,6 +1,7 @@
 :root {
-  --color-brand-primary: rgb(204, 138, 246);
-  --color-brand-secondary: rgb(156, 141, 228);
+  --color-brand-primary: rgb(159, 201, 213);
+  --color-brand-secondary: rgb(159, 180, 185);
+  --color-brand-tertiary: rgb(242, 242, 242);
 }
 
 * {
@@ -59,6 +60,12 @@ body {
   font-style: italic;
 }
 
+#todosTab {
+  background-color: var(--color-brand-primary);
+}
+#habitTab {
+  background-color: var(--color-brand-tertiary);
+}
 #todosContainer {
   border-radius: 10px;
   margin: 5px;
@@ -187,8 +194,7 @@ nav a:hover {
   gap: 10px;
 }
 
-.todo-info,
-.habit-info {
+.todo-info {
   border-radius: 20px;
   background-color: var(--color-brand-primary);
   width: 100%;
@@ -253,20 +259,32 @@ nav a:hover {
 }
 
 .habit-priority-high-cover {
-  background-color: rgb(255, 85, 0);
+  background-image: linear-gradient(
+    rgb(255, 98, 0),
+    var(--color-brand-tertiary)
+  );
+  height: 40px;
+  font-size: 12px;
 }
 
 .habit-priority-medium-cover {
-  background-color: darkorange;
+  background-image: linear-gradient(darkorange, var(--color-brand-tertiary));
+  height: 40px;
+  font-size: 12px;
 }
 
 .habit-priority-low-cover {
-  background-color: yellow;
+  background-image: linear-gradient(
+    rgb(255, 221, 0),
+    var(--color-brand-tertiary)
+  );
+  height: 40px;
+  font-size: 12px;
 }
 
 .habit-info {
   border-radius: 0px 0px 8px 8px;
-  background-color: var(--color-brand-primary);
+  background-color: var(--color-brand-tertiary);
   padding: 20px;
   margin-bottom: 20px;
 }
