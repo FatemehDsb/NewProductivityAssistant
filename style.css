@@ -187,7 +187,8 @@ nav a:hover {
   gap: 10px;
 }
 
-.todo-info, .habit-info {
+.todo-info,
+.habit-info {
   border-radius: 20px;
   background-color: var(--color-brand-primary);
   width: 100%;
@@ -235,10 +236,37 @@ nav a:hover {
 
 .habit-card
 
-.habit-info
-
 .habit-title-info
 
 .habit-btn
 
 .habit-details
+*/
+
+.habit-priority-high-cover,
+.habit-priority-medium-cover,
+.habit-priority-low-cover {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 10px 20px;
+  overflow: hidden;
+}
+
+.habit-priority-high-cover {
+  background-color: rgb(255, 85, 0);
+}
+
+.habit-priority-medium-cover {
+  background-color: darkorange;
+}
+
+.habit-priority-low-cover {
+  background-color: yellow;
+}
+
+.habit-info {
+  border-radius: 0px 0px 8px 8px;
+  background-color: var(--color-brand-primary);
+  padding: 20px;
+  margin-bottom: 20px;
+}
