@@ -671,7 +671,8 @@ window.onload = () => {
     //Medan timer är igång, dölj allt annat på sidan förutom tillhörande-knappar och tiden.
     // När tiden är pausad eller stoppad, ska allt annat på sidan kunna visas.
 
-    pomodoroModal.style.background = "white";
+    pomodoroModal.style.background= "white";
+    clearInterval(countdown);
 
     let timerValue = timerInput.value;
     const durationInSeconds = parseInt(timerValue) * 60; //convert input value to seconds
@@ -712,6 +713,9 @@ window.onload = () => {
   });
 
   //stop button
+
+  /* Siri saving this just to be sure - MERGE CONFLICT
+
   stopButton.addEventListener("click", () => {
     clearInterval(countdown);
     timeLeft = 0;
@@ -721,6 +725,19 @@ window.onload = () => {
     timerDisplay.textContent = `${minutes}:${
       remainingSeconds < 10 ? "0" : ""
     }${remainingSeconds}`;
+*/
+
+  stopButton.addEventListener("click", ()=>{
+    pomodoroModal.style.background= "white";
+    clearInterval(countdown);
+    timeLeft=0;
+    // //updated display time
+    // const minutes = Math.floor(timeLeft/60);
+    // const remainingSeconds = timeLeft % 60;
+    timerDisplay.textContent = "0:00";
+    timerInput.value="";
+    timerInput.disabled = false;
+
   });
 
   let isPaused = false;
@@ -729,8 +746,8 @@ window.onload = () => {
       clearInterval(countdown); // Pause the timer
       pauseButton.innerHTML = "Resume";
       isPaused = true;
-    } else {
-      // Resume the timer
+    } else{// Resume the timer
+      isPaused = false;
       pauseButton.innerHTML = "Pause";
       countdown = setInterval(() => {
         if (timeLeft <= 0) {
