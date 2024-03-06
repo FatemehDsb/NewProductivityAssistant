@@ -644,6 +644,11 @@ window.onload = () => {
   //start timer 
   startButton.addEventListener("click", ()=>{
     
+    //Medan timer är igång, dölj allt annat på sidan förutom tillhörande-knappar och tiden.
+    // När tiden är pausad eller stoppad, ska allt annat på sidan kunna visas.
+
+    pomodoroModal.style.background= "white";
+    
     let timerValue = timerInput.value;
     const durationInSeconds = parseInt(timerValue)*60;   //convert input value to seconds
     timeLeft = durationInSeconds;

@@ -356,4 +356,30 @@ nav a:hover {
   cursor: pointer;
 }
 
+
+.pomodoro-modal-details{
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+#timerTime{
+  font-size: 100px;
+  width: 200px;
+ 
+}
+.timer-display{
+  font-size: 100px;
+}
+.timer-buttons{
+border: 1px solid rgb(20, 58, 134);
+}
+.timer-stop, 
+.timer-pause,
+.timer-start
+{
+
+}
+
 /******************POMODORO MODAL ENDS******************/
