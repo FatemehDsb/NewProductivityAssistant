@@ -23,6 +23,24 @@
         <p id="quote"></p>
         <p id="author"></p>
       </div>
+
+      <!---------Pomodoro MODAL STARTS-------------------------------------->
+      <button id="openPomodoroBtn">Open Pomodoro</button>
+      <div id="pomodoroModal" class="pomodoro-modal">
+      <div class="pomodoro-modal-content">
+         <span class="pomodoro-close">&times;</span>
+         <div class="pomodoro-modal-details">
+          <div class="timer-display">
+            <input type="text" id="timerTime" value="25">:00
+          </div>
+          <button class="timer-start">Start</button>
+          <button class="timer-pause">Pause</button>
+          <button class="timer-stop">Stop</button>
+         </div>
+      </div>
+      </div>
+      <!---------Pomodoro MODAL ENDS-------------------------------------->
+      
       <!-- Trigger/Open The Modal -->
       <button id="logOutBtn">Log out</button>
       <button id="openModalBtn">+</button>

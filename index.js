@@ -615,4 +615,102 @@ window.onload = () => {
       localStorage.removeItem("currentUser");
     });
   }
+
+
+  // POMODORA Modal begins here ----------------------------------------
+ const openPomodoroModalBtn = document.getElementById("openPomodoroBtn");
+ const pomodoroModal = document.getElementById("pomodoroModal");
+ const pomodoroModalSpan = document.getElementsByClassName("pomodoro-close")[0];
+ 
+ if (openPomodoroModalBtn) {
+   openPomodoroModalBtn.onclick =function(){
+     pomodoroModal.style.display = "block";
+    }
+  }
+  if (pomodoroModalSpan) {
+    pomodoroModalSpan.onclick = function () {
+      pomodoroModal.style.display = "none";
+    };
+  }
+  
+  const timerDisplay = document.querySelector(".timer-display");
+  const startButton = document.querySelector(".timer-start");
+  const pauseButton = document.querySelector(".timer-pause");
+  const stopButton = document.querySelector(".timer-stop");
+  const timerInput = document.getElementById('timerTime');//timer input
+  let countdown; // countdown timer
+  let timeLeft ;
+
+  //start timer 
+  startButton.addEventListener("click", ()=>{
+    
+    let timerValue = timerInput.value;
+    const durationInSeconds = parseInt(timerValue)*60;   //convert input value to seconds
+    timeLeft = durationInSeconds;
+    
+    if (isNaN(durationInSeconds)) {//JavaScript function  "is Not a Number." 
+      alert("invalid number.");
+      return;
+    };
+    
+    clearInterval(countdown);  //Clears any ongoing countdown (to ensure only one timer runs at a time).
+
+    //displaying userInput- timerInput 
+    const minutes = Math.floor(timeLeft/60);
+    const remainingSeconds = timeLeft % 60;
+    timerDisplay.textContent = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    //displaying-END
+
+    //Sets up a countdown that decreases every second.
+    countdown = setInterval(()=>{
+      timeLeft -= 1;
+      //updated display time
+      const minutes = Math.floor(timeLeft/60);
+      const remainingSeconds = timeLeft % 60;
+      timerDisplay.textContent = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+      //displaying-END
+
+      if (timeLeft <= 0) {// Stop the timer when it reaches 0
+        clearInterval(countdown);//stopping the timer.
+      }
+      }, 1000); // Update every 1000 milliseconds/1 second. 
+      });
+      
+  //stop button
+  stopButton.addEventListener("click", ()=>{
+  clearInterval(countdown);
+    timeLeft=0;
+    //updated display time
+    const minutes = Math.floor(timeLeft/60);
+    const remainingSeconds = timeLeft % 60;
+    timerDisplay.textContent = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+  });
+
+  let isPaused = false;
+  pauseButton.addEventListener("click", ()=>{
+    if(!isPaused){
+      clearInterval(countdown); // Pause the timer
+      pauseButton.innerHTML="Resume";
+      isPaused = true;
+    } else{// Resume the timer
+      pauseButton.innerHTML = "Pause";
+      countdown = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(countdown); // Stop the timer if time runs out
+            pauseButton.innerHTML = "Pause"; // Reset button text
+            isPaused = false; // Reset pause state
+        } else {
+            timeLeft -= 1; // Decrement the time left by one second
+              //displaying userInput- timerInput 
+            const minutes = Math.floor(timeLeft/60);
+            const remainingSeconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+            //
+        }
+    }, 1000); // Update every second
+    isPaused = false;
+  }
+  });
+ // POMODORA Modal end here ----------------------------------------
+
 };
