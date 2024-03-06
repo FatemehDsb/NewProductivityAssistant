@@ -418,29 +418,54 @@ window.onload = () => {
   //----------------FILTRERING------------------------------------
 
   let checkBoxes = document.querySelectorAll("[name ='filterCategory']");
+  let selectAll = document.getElementById("selectAll");
 
-  checkBoxes.forEach((checkbox) => {
-    checkbox.addEventListener("click", function () {
-      todosContainer.innerHTML = "";
-      completedTodosContainer.innerHTML = "";
+  // Eventlistener for the "All"-checkbox with the instruction that if
+  // this checkbox is checked, all other checkboxes (checkBoxes) should also be checked.
 
-      let selectedCategories = document.querySelectorAll(
-        "[name ='filterCategory']:checked"
-      );
+  selectAll.addEventListener("change", () => {
+    checkBoxes.forEach((checkbox) => {
+      checkbox.checked = selectAll.checked;
 
-      let pickedCategories = Array.from(selectedCategories).map(
-        (box) => box.value
-      );
-
-      let filteredTodos = currentUser.toDoList.filter((todo) => {
-        return pickedCategories.includes(todo.category);
-      });
-
-      filteredTodos.forEach((toDoItem) => {
-        renderToDoCard(toDoItem);
-      });
+      updateTodos();
     });
   });
+
+  // Rendering of checkBoxes and adding eventlistener which has a variable (allChecked)
+  // that is only "true" if all checkboxes are checked, and if so, the "All" checkbox
+  // should also be checked. If all checkboxes are NOT checked, "All" should not be.
+
+  checkBoxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      const allChecked = Array.from(checkBoxes).every((box) => box.checked);
+      selectAll.checked = allChecked;
+
+      updateTodos();
+    });
+  });
+
+  // The function that renders the cards depending on what filter checkbox/es are checked.
+
+  const updateTodos = () => {
+    todosContainer.innerHTML = "";
+    completedTodosContainer.innerHTML = "";
+
+    let selectedCategories = document.querySelectorAll(
+      "[name ='filterCategory']:checked"
+    );
+
+    let pickedCategories = Array.from(selectedCategories).map(
+      (box) => box.value
+    );
+
+    let filteredTodos = currentUser.toDoList.filter((todo) => {
+      return pickedCategories.includes(todo.category);
+    });
+
+    filteredTodos.forEach((toDoItem) => {
+      renderToDoCard(toDoItem);
+    });
+  };
 
   //----------------FILTRERING SLUT-------------------------------
   //----------------SORTERING-------------------------------------
@@ -595,13 +620,13 @@ window.onload = () => {
   arrowRight.style.display = "none";
 
   arrowDown?.addEventListener("click", () => {
-    completedTodosContainer.style.display = "none";
+    completedTodosContainer.classList.add("hide-element");
     arrowDown.style.display = "none";
     arrowRight.style.display = "inline";
   });
 
   arrowRight?.addEventListener("click", () => {
-    completedTodosContainer.style.display = "block";
+    completedTodosContainer.classList.remove("hide-element");
     arrowRight.style.display = "none";
     arrowDown.style.display = "inline";
   });
@@ -616,72 +641,92 @@ window.onload = () => {
     });
   }
 
-
   // POMODORA Modal begins here ----------------------------------------
- const openPomodoroModalBtn = document.getElementById("openPomodoroBtn");
- const pomodoroModal = document.getElementById("pomodoroModal");
- const pomodoroModalSpan = document.getElementsByClassName("pomodoro-close")[0];
- 
- if (openPomodoroModalBtn) {
-   openPomodoroModalBtn.onclick =function(){
-     pomodoroModal.style.display = "block";
-    }
+  const openPomodoroModalBtn = document.getElementById("openPomodoroBtn");
+  const pomodoroModal = document.getElementById("pomodoroModal");
+  const pomodoroModalSpan =
+    document.getElementsByClassName("pomodoro-close")[0];
+
+  if (openPomodoroModalBtn) {
+    openPomodoroModalBtn.onclick = function () {
+      pomodoroModal.style.display = "block";
+    };
   }
   if (pomodoroModalSpan) {
     pomodoroModalSpan.onclick = function () {
       pomodoroModal.style.display = "none";
     };
   }
-  
+
   const timerDisplay = document.querySelector(".timer-display");
   const startButton = document.querySelector(".timer-start");
   const pauseButton = document.querySelector(".timer-pause");
   const stopButton = document.querySelector(".timer-stop");
-  const timerInput = document.getElementById('timerTime');//timer input
+  const timerInput = document.getElementById("timerTime"); //timer input
   let countdown; // countdown timer
-  let timeLeft ;
+  let timeLeft;
 
-  //start timer 
-  startButton.addEventListener("click", ()=>{
-    
+  //start timer
+  startButton.addEventListener("click", () => {
     //Medan timer är igång, dölj allt annat på sidan förutom tillhörande-knappar och tiden.
     // När tiden är pausad eller stoppad, ska allt annat på sidan kunna visas.
 
     pomodoroModal.style.background= "white";
     clearInterval(countdown);
+
     let timerValue = timerInput.value;
-    const durationInSeconds = parseInt(timerValue)*60;   //convert input value to seconds
+    const durationInSeconds = parseInt(timerValue) * 60; //convert input value to seconds
     timeLeft = durationInSeconds;
-    
-    if (isNaN(durationInSeconds)) {//JavaScript function  "is Not a Number." 
+
+    if (isNaN(durationInSeconds)) {
+      //JavaScript function  "is Not a Number."
       alert("invalid number.");
       return;
-    };
-    
-    clearInterval(countdown);  //Clears any ongoing countdown (to ensure only one timer runs at a time).
+    }
 
-    //displaying userInput- timerInput 
-    const minutes = Math.floor(timeLeft/60);
+    clearInterval(countdown); //Clears any ongoing countdown (to ensure only one timer runs at a time).
+
+    //displaying userInput- timerInput
+    const minutes = Math.floor(timeLeft / 60);
     const remainingSeconds = timeLeft % 60;
-    timerDisplay.textContent = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    timerDisplay.textContent = `${minutes}:${
+      remainingSeconds < 10 ? "0" : ""
+    }${remainingSeconds}`;
     //displaying-END
 
     //Sets up a countdown that decreases every second.
-    countdown = setInterval(()=>{
+    countdown = setInterval(() => {
       timeLeft -= 1;
       //updated display time
-      const minutes = Math.floor(timeLeft/60);
+      const minutes = Math.floor(timeLeft / 60);
       const remainingSeconds = timeLeft % 60;
-      timerDisplay.textContent = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+      timerDisplay.textContent = `${minutes}:${
+        remainingSeconds < 10 ? "0" : ""
+      }${remainingSeconds}`;
       //displaying-END
 
-      if (timeLeft <= 0) {// Stop the timer when it reaches 0
-        clearInterval(countdown);//stopping the timer.
+      if (timeLeft <= 0) {
+        // Stop the timer when it reaches 0
+        clearInterval(countdown); //stopping the timer.
       }
-      }, 1000); // Update every 1000 milliseconds/1 second. 
-      });
-      
+    }, 1000); // Update every 1000 milliseconds/1 second.
+  });
+
   //stop button
+
+  /* Siri saving this just to be sure - MERGE CONFLICT
+
+  stopButton.addEventListener("click", () => {
+    clearInterval(countdown);
+    timeLeft = 0;
+    //updated display time
+    const minutes = Math.floor(timeLeft / 60);
+    const remainingSeconds = timeLeft % 60;
+    timerDisplay.textContent = `${minutes}:${
+      remainingSeconds < 10 ? "0" : ""
+    }${remainingSeconds}`;
+*/
+
   stopButton.addEventListener("click", ()=>{
     pomodoroModal.style.background= "white";
     clearInterval(countdown);
@@ -696,31 +741,32 @@ window.onload = () => {
   });
 
   let isPaused = false;
-  pauseButton.addEventListener("click", ()=>{
-    if(!isPaused){
+  pauseButton.addEventListener("click", () => {
+    if (!isPaused) {
       clearInterval(countdown); // Pause the timer
-      pauseButton.innerHTML="Resume";
+      pauseButton.innerHTML = "Resume";
       isPaused = true;
     } else{// Resume the timer
       isPaused = false;
       pauseButton.innerHTML = "Pause";
       countdown = setInterval(() => {
         if (timeLeft <= 0) {
-            clearInterval(countdown); // Stop the timer if time runs out
-            pauseButton.innerHTML = "Pause"; // Reset button text
-            isPaused = false; // Reset pause state
+          clearInterval(countdown); // Stop the timer if time runs out
+          pauseButton.innerHTML = "Pause"; // Reset button text
+          isPaused = false; // Reset pause state
         } else {
-            timeLeft -= 1; // Decrement the time left by one second
-              //displaying userInput- timerInput 
-            const minutes = Math.floor(timeLeft/60);
-            const remainingSeconds = timeLeft % 60;
-            timerDisplay.textContent = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-            //
+          timeLeft -= 1; // Decrement the time left by one second
+          //displaying userInput- timerInput
+          const minutes = Math.floor(timeLeft / 60);
+          const remainingSeconds = timeLeft % 60;
+          timerDisplay.textContent = `${minutes}:${
+            remainingSeconds < 10 ? "0" : ""
+          }${remainingSeconds}`;
+          //
         }
-    }, 1000); // Update every second
-    isPaused = false;
-  }
+      }, 1000); // Update every second
+      isPaused = false;
+    }
   });
- // POMODORA Modal end here ----------------------------------------
-
+  // POMODORA Modal end here ----------------------------------------
 };
