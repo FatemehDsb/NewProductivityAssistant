@@ -27,22 +27,22 @@
       <!---------Pomodoro MODAL STARTS-------------------------------------->
       <button id="openPomodoroBtn">Open Pomodoro</button>
       <div id="pomodoroModal" class="pomodoro-modal">
-      <div class="pomodoro-modal-content">
-         <span class="pomodoro-close">&times;</span>
-         <div class="pomodoro-modal-details">
-          <div class="timer-display">
-            <input type="text" id="timerTime" value="25">:00
-          </div>
-          <div class="timer-buttons">
-            <button class="timer-start">Start</button>
-            <button class="timer-pause">Pause</button>
-            <button class="timer-stop">Stop</button>
+        <div class="pomodoro-modal-content">
+          <span class="pomodoro-close">&times;</span>
+          <div class="pomodoro-modal-details">
+            <div class="timer-display">
+              <input type="text" id="timerTime" value="25" />:00
+            </div>
+            <div class="timer-buttons">
+              <button class="timer-start">Start</button>
+              <button class="timer-pause">Pause</button>
+              <button class="timer-stop">Stop</button>
+            </div>
           </div>
         </div>
       </div>
-      </div>
       <!---------Pomodoro MODAL ENDS-------------------------------------->
-      
+
       <!-- Trigger/Open The Modal -->
       <button id="logOutBtn">Log out</button>
       <button id="openModalBtn">+</button>
@@ -147,13 +147,21 @@
         <fieldset>
           <legend>Filtrera</legend>
 
-          <!-- <label for="all">All</label>
+          <label for="selectAll">All</label>
           <input
             type="checkbox"
             name="filterCategoryAll"
-            id="selectall"
+            id="selectAll"
             value="All"
-          /> -->
+          />
+
+          <label for="general">General</label>
+          <input
+            type="checkbox"
+            name="filterCategory"
+            id="general"
+            value="General"
+          />
 
           <label for="shopping">Shopping</label>
           <input

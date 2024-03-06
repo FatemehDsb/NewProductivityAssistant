@@ -302,17 +302,18 @@ nav a:hover {
 }
 
 #arrowRight {
-  display: hide;
   margin: 10px;
 }
 
 #arrowDown {
-  display: inline-block;
   margin: 10px;
 }
 
-/* End of Arrows to display Completed todos or not*/
+.hide-element {
+  display: none;
+}
 
+/* End of Arrows to display Completed todos or not*/
 
 /*************POMODORO MODAL******************/
 
@@ -356,30 +357,26 @@ nav a:hover {
   cursor: pointer;
 }
 
-
-.pomodoro-modal-details{
+.pomodoro-modal-details {
   border: 1px solid black;
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: center;
 }
-#timerTime{
+#timerTime {
   font-size: 100px;
   width: 200px;
- 
 }
-.timer-display{
+.timer-display {
   font-size: 100px;
 }
-.timer-buttons{
-border: 1px solid rgb(20, 58, 134);
+.timer-buttons {
+  border: 1px solid rgb(20, 58, 134);
 }
-.timer-stop, 
+/* .timer-stop,
 .timer-pause,
-.timer-start
-{
-
-}
+.timer-start {
+} */
 
 /******************POMODORO MODAL ENDS******************/
