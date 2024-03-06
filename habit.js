@@ -294,28 +294,40 @@ window.onload = () => {
   }
 
   //----------------FILTRERING------------------------------------//
+  //how to reset filtering and sorting
 
   let priorityFilter = document.getElementById("priorityFilterDropdown");
   priorityFilter?.addEventListener("change", () => {
     let selectedPriority = priorityFilter.value;
+    /*************REFRESH PRIORITY filter******03-06  */
+    if(selectedPriority==="Resetfiltering"){
+      //render all of habits as normal
+      if (
+        currentUser &&
+        currentUser.habitList &&
+        currentUser.habitList.length > 0
+        ) {
+        habitContainer.innerHTML = "";
+        currentUser.habitList.forEach((habitItem) => {
+          renderHabitCard(habitItem);
+        });
+      }
 
-    //   for (let i = 0; i < currentUser.habitList.length; i++) {
-    //     if (currentUser.habitList[i].priority === selectedPriority) {
-    //         filteredHabits.push(currentUser.habitList[i]);
-    //     }
-    // }
+    } else{
 
-    let filteredHabits = currentUser.habitList.filter((habitItem) => {
-      return habitItem.priority === selectedPriority;
-    });
-
-    const habitContainer = document.getElementById("habitContainer");
-    habitContainer.innerHTML = "";
-
-    filteredHabits.forEach((habitItem) => {
-      renderHabitCard(habitItem);
-    });
-  });
+          
+          let filteredHabits = currentUser.habitList.filter((habitItem) => {
+            return habitItem.priority === selectedPriority;
+          });
+          
+          const habitContainer = document.getElementById("habitContainer");
+          habitContainer.innerHTML = "";
+          
+          filteredHabits.forEach((habitItem) => {
+            renderHabitCard(habitItem);
+          });
+        }
+        });
   //----------------FILTRERING SLUT ------------------------------------//
 
                      //sorting by priority
@@ -352,8 +364,24 @@ const renderSortedPriority = (sortedPriority) => {
 prioritySortDropdown?.addEventListener("change", ()=>{
 
   const sortOrder = prioritySortDropdown.value;
+   /*************REFRESH PRIORITY sort******03-06  */
+   if(sortOrder==="resetSortingPriority"){
+    //render all of habits as normal
+    if (
+      currentUser &&
+      currentUser.habitList &&
+      currentUser.habitList.length > 0
+      ) {
+      habitContainer.innerHTML = "";
+      currentUser.habitList.forEach((habitItem) => {
+        renderHabitCard(habitItem);
+      });
+    }
+
+  } else{
   console.log(sortOrder)
   sortedHabitsByPriority(sortOrder)
+  }
 });
 
 
@@ -381,6 +409,24 @@ let streakSortedDropdown= document.getElementById("streakSortDropdown");
 streakSortedDropdown?.addEventListener("change", ()=>{
 
   const sortOrder = streakSortedDropdown.value;
+    /*************REFRESH streak sort******03-06  */
+    if(sortOrder==="resetSortingStreak"){
+      //render all of habits as normal
+      if (
+        currentUser &&
+        currentUser.habitList &&
+        currentUser.habitList.length > 0
+        ) {
+        habitContainer.innerHTML = "";
+        currentUser.habitList.forEach((habitItem) => {
+          renderHabitCard(habitItem);
+        });
+      }
+  
+    } else{
+    console.log(sortOrder)
+    sortedHabitsByPriority(sortOrder)
+    }
  
   sortedHabitsByStreak(sortOrder)
 });
