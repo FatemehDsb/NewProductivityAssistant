@@ -293,3 +293,22 @@ nav a:hover {
   display: flex;
   flex-direction: row-reverse;
 }
+
+/* Arrows to display Completed todos or not*/
+
+.completed-todos-heading {
+  display: flex;
+  align-items: center;
+}
+
+#arrowRight {
+  display: hide;
+  margin: 10px;
+}
+
+#arrowDown {
+  display: inline-block;
+  margin: 10px;
+}
+
+/* End of Arrows to display Completed todos or not*/

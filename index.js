@@ -13,8 +13,6 @@ window.onload = () => {
   let completedTodosContainer = document.getElementById(
     "completedTodosContainer"
   );
-  let arrowRight = document.querySelector(".arrow-right");
-  let arrowDown = document.querySelector(".arrow-down");
 
   const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
@@ -49,7 +47,9 @@ window.onload = () => {
 
   function saveTodoChanges(itemId) {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    let editedTodoItem = currentUser.toDoList.find((item) => item.itemId === itemId);
+    let editedTodoItem = currentUser.toDoList.find(
+      (item) => item.itemId === itemId
+    );
     if (editedTodoItem) {
       //
       editedTodoItem.title = titleInput.value;
@@ -65,8 +65,8 @@ window.onload = () => {
         (parseInt(document.getElementById("estimatedTimeHours").value) || 0) *
           60 +
         (parseInt(document.getElementById("estimatedTimeMinutes").value) || 0);
-        editedTodoItem.description = descriptionInput.value;
-        editedTodoItem.statusValue = todoStatusInput.checked;
+      editedTodoItem.description = descriptionInput.value;
+      editedTodoItem.statusValue = todoStatusInput.checked;
 
       //
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -82,20 +82,18 @@ window.onload = () => {
       //
       modal.style.display = "none";
 
-/*Siris radera?
+      /*Siris radera?
       //
       todosContainer.innerHTML = "";
       completedTodosContainer.innerHTML = "";
       currentUser.toDoList.forEach((todoItem) => {
-*/     
-    
-      todosContainer.innerHTML = '';
-      completedTodosContainer.innerHTML = '';
+*/
 
-      currentUser.toDoList.forEach(editedTodoItem => {
+      todosContainer.innerHTML = "";
+      completedTodosContainer.innerHTML = "";
 
+      currentUser.toDoList.forEach((editedTodoItem) => {
         renderToDoCard(editedTodoItem);
-
       });
     } else {
       console.error("Todo item not found.");
@@ -245,9 +243,9 @@ window.onload = () => {
       e.preventDefault();
       //
       modal.style.display = "block";
-      addTodoBtn.style.display="none";
+      addTodoBtn.style.display = "none";
       saveBtn.style.display = "block";
-      // 
+      //
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
       const editedTodoItem = currentUser.toDoList.find(
         (item) => item.itemId === toDoItem.itemId
@@ -256,42 +254,45 @@ window.onload = () => {
       //
       titleInput.value = editedTodoItem.title;
 
-// 
-      const categoryInput = document.querySelector('input[name="category"][value="' + editedTodoItem.category + '"]');
+      //
+      const categoryInput = document.querySelector(
+        'input[name="category"][value="' + editedTodoItem.category + '"]'
+      );
 
-// 
+      //
       if (categoryInput) {
-    categoryInput.checked = true;
-     }
-      
+        categoryInput.checked = true;
+      }
+
       deadlineInput.value = editedTodoItem.deadline;
       document.getElementById("estimatedTimeHours").value = Math.floor(
         editedTodoItem.estimatedTime / 60
       );
       document.getElementById("estimatedTimeMinutes").value =
-      editedTodoItem.estimatedTime % 60;
+        editedTodoItem.estimatedTime % 60;
       descriptionInput.value = editedTodoItem.description;
       todoStatusInput.checked = editedTodoItem.statusValue;
 
       saveBtn.onclick = () => {
         saveTodoChanges(editedTodoItem.itemId);
-      /*********************Nullställa alla input fält- nullställa hela modalen? */
-      //when we click on savebutton, it deletes all input fields, it should
-    const checkedCategoryInput = document.querySelector('input[name="category"]:checked');
-   if (checkedCategoryInput) {
-     checkedCategoryInput.checked = false;
-   }
-   titleInput.value="";
-   deadlineInput.value = "";
-   descriptionInput.value = "";
-   todoStatusInput.checked = "";
-   document.getElementById("estimatedTimeHours").value = "";
-   document.getElementById("estimatedTimeMinutes").value = "";
-   modal.style.display="none";
-   addTodoBtn.style.display="block";
-   saveBtn.style.display="none";
-  //*****************************Jag behöver nollställa modal efter click på save eller innan öpp */
-
+        /*********************Nullställa alla input fält- nullställa hela modalen? */
+        //when we click on savebutton, it deletes all input fields, it should
+        const checkedCategoryInput = document.querySelector(
+          'input[name="category"]:checked'
+        );
+        if (checkedCategoryInput) {
+          checkedCategoryInput.checked = false;
+        }
+        titleInput.value = "";
+        deadlineInput.value = "";
+        descriptionInput.value = "";
+        todoStatusInput.checked = "";
+        document.getElementById("estimatedTimeHours").value = "";
+        document.getElementById("estimatedTimeMinutes").value = "";
+        modal.style.display = "none";
+        addTodoBtn.style.display = "block";
+        saveBtn.style.display = "none";
+        //*****************************Jag behöver nollställa modal efter click på save eller innan öpp */
       };
     });
   };
@@ -489,14 +490,11 @@ window.onload = () => {
   //----------------SORTERING-------------------------------------
 
   addTodoBtn?.addEventListener("click", () => {
+    addTodoBtn.style.display = "block";
+    saveBtn.style.display = "none";
 
+    //******************************************************************************* */
 
-
-   addTodoBtn.style.display="block";
-   saveBtn.style.display = "none";
-
-   //******************************************************************************* */
-  
     let title = titleInput.value;
     const categoryCheckbox = document.querySelector(
       'input[name="category"]:checked'
@@ -517,8 +515,6 @@ window.onload = () => {
     let statusValue = todoStatusInput.checked;
 
     if (!title) return;
-
-     
 
     let toDoItem = {
       itemId: Date.now().toString(), // Unique ID for each to-do item
@@ -594,13 +590,20 @@ window.onload = () => {
   // localStorage.clear();
 
   // Arrows hiding and showing Completed Todos container
-
-  arrowRight?.addEventListener("click", () => {
-    completedTodosContainer.classList.add("hide-element");
-  });
+  let arrowRight = document.getElementById("arrowRight");
+  let arrowDown = document.getElementById("arrowDown");
+  arrowRight.style.display = "none";
 
   arrowDown?.addEventListener("click", () => {
+    completedTodosContainer.classList.add("hide-element");
+    arrowDown.style.display = "none";
+    arrowRight.style.display = "inline";
+  });
+
+  arrowRight?.addEventListener("click", () => {
     completedTodosContainer.classList.remove("hide-element");
+    arrowRight.style.display = "none";
+    arrowDown.style.display = "inline";
   });
 
   // Checking if the element logOutBtn exists in the HTML file
