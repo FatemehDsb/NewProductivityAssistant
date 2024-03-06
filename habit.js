@@ -85,44 +85,94 @@ window.onload = () => {
     //-------------STREAK STARTS---------------
   
     let streakCounter = habitItem.streak || 0;
-    const streakElement = document.createElement("div");
+
+    //Get last saved date from loc. sto., or ''
+    let lastCheckedDate = localStorage.getItem('lastCheckedDate') || '';
+    let newStreak = parseInt(localStorage.getItem('streak')) || 0;
+    let currentDate = new Date().toLocaleDateString();
+
+    //If user checked/clicked today
+    let clickedToday = lastCheckedDate === currentDate;
+    
+    //If user has NOT checked/clicked today
+    if(!clickedToday) {
+     streakCounter = 0;
+    }
+
+    //Create streakElement. Code from Siri cut in here
+    const streakElement = document.createElement('div');
     streakElement.classList.add("streak-element");
-    streakElement.textContent = `Streak: ${streakCounter}`;
 
+    //Aside shows current streak - #showStreak
+    const showStreak = document.createElement('aside');
+    showStreak.id = 'showStreak';
+    showStreak.textContent = `Current Streak: ${streakCounter}`;
+
+    //Create checkbox + span: 'Check today'
     const streakCheckbox = document.createElement("input");
-    streakCheckbox.setAttribute("type", "checkbox");
+    streakCheckbox.setAttribute('type', 'checkbox');
+    //If user clicked today
+    streakCheckbox.checked = clickedToday;
 
+    //Span for checkbox + text
     const streakText = document.createElement('span');
-    streakText.textContent = `Current Streak: ${streakCounter}`;
+    streakText.id = 'streakText';
+    streakText.textContent = 'Check today';
 
-    //streakCheckbox.checked = habitItem.completed || false;
+    //Create aside and append checkbox + streakText 
+    const addNewStreak = document.createElement('aside');
+    addNewStreak.id = 'addNewStreak';
+    addNewStreak.appendChild(streakCheckbox);
+    addNewStreak.appendChild(streakText);
 
     const updateStreak = () => {
-      habitItem.completed = streakCheckbox.checked;
+     let clickedToday = lastCheckedDate === currentDate;
 
-      if(streakCheckbox.checked) {
-        streakCounter++;
-      } else {
-        streakCounter = 0;
-      }
+     if(!clickedToday) {
+         streakCounter++;
+         lastCheckedDate = currentDate;
+         localStorage.setItem('streak', streakCounter);
+         localStorage.setItem('lastCheckedDate', lastCheckedDate);
+     }
 
-      streakText.textContent = `Streak: ${streakCounter}`;
-      habitItem.streak = streakCounter;
-
-      currentUser.habitList = currentUser.habitList.map(item => {
-        if(item.itemId === habitItem.itemId) {
-          return habitItem;
-        }
-        return item;
-      });
-
+     habitItem.streak = streakCounter;   
+ 
+     currentUser.habitList = currentUser.habitList.map(item => {
+         if(item.itemId === habitItem.itemId) {
+          item.streak = habitItem.streak;
+           return habitItem;
+         }
+         return item;
+       });
       updateLocalStorage(currentUser.habitList);
+      //Update showStreak, current streak
+      showStreak.textContent = `Current Streak: ${streakCounter}`;
     };
 
-    streakCheckbox.addEventListener('click', updateStreak);
-    
-    streakElement.appendChild(streakCheckbox);
-    streakElement.appendChild(streakText);
+    streakCheckbox?.addEventListener('click', () => { 
+     if(streakCheckbox.checked) {
+
+         if(!clickedToday){
+             streakCounter++;
+             lastCheckedDate = currentDate;
+             localStorage.setItem('streak', streakCounter);
+             localStorage.setItem('lastCheckedDate', lastCheckedDate);
+             showStreak.textContent = `Current Streak: ${streakCounter}`;
+             updateStreak();
+         }
+         streakCheckbox.disabled = true;
+         streakText.textContent = 'Checked!';
+    } else {
+      //User did not check
+      streakCounter = 0;
+      localStorage.setItem('streak', streakCounter);
+      lastCheckedDate = '';
+      localStorage.setItem('lastCheckedDate', lastCheckedDate);
+    }
+  });
+
+    streakElement.appendChild(showStreak);
+    streakElement.appendChild(addNewStreak);
     habitDetails.appendChild(streakElement);
     habitCard.appendChild(habitDetails);
 
@@ -241,7 +291,7 @@ window.onload = () => {
   addHabitBtn?.addEventListener("click", () => {
     let title = titleInput.value;
     let priority = priorityInput.value;
-    let streak;
+    let streak = 0;
 
     if (!title) return;
 
