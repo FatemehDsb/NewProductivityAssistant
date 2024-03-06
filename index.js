@@ -595,13 +595,13 @@ window.onload = () => {
   arrowRight.style.display = "none";
 
   arrowDown?.addEventListener("click", () => {
-    completedTodosContainer.classList.add("hide-element");
+    completedTodosContainer.style.display = "none";
     arrowDown.style.display = "none";
     arrowRight.style.display = "inline";
   });
 
   arrowRight?.addEventListener("click", () => {
-    completedTodosContainer.classList.remove("hide-element");
+    completedTodosContainer.style.display = "block";
     arrowRight.style.display = "none";
     arrowDown.style.display = "inline";
   });
