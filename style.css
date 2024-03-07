@@ -251,11 +251,14 @@ nav a:hover {
 
 .habit-priority-high-cover,
 .habit-priority-medium-cover,
-.habit-priority-low-cover {
+.habit-priority-low-cover,
+.habit-priority-none-cover {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   padding: 10px 20px;
   overflow: hidden;
+  height: 40px;
+  font-size: 12px;
 }
 
 .habit-priority-high-cover {
@@ -263,14 +266,10 @@ nav a:hover {
     rgb(255, 98, 0),
     var(--color-brand-tertiary)
   );
-  height: 40px;
-  font-size: 12px;
 }
 
 .habit-priority-medium-cover {
   background-image: linear-gradient(darkorange, var(--color-brand-tertiary));
-  height: 40px;
-  font-size: 12px;
 }
 
 .habit-priority-low-cover {
@@ -278,8 +277,10 @@ nav a:hover {
     rgb(255, 221, 0),
     var(--color-brand-tertiary)
   );
-  height: 40px;
-  font-size: 12px;
+}
+
+.habit-priority-none-cover {
+  background-color: var(--color-brand-tertiary);
 }
 
 .habit-info {
@@ -296,13 +297,13 @@ nav a:hover {
   align-items: end;
 }
 
-#showStreak{
+#showStreak {
   display: flex;
   flex-direction: row;
   border: 1px solid gray;
 }
 
-#addNewStreak{
+#addNewStreak {
   border: 1px solid black;
 }
 
