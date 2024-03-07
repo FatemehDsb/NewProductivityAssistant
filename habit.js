@@ -83,6 +83,9 @@ window.onload = () => {
     } else if (priority == "low") {
       habitPriorityCover.innerText = "PRIORITY: LOW";
       habitPriorityCover.classList.add("habit-priority-low-cover");
+    } else {
+      habitPriorityCover.innerText = "PRIORITY: None";
+      habitPriorityCover.classList.add("habit-priority-none-cover");
     }
 
     const habitInfo = document.createElement("div");
@@ -259,7 +262,7 @@ window.onload = () => {
 
     deleteBtn.style.width = "50px";
     editBtn.style.width = "50px";
-    habitContainer.appendChild(habitCard);
+    habitContainer.prepend(habitCard);
 
     //*****************************************DELETE BUTTON*/
     deleteBtn.addEventListener("click", () => {
@@ -343,7 +346,8 @@ window.onload = () => {
 
   addHabitBtn?.addEventListener("click", () => {
     let title = titleInput.value;
-    let priority = priorityInput.value;
+    let priority = priorityInput ? priorityInput.value : "None"; // Default category if none selected
+
     let streak = 0;
 
     if (!title) return;
