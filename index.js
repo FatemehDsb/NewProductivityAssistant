@@ -423,7 +423,7 @@ window.onload = () => {
   // Eventlistener for the "All"-checkbox with the instruction that if
   // this checkbox is checked, all other checkboxes (checkBoxes) should also be checked.
 
-  selectAll.addEventListener("change", () => {
+  selectAll?.addEventListener("change", () => {
     checkBoxes.forEach((checkbox) => {
       checkbox.checked = selectAll.checked;
 
@@ -615,21 +615,26 @@ window.onload = () => {
   // localStorage.clear();
 
   // Arrows hiding and showing Completed Todos container
+
   let arrowRight = document.getElementById("arrowRight");
   let arrowDown = document.getElementById("arrowDown");
-  arrowRight.style.display = "none";
-
-  arrowDown?.addEventListener("click", () => {
-    completedTodosContainer.classList.add("hide-element");
-    arrowDown.style.display = "none";
-    arrowRight.style.display = "inline";
-  });
-
-  arrowRight?.addEventListener("click", () => {
-    completedTodosContainer.classList.remove("hide-element");
+  if (arrowRight) {
     arrowRight.style.display = "none";
-    arrowDown.style.display = "inline";
-  });
+
+    arrowRight?.addEventListener("click", () => {
+      completedTodosContainer.classList.remove("hide-element");
+      arrowRight.style.display = "none";
+      arrowDown.style.display = "inline";
+    });
+  }
+
+  if (arrowDown) {
+    arrowDown?.addEventListener("click", () => {
+      completedTodosContainer.classList.add("hide-element");
+      arrowDown.style.display = "none";
+      arrowRight.style.display = "inline";
+    });
+  }
 
   // Checking if the element logOutBtn exists in the HTML file
   if (logOutBtn) {
@@ -667,11 +672,11 @@ window.onload = () => {
   let timeLeft;
 
   //start timer
-  startButton.addEventListener("click", () => {
+  startButton?.addEventListener("click", () => {
     //Medan timer är igång, dölj allt annat på sidan förutom tillhörande-knappar och tiden.
     // När tiden är pausad eller stoppad, ska allt annat på sidan kunna visas.
 
-    pomodoroModal.style.background= "white";
+    pomodoroModal.style.background = "white";
     clearInterval(countdown);
 
     let timerValue = timerInput.value;
@@ -727,26 +732,26 @@ window.onload = () => {
     }${remainingSeconds}`;
 */
 
-  stopButton.addEventListener("click", ()=>{
-    pomodoroModal.style.background= "white";
+  stopButton?.addEventListener("click", () => {
+    pomodoroModal.style.background = "white";
     clearInterval(countdown);
-    timeLeft=0;
+    timeLeft = 0;
     // //updated display time
     // const minutes = Math.floor(timeLeft/60);
     // const remainingSeconds = timeLeft % 60;
     timerDisplay.textContent = "0:00";
-    timerInput.value="";
+    timerInput.value = "";
     timerInput.disabled = false;
-
   });
 
   let isPaused = false;
-  pauseButton.addEventListener("click", () => {
+  pauseButton?.addEventListener("click", () => {
     if (!isPaused) {
       clearInterval(countdown); // Pause the timer
       pauseButton.innerHTML = "Resume";
       isPaused = true;
-    } else{// Resume the timer
+    } else {
+      // Resume the timer
       isPaused = false;
       pauseButton.innerHTML = "Pause";
       countdown = setInterval(() => {
