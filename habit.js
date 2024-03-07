@@ -63,9 +63,9 @@ window.onload = () => {
     priorityElement.classList.add("priority-element");
     priorityElement.textContent = priority;
 
-    //const streakElement = document.createElement("div");
-    //streakElement.classList.add("streak-element");
-    //streakElement.textContent = streak;
+    const streakElement = document.createElement("div");
+    streakElement.classList.add("streak-element");
+    streakElement.textContent = streak;
 
     const habitBtn = document.createElement("div");
     habitBtn.classList.add("habit-btn");
@@ -100,8 +100,8 @@ window.onload = () => {
     }
 
     //Create streakElement. Code from Siri cut in here
-    const streakElement = document.createElement('div');
-    streakElement.classList.add("streak-element");
+    //const streakElement = document.createElement('div');
+    //streakElement.classList.add("streak-element");
 
     //Aside shows current streak - #showStreak
     const showStreak = document.createElement('aside');
@@ -135,16 +135,33 @@ window.onload = () => {
          localStorage.setItem('lastCheckedDate', lastCheckedDate);
      }
 
-     habitItem.streak = streakCounter;   
- 
-     currentUser.habitList = currentUser.habitList.map(item => {
-         if(item.itemId === habitItem.itemId) {
-          item.streak = habitItem.streak;
-           return habitItem;
-         }
-         return item;
-       });
-      updateLocalStorage(currentUser.habitList);
+     habitItem.streak = streakCounter; 
+     
+     let updatedHabitStreak = currentUser.habitList.map(item => {
+      if(item.itemId === habitItem.itemId) {
+       item.streak = habitItem.streak;
+        return habitItem;
+      }
+      return item;
+    });
+
+     function updateLocalStorageStreak(updatedHabitStreak) {
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (currentUser) {
+        currentUser.habitList = updatedHabitStreak;
+        console.log(updatedHabitStreak);
+        registeredUsers = registeredUsers.map((user) =>
+          user.id === currentUser.id ? currentUser : user
+        );
+  
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+      } else {
+        console.error("error");
+      }
+    }
+
+      updateLocalStorageStreak(updatedHabitStreak);
       //Update showStreak, current streak
       showStreak.textContent = `Current Streak: ${streakCounter}`;
     };
@@ -155,8 +172,8 @@ window.onload = () => {
          if(!clickedToday){
              streakCounter++;
              lastCheckedDate = currentDate;
-             localStorage.setItem('streak', streakCounter);
-             localStorage.setItem('lastCheckedDate', lastCheckedDate);
+             //localStorage.setItem('streak', streakCounter);
+             //localStorage.setItem('lastCheckedDate', lastCheckedDate);
              showStreak.textContent = `Current Streak: ${streakCounter}`;
              updateStreak();
          }
