@@ -13,6 +13,41 @@ window.onload = () => {
     JSON.parse(localStorage.getItem("registeredUsers")) || [];
   let userIdCounter = localStorage.getItem("userIdCounter") || 0;
 
+  /**********FUNCTION TO SAVE CHANGES ************************ */
+
+  function saveHabitChanges(itemId) {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    let editedHabitItem = currentUser.habitList.find(
+      (item) => item.itemId === itemId
+    );
+    if (editedHabitItem) {
+      //
+      editedHabitItem.title = titleInput.value;
+
+      //
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      localStorage.setItem(
+        "registeredUsers",
+        JSON.stringify(
+          registeredUsers.map((user) =>
+            user.id === currentUser.id ? currentUser : user
+          )
+        )
+      );
+
+      //
+      modal.style.display = "none";
+
+      habitContainer.innerHTML = "";
+
+      currentUser.habitList.forEach((editedHabitItem) => {
+        renderHabitCard(editedHabitItem);
+      });
+    } else {
+      console.error("Habit item not found.");
+    }
+  }
+
   function updateLocalStorage(updatedHabitList) {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser) {
@@ -81,22 +116,21 @@ window.onload = () => {
     const habitDetails = document.createElement("div");
     habitDetails.classList.add("habit-details");
 
-    
     //-------------STREAK STARTS---------------
-  
+
     let streakCounter = habitItem.streak || 0;
 
     //Get last saved date from loc. sto., or ''
-    let lastCheckedDate = localStorage.getItem('lastCheckedDate') || '';
-    let newStreak = parseInt(localStorage.getItem('streak')) || 0;
+    let lastCheckedDate = localStorage.getItem("lastCheckedDate") || "";
+    let newStreak = parseInt(localStorage.getItem("streak")) || 0;
     let currentDate = new Date().toLocaleDateString();
 
     //If user checked/clicked today
     let clickedToday = lastCheckedDate === currentDate;
-    
+
     //If user has NOT checked/clicked today
-    if(!clickedToday) {
-     streakCounter = 0;
+    if (!clickedToday) {
+      streakCounter = 0;
     }
 
     //Create streakElement. Code from Siri cut in here
@@ -104,89 +138,91 @@ window.onload = () => {
     //streakElement.classList.add("streak-element");
 
     //Aside shows current streak - #showStreak
-    const showStreak = document.createElement('aside');
-    showStreak.id = 'showStreak';
+    const showStreak = document.createElement("aside");
+    showStreak.id = "showStreak";
     showStreak.textContent = `Current Streak: ${streakCounter}`;
 
     //Create checkbox + span: 'Check today'
     const streakCheckbox = document.createElement("input");
-    streakCheckbox.setAttribute('type', 'checkbox');
+    streakCheckbox.setAttribute("type", "checkbox");
     //If user clicked today
     streakCheckbox.checked = clickedToday;
 
     //Span for checkbox + text
-    const streakText = document.createElement('span');
-    streakText.id = 'streakText';
-    streakText.textContent = 'Check today';
+    const streakText = document.createElement("span");
+    streakText.id = "streakText";
+    streakText.textContent = "Check today";
 
-    //Create aside and append checkbox + streakText 
-    const addNewStreak = document.createElement('aside');
-    addNewStreak.id = 'addNewStreak';
+    //Create aside and append checkbox + streakText
+    const addNewStreak = document.createElement("aside");
+    addNewStreak.id = "addNewStreak";
     addNewStreak.appendChild(streakCheckbox);
     addNewStreak.appendChild(streakText);
 
     const updateStreak = () => {
-     let clickedToday = lastCheckedDate === currentDate;
+      let clickedToday = lastCheckedDate === currentDate;
 
-     if(!clickedToday) {
-         streakCounter++;
-         lastCheckedDate = currentDate;
-         localStorage.setItem('streak', streakCounter);
-         localStorage.setItem('lastCheckedDate', lastCheckedDate);
-     }
-
-     habitItem.streak = streakCounter; 
-     
-     let updatedHabitStreak = currentUser.habitList.map(item => {
-      if(item.itemId === habitItem.itemId) {
-       item.streak = habitItem.streak;
-        return habitItem;
+      if (!clickedToday) {
+        streakCounter++;
+        lastCheckedDate = currentDate;
+        localStorage.setItem("streak", streakCounter);
+        localStorage.setItem("lastCheckedDate", lastCheckedDate);
       }
-      return item;
-    });
 
-     function updateLocalStorageStreak(updatedHabitStreak) {
-      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (currentUser) {
-        currentUser.habitList = updatedHabitStreak;
-        console.log(updatedHabitStreak);
-        registeredUsers = registeredUsers.map((user) =>
-          user.id === currentUser.id ? currentUser : user
-        );
-  
-        localStorage.setItem("currentUser", JSON.stringify(currentUser));
-        localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-      } else {
-        console.error("error");
+      habitItem.streak = streakCounter;
+
+      let updatedHabitStreak = currentUser.habitList.map((item) => {
+        if (item.itemId === habitItem.itemId) {
+          item.streak = habitItem.streak;
+          return habitItem;
+        }
+        return item;
+      });
+
+      function updateLocalStorageStreak(updatedHabitStreak) {
+        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (currentUser) {
+          currentUser.habitList = updatedHabitStreak;
+          console.log(updatedHabitStreak);
+          registeredUsers = registeredUsers.map((user) =>
+            user.id === currentUser.id ? currentUser : user
+          );
+
+          localStorage.setItem("currentUser", JSON.stringify(currentUser));
+          localStorage.setItem(
+            "registeredUsers",
+            JSON.stringify(registeredUsers)
+          );
+        } else {
+          console.error("error");
+        }
       }
-    }
 
       updateLocalStorageStreak(updatedHabitStreak);
       //Update showStreak, current streak
       showStreak.textContent = `Current Streak: ${streakCounter}`;
     };
 
-    streakCheckbox?.addEventListener('click', () => { 
-     if(streakCheckbox.checked) {
-
-         if(!clickedToday){
-             streakCounter++;
-             lastCheckedDate = currentDate;
-             //localStorage.setItem('streak', streakCounter);
-             //localStorage.setItem('lastCheckedDate', lastCheckedDate);
-             showStreak.textContent = `Current Streak: ${streakCounter}`;
-             updateStreak();
-         }
-         streakCheckbox.disabled = true;
-         streakText.textContent = 'Checked!';
-    } else {
-      //User did not check
-      streakCounter = 0;
-      localStorage.setItem('streak', streakCounter);
-      lastCheckedDate = '';
-      localStorage.setItem('lastCheckedDate', lastCheckedDate);
-    }
-  });
+    streakCheckbox?.addEventListener("click", () => {
+      if (streakCheckbox.checked) {
+        if (!clickedToday) {
+          streakCounter++;
+          lastCheckedDate = currentDate;
+          //localStorage.setItem('streak', streakCounter);
+          //localStorage.setItem('lastCheckedDate', lastCheckedDate);
+          showStreak.textContent = `Current Streak: ${streakCounter}`;
+          updateStreak();
+        }
+        streakCheckbox.disabled = true;
+        streakText.textContent = "Checked!";
+      } else {
+        //User did not check
+        streakCounter = 0;
+        localStorage.setItem("streak", streakCounter);
+        lastCheckedDate = "";
+        localStorage.setItem("lastCheckedDate", lastCheckedDate);
+      }
+    });
 
     streakElement.appendChild(showStreak);
     streakElement.appendChild(addNewStreak);
@@ -367,135 +403,117 @@ window.onload = () => {
   priorityFilter?.addEventListener("change", () => {
     let selectedPriority = priorityFilter.value;
     /*************REFRESH PRIORITY filter******03-06  */
-    if(selectedPriority==="Resetfiltering"){
+    if (selectedPriority === "Resetfiltering") {
       //render all of habits as normal
       if (
         currentUser &&
         currentUser.habitList &&
         currentUser.habitList.length > 0
-        ) {
+      ) {
         habitContainer.innerHTML = "";
         currentUser.habitList.forEach((habitItem) => {
           renderHabitCard(habitItem);
         });
       }
+    } else {
+      let filteredHabits = currentUser.habitList.filter((habitItem) => {
+        return habitItem.priority === selectedPriority;
+      });
 
-    } else{
-
-          
-          let filteredHabits = currentUser.habitList.filter((habitItem) => {
-            return habitItem.priority === selectedPriority;
-          });
-          
-          const habitContainer = document.getElementById("habitContainer");
-          habitContainer.innerHTML = "";
-          
-          filteredHabits.forEach((habitItem) => {
-            renderHabitCard(habitItem);
-          });
-        }
-        });
-  //----------------FILTRERING SLUT ------------------------------------//
-
-                     //sorting by priority
-
-//giving number to each of priorities by having them in array to use their index
-
-const priorityOrder = ['low', 'medium', 'high'];
-let prioritySortDropdown = document.getElementById("prioritySortDropdown");
-
-
-const sortedHabitsByPriority = (sortOrder) => {
-  const sortedPriority = currentUser.habitList.slice().sort((a, b) => {
-    let indexA = priorityOrder.indexOf(a.priority);
-    let indexB = priorityOrder.indexOf(b.priority);
-
-    console.log("indexa"+ indexA);
-
-    console.log("indexB" + indexB)
-    
-    return sortOrder === 'lowToHigh' 
-    ? indexA - indexB 
-    : indexB - indexA;
-  });
-
-  renderSortedPriority(sortedPriority);
-};
-
-const renderSortedPriority = (sortedPriority) => {
-  habitContainer.innerHTML = "";
-  sortedPriority.forEach((habitItem) => renderHabitCard(habitItem));
-
-};
-
-prioritySortDropdown?.addEventListener("change", ()=>{
-
-  const sortOrder = prioritySortDropdown.value;
-   /*************REFRESH PRIORITY sort******03-06  */
-   if(sortOrder==="resetSortingPriority"){
-    //render all of habits as normal
-    if (
-      currentUser &&
-      currentUser.habitList &&
-      currentUser.habitList.length > 0
-      ) {
+      const habitContainer = document.getElementById("habitContainer");
       habitContainer.innerHTML = "";
-      currentUser.habitList.forEach((habitItem) => {
+
+      filteredHabits.forEach((habitItem) => {
         renderHabitCard(habitItem);
       });
     }
+  });
+  //----------------FILTRERING SLUT ------------------------------------//
 
-  } else{
-  console.log(sortOrder)
-  sortedHabitsByPriority(sortOrder)
-  }
-});
+  //sorting by priority
 
+  //giving number to each of priorities by having them in array to use their index
 
-//streak
+  const priorityOrder = ["low", "medium", "high"];
+  let prioritySortDropdown = document.getElementById("prioritySortDropdown");
 
+  const sortedHabitsByPriority = (sortOrder) => {
+    const sortedPriority = currentUser.habitList.slice().sort((a, b) => {
+      let indexA = priorityOrder.indexOf(a.priority);
+      let indexB = priorityOrder.indexOf(b.priority);
 
-const sortedHabitsByStreak =(order)=>{
-  const sortedStreak= currentUser.habitList.slice().sort((a,b)=>{
-    return order ==='lowToHigh' 
-    ? a.streak - b.streak
-    : b.streak - a.streak;
-    
-  })
-  renderSortedStreak(sortedStreak);
-}
+      console.log("indexa" + indexA);
 
-const renderSortedStreak = (sortedStreak) => {
-  habitContainer.innerHTML = "";
-  sortedStreak.forEach((habitItem) => renderHabitCard(habitItem));
+      console.log("indexB" + indexB);
 
-};
+      return sortOrder === "lowToHigh" ? indexA - indexB : indexB - indexA;
+    });
 
-let streakSortedDropdown= document.getElementById("streakSortDropdown");
+    renderSortedPriority(sortedPriority);
+  };
 
-streakSortedDropdown?.addEventListener("change", ()=>{
+  const renderSortedPriority = (sortedPriority) => {
+    habitContainer.innerHTML = "";
+    sortedPriority.forEach((habitItem) => renderHabitCard(habitItem));
+  };
 
-  const sortOrder = streakSortedDropdown.value;
-    /*************REFRESH streak sort******03-06  */
-    if(sortOrder==="resetSortingStreak"){
+  prioritySortDropdown?.addEventListener("change", () => {
+    const sortOrder = prioritySortDropdown.value;
+    /*************REFRESH PRIORITY sort******03-06  */
+    if (sortOrder === "resetSortingPriority") {
       //render all of habits as normal
       if (
         currentUser &&
         currentUser.habitList &&
         currentUser.habitList.length > 0
-        ) {
+      ) {
         habitContainer.innerHTML = "";
         currentUser.habitList.forEach((habitItem) => {
           renderHabitCard(habitItem);
         });
       }
-  
-    } else{
-    console.log(sortOrder)
-    sortedHabitsByPriority(sortOrder)
+    } else {
+      console.log(sortOrder);
+      sortedHabitsByPriority(sortOrder);
     }
- 
-  sortedHabitsByStreak(sortOrder)
-});
+  });
 
+  //streak
+
+  const sortedHabitsByStreak = (order) => {
+    const sortedStreak = currentUser.habitList.slice().sort((a, b) => {
+      return order === "lowToHigh" ? a.streak - b.streak : b.streak - a.streak;
+    });
+    renderSortedStreak(sortedStreak);
+  };
+
+  const renderSortedStreak = (sortedStreak) => {
+    habitContainer.innerHTML = "";
+    sortedStreak.forEach((habitItem) => renderHabitCard(habitItem));
+  };
+
+  let streakSortedDropdown = document.getElementById("streakSortDropdown");
+
+  streakSortedDropdown?.addEventListener("change", () => {
+    const sortOrder = streakSortedDropdown.value;
+    /*************REFRESH streak sort******03-06  */
+    if (sortOrder === "resetSortingStreak") {
+      //render all of habits as normal
+      if (
+        currentUser &&
+        currentUser.habitList &&
+        currentUser.habitList.length > 0
+      ) {
+        habitContainer.innerHTML = "";
+        currentUser.habitList.forEach((habitItem) => {
+          renderHabitCard(habitItem);
+        });
+      }
+    } else {
+      console.log(sortOrder);
+      sortedHabitsByPriority(sortOrder);
+    }
+
+    sortedHabitsByStreak(sortOrder);
+  });
 };
