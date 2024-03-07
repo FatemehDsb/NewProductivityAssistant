@@ -140,7 +140,7 @@ window.onload = () => {
      let updatedHabitStreak = currentUser.habitList.map(item => {
       if(item.itemId === habitItem.itemId) {
        item.streak = habitItem.streak;
-        return habitItem;
+        //return habitItem;
       }
       return item;
     });
