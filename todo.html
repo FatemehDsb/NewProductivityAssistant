@@ -145,8 +145,6 @@
       <!---------Filter------>
       <div class="filterContainer">
         <fieldset>
-          <legend>Filtrera</legend>
-
           <label for="selectAll">All</label>
           <input
             type="checkbox"
@@ -191,12 +189,13 @@
       <!----------Sorting---------->
       <div class="sortContainer">
         <fieldset>
-          <legend id="sort">Sortera</legend>
           <div id="deadlineContainer">
             <label for="deadlineSortDropdown">Sort by Deadline:</label>
             <select id="deadlineSortDropdown">
-              <option value="asc">Ascending</option>
-              <option value="desc">Descending</option>
+              <option value="" selected disabled>Sort By Deadline</option>
+
+              <option value="asc">Highest</option>
+              <option value="desc">Lowest</option>
             </select>
           </div>
           <div id="estimatedTimeContainer">
@@ -204,8 +203,10 @@
               >Sort by Estimated Time:</label
             >
             <select id="estimatedTimeSortDropdown">
-              <option value="asc">Ascending</option>
-              <option value="desc">Descending</option>
+              <option value="" selected disabled>Sort By Estimated Time</option>
+
+              <option value="asc">Highest</option>
+              <option value="desc">Lowest</option>
             </select>
           </div>
         </fieldset>
