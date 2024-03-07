@@ -119,118 +119,172 @@ window.onload = () => {
     const habitDetails = document.createElement("div");
     habitDetails.classList.add("habit-details");
 
+
+
+
+    //------------STREAK FATEMEH-------------
+
+     //-------------STREAK STARTS---------------
+
+    
+ 
+     const streakCheckbox = document.createElement("input");
+     streakCheckbox.setAttribute("type", "checkbox");
+     const showStreak = document.createElement("p");
+     habitDetails.append(streakCheckbox);
+     habitDetails.append(showStreak);
+   
+    
+ 
+    streakCheckbox?.addEventListener("click", () => {
+     
+       if (streakCheckbox.checked) {
+         
+         let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+         let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+ 
+         //find the currentuser.habitlist.habititem that user has clicked on its checkbox and then update the currentuser with new streak
+         if(currentUser && currentUser.habitList){
+           currentUser.habitList = currentUser.habitList.map(item => {
+             if (item.itemId === habitItem.itemId) {
+               item.streak = (item.streak || 0) + 1;
+ 
+               //Render streak
+               showStreak.textContent = item.streak; 
+ 
+             }
+             return item;
+           });
+ 
+           //update registereduser with updated currentuser
+               registeredUsers = registeredUsers.map((user) =>
+                     user.id === currentUser.id ? currentUser : user
+                   );
+           //save updated registeruser and currentuser in localstorage
+                 localStorage.setItem("currentUser", JSON.stringify(currentUser));
+                 localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+       }
+     }
+
+     });
+ 
+     //-------------STREAK ENDS---------------
+
+
+     
+
     //-------------STREAK STARTS---------------
 
-    let streakCounter = habitItem.streak || 0;
+    // let streakCounter = habitItem.streak || 0;
 
-    //Get last saved date from loc. sto., or ''
-    let lastCheckedDate = localStorage.getItem("lastCheckedDate") || "";
-    let newStreak = parseInt(localStorage.getItem("streak")) || 0;
-    let currentDate = new Date().toLocaleDateString();
+    // //Get last saved date from loc. sto., or ''
+    // let lastCheckedDate = localStorage.getItem("lastCheckedDate") || "";
+    // let newStreak = parseInt(localStorage.getItem("streak")) || 0;
+    // let currentDate = new Date().toLocaleDateString();
 
-    //If user checked/clicked today
-    let clickedToday = lastCheckedDate === currentDate;
+    // //If user checked/clicked today
+    // let clickedToday = lastCheckedDate === currentDate;
 
-    //If user has NOT checked/clicked today
-    if (!clickedToday) {
-      streakCounter = 0;
-    }
+    // //If user has NOT checked/clicked today
+    // if (!clickedToday) {
+    //   streakCounter = 0;
+    // }
 
-    //Create streakElement. Code from Siri cut in here
-    //const streakElement = document.createElement('div');
-    //streakElement.classList.add("streak-element");
+    // //Create streakElement. Code from Siri cut in here
+    // //const streakElement = document.createElement('div');
+    // //streakElement.classList.add("streak-element");
 
-    //Aside shows current streak - #showStreak
-    const showStreak = document.createElement("aside");
-    showStreak.id = "showStreak";
-    showStreak.textContent = `Current Streak: ${streakCounter}`;
+    // //Aside shows current streak - #showStreak
+    // const showStreak = document.createElement("aside");
+    // showStreak.id = "showStreak";
+    // showStreak.textContent = `Current Streak: ${streakCounter}`;
 
-    //Create checkbox + span: 'Check today'
-    const streakCheckbox = document.createElement("input");
-    streakCheckbox.setAttribute("type", "checkbox");
-    //If user clicked today
-    streakCheckbox.checked = clickedToday;
+    // //Create checkbox + span: 'Check today'
+    // const streakCheckbox = document.createElement("input");
+    // streakCheckbox.setAttribute("type", "checkbox");
+    // //If user clicked today
+    // streakCheckbox.checked = clickedToday;
 
-    //Span for checkbox + text
-    const streakText = document.createElement("span");
-    streakText.id = "streakText";
-    streakText.textContent = "Check today";
+    // //Span for checkbox + text
+    // const streakText = document.createElement("span");
+    // streakText.id = "streakText";
+    // streakText.textContent = "Check today";
 
-    //Create aside and append checkbox + streakText
-    const addNewStreak = document.createElement("aside");
-    addNewStreak.id = "addNewStreak";
-    addNewStreak.appendChild(streakCheckbox);
-    addNewStreak.appendChild(streakText);
+    // //Create aside and append checkbox + streakText
+    // const addNewStreak = document.createElement("aside");
+    // addNewStreak.id = "addNewStreak";
+    // addNewStreak.appendChild(streakCheckbox);
+    // addNewStreak.appendChild(streakText);
 
-    const updateStreak = () => {
-      let clickedToday = lastCheckedDate === currentDate;
+    // const updateStreak = () => {
+    //   let clickedToday = lastCheckedDate === currentDate;
 
-      if (!clickedToday) {
-        streakCounter++;
-        lastCheckedDate = currentDate;
-        localStorage.setItem("streak", streakCounter);
-        localStorage.setItem("lastCheckedDate", lastCheckedDate);
-      }
+    //   if (!clickedToday) {
+    //     streakCounter++;
+    //     lastCheckedDate = currentDate;
+    //     localStorage.setItem("streak", streakCounter);
+    //     localStorage.setItem("lastCheckedDate", lastCheckedDate);
+    //   }
 
-      habitItem.streak = streakCounter;
+    //   habitItem.streak = streakCounter;
 
-      let updatedHabitStreak = currentUser.habitList.map((item) => {
-        if (item.itemId === habitItem.itemId) {
-          item.streak = habitItem.streak;
-          return habitItem;
-        }
-        return item;
-      });
+    //   let updatedHabitStreak = currentUser.habitList.map((item) => {
+    //     if (item.itemId === habitItem.itemId) {
+    //       item.streak = habitItem.streak;
+    //       return habitItem;
+    //     }
+    //     return item;
+    //   });
 
-      function updateLocalStorageStreak(updatedHabitStreak) {
-        let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-        if (currentUser) {
-          currentUser.habitList = updatedHabitStreak;
-          console.log(updatedHabitStreak);
-          registeredUsers = registeredUsers.map((user) =>
-            user.id === currentUser.id ? currentUser : user
-          );
+    //   function updateLocalStorageStreak(updatedHabitStreak) {
+    //     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    //     if (currentUser) {
+    //       currentUser.habitList = updatedHabitStreak;
+    //       console.log(updatedHabitStreak);
+    //       registeredUsers = registeredUsers.map((user) =>
+    //         user.id === currentUser.id ? currentUser : user
+    //       );
 
-          localStorage.setItem("currentUser", JSON.stringify(currentUser));
-          localStorage.setItem(
-            "registeredUsers",
-            JSON.stringify(registeredUsers)
-          );
-        } else {
-          console.error("error");
-        }
-      }
+    //       localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    //       localStorage.setItem(
+    //         "registeredUsers",
+    //         JSON.stringify(registeredUsers)
+    //       );
+    //     } else {
+    //       console.error("error");
+    //     }
+    //   }
 
-      updateLocalStorageStreak(updatedHabitStreak);
-      //Update showStreak, current streak
-      showStreak.textContent = `Current Streak: ${streakCounter}`;
-    };
+    //   updateLocalStorageStreak(updatedHabitStreak);
+    //   //Update showStreak, current streak
+    //   showStreak.textContent = `Current Streak: ${streakCounter}`;
+    // };
 
-    streakCheckbox?.addEventListener("click", () => {
-      if (streakCheckbox.checked) {
-        if (!clickedToday) {
-          streakCounter++;
-          lastCheckedDate = currentDate;
-          //localStorage.setItem('streak', streakCounter);
-          //localStorage.setItem('lastCheckedDate', lastCheckedDate);
-          showStreak.textContent = `Current Streak: ${streakCounter}`;
-          updateStreak();
-        }
-        streakCheckbox.disabled = true;
-        streakText.textContent = "Checked!";
-      } else {
-        //User did not check
-        streakCounter = 0;
-        localStorage.setItem("streak", streakCounter);
-        lastCheckedDate = "";
-        localStorage.setItem("lastCheckedDate", lastCheckedDate);
-      }
-    });
+    // streakCheckbox?.addEventListener("click", () => {
+    //   if (streakCheckbox.checked) {
+    //     if (!clickedToday) {
+    //       streakCounter++;
+    //       lastCheckedDate = currentDate;
+    //       //localStorage.setItem('streak', streakCounter);
+    //       //localStorage.setItem('lastCheckedDate', lastCheckedDate);
+    //       showStreak.textContent = `Current Streak: ${streakCounter}`;
+    //       updateStreak();
+    //     }
+    //     streakCheckbox.disabled = true;
+    //     streakText.textContent = "Checked!";
+    //   } else {
+    //     //User did not check
+    //     streakCounter = 0;
+    //     localStorage.setItem("streak", streakCounter);
+    //     lastCheckedDate = "";
+    //     localStorage.setItem("lastCheckedDate", lastCheckedDate);
+    //   }
+    // });
 
-    streakElement.appendChild(showStreak);
-    streakElement.appendChild(addNewStreak);
-    habitDetails.appendChild(streakElement);
-    habitCard.appendChild(habitDetails);
+    // streakElement.appendChild(showStreak);
+    // streakElement.appendChild(addNewStreak);
+    // habitDetails.appendChild(streakElement);
+    // habitCard.appendChild(habitDetails);
 
     //-------------STREAK ENDS---------------
 
