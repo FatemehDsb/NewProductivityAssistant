@@ -23,6 +23,7 @@ window.onload = () => {
     if (editedHabitItem) {
       //
       editedHabitItem.title = titleInput.value;
+      editedHabitItem.streak=editStreakInput.value;
 
       //
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -122,20 +123,21 @@ window.onload = () => {
 
 
 
-    //------------STREAK FATEMEH-------------
+  
 
      //-------------STREAK STARTS---------------
 
  
-     //-------------STREAK ENDS---------------
+
 
      const streakCheckbox = document.createElement("input");
      streakCheckbox.setAttribute("type", "checkbox");
      const showStreak = document.createElement("p");
+     showStreak.textContent=streak;
+
      habitDetails.append(streakCheckbox);
      habitDetails.append(showStreak);
 
-     //03-08*************************
      //when page loads, check if todaysdate equal to habititem.lastcheckeddate, if user has already checked in today, disabled checkbox, and leave checkbox , checked.
      let initialDate = new Date().toISOString().split('T')[0];
      if (habitItem.lastCheckedDate === initialDate) {
@@ -189,120 +191,7 @@ window.onload = () => {
      });
      
 
-    //-------------STREAK STARTS---------------
-
-    // let streakCounter = habitItem.streak || 0;
-
-    // //Get last saved date from loc. sto., or ''
-    // let lastCheckedDate = localStorage.getItem("lastCheckedDate") || "";
-    // let newStreak = parseInt(localStorage.getItem("streak")) || 0;
-    // let currentDate = new Date().toLocaleDateString();
-
-    // //If user checked/clicked today
-    // let clickedToday = lastCheckedDate === currentDate;
-
-    // //If user has NOT checked/clicked today
-    // if (!clickedToday) {
-    //   streakCounter = 0;
-    // }
-
-    // //Create streakElement. Code from Siri cut in here
-    // //const streakElement = document.createElement('div');
-    // //streakElement.classList.add("streak-element");
-
-    // //Aside shows current streak - #showStreak
-    // const showStreak = document.createElement("aside");
-    // showStreak.id = "showStreak";
-    // showStreak.textContent = `Current Streak: ${streakCounter}`;
-
-    // //Create checkbox + span: 'Check today'
-    // const streakCheckbox = document.createElement("input");
-    // streakCheckbox.setAttribute("type", "checkbox");
-    // //If user clicked today
-    // streakCheckbox.checked = clickedToday;
-
-    // //Span for checkbox + text
-    // const streakText = document.createElement("span");
-    // streakText.id = "streakText";
-    // streakText.textContent = "Check today";
-
-    // //Create aside and append checkbox + streakText
-    // const addNewStreak = document.createElement("aside");
-    // addNewStreak.id = "addNewStreak";
-    // addNewStreak.appendChild(streakCheckbox);
-    // addNewStreak.appendChild(streakText);
-
-    // const updateStreak = () => {
-    //   let clickedToday = lastCheckedDate === currentDate;
-
-    //   if (!clickedToday) {
-    //     streakCounter++;
-    //     lastCheckedDate = currentDate;
-    //     localStorage.setItem("streak", streakCounter);
-    //     localStorage.setItem("lastCheckedDate", lastCheckedDate);
-    //   }
-
-    //   habitItem.streak = streakCounter;
-
-    //   let updatedHabitStreak = currentUser.habitList.map((item) => {
-    //     if (item.itemId === habitItem.itemId) {
-    //       item.streak = habitItem.streak;
-    //       return habitItem;
-    //     }
-    //     return item;
-    //   });
-
-    //   function updateLocalStorageStreak(updatedHabitStreak) {
-    //     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    //     if (currentUser) {
-    //       currentUser.habitList = updatedHabitStreak;
-    //       console.log(updatedHabitStreak);
-    //       registeredUsers = registeredUsers.map((user) =>
-    //         user.id === currentUser.id ? currentUser : user
-    //       );
-
-    //       localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    //       localStorage.setItem(
-    //         "registeredUsers",
-    //         JSON.stringify(registeredUsers)
-    //       );
-    //     } else {
-    //       console.error("error");
-    //     }
-    //   }
-
-    //   updateLocalStorageStreak(updatedHabitStreak);
-    //   //Update showStreak, current streak
-    //   showStreak.textContent = `Current Streak: ${streakCounter}`;
-    // };
-
-    // streakCheckbox?.addEventListener("click", () => {
-    //   if (streakCheckbox.checked) {
-    //     if (!clickedToday) {
-    //       streakCounter++;
-    //       lastCheckedDate = currentDate;
-    //       //localStorage.setItem('streak', streakCounter);
-    //       //localStorage.setItem('lastCheckedDate', lastCheckedDate);
-    //       showStreak.textContent = `Current Streak: ${streakCounter}`;
-    //       updateStreak();
-    //     }
-    //     streakCheckbox.disabled = true;
-    //     streakText.textContent = "Checked!";
-    //   } else {
-    //     //User did not check
-    //     streakCounter = 0;
-    //     localStorage.setItem("streak", streakCounter);
-    //     lastCheckedDate = "";
-    //     localStorage.setItem("lastCheckedDate", lastCheckedDate);
-    //   }
-    // });
-
-    // streakElement.appendChild(showStreak);
-    // streakElement.appendChild(addNewStreak);
-    // habitDetails.appendChild(streakElement);
-    // habitCard.appendChild(habitDetails);
-
-    //-------------STREAK ENDS---------------
+    
 
     // Saving to Local storage
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
