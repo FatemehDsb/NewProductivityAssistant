@@ -101,9 +101,9 @@ window.onload = () => {
     priorityElement.classList.add("priority-element");
     priorityElement.textContent = priority;
 
-    const streakElement = document.createElement("div");
-    streakElement.classList.add("streak-element");
-    streakElement.textContent = streak;
+    // const streakElement = document.createElement("div");
+    // streakElement.classList.add("streak-element");
+    // streakElement.textContent = streak;
 
     const habitBtn = document.createElement("div");
     habitBtn.classList.add("habit-btn");
@@ -312,7 +312,7 @@ window.onload = () => {
     habitBtn.appendChild(editBtn);
     habitBtn.appendChild(deleteBtn);
 
-    habitDetails.append(streakElement);
+    // habitDetails.append(streakElement);
 
     deleteBtn.style.width = "50px";
     editBtn.style.width = "50px";
