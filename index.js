@@ -313,6 +313,13 @@ window.onload = () => {
 
     quoteParagraph.innerText = finalQuote;
     authorParagraph.innerText = "- " + author;
+
+    //Set timeout and remove quoteContainer after 30 sec
+    setTimeout(() => {
+      if(quoteContainer){
+      quoteContainer.style.display = 'none';
+      }
+    }, 10000); //10 seconds
   };
 
   // Modal begins here
