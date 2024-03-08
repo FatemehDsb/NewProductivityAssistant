@@ -66,7 +66,7 @@ window.onload = () => {
 
   let renderHabitCard = (habitItem) => {
     // Destructuring habitItem for ease of use, including the category
-    const { title, priority, streak } = habitItem;
+    const { title, priority, streak, lastCheckedDate} = habitItem;
 
     const habitCard = document.createElement("div");
     habitCard.classList.add("habit-card");
@@ -126,31 +126,47 @@ window.onload = () => {
 
      //-------------STREAK STARTS---------------
 
-    
  
+     //-------------STREAK ENDS---------------
+
      const streakCheckbox = document.createElement("input");
      streakCheckbox.setAttribute("type", "checkbox");
      const showStreak = document.createElement("p");
      habitDetails.append(streakCheckbox);
      habitDetails.append(showStreak);
-   
-    
- 
-    streakCheckbox?.addEventListener("click", () => {
+
+     //03-08*************************
+     //when page loads, check if todaysdate equal to habititem.lastcheckeddate, if user has already checked in today, disabled checkbox, and leave checkbox , checked.
+     let initialDate = new Date().toISOString().split('T')[0];
+     if (habitItem.lastCheckedDate === initialDate) {
+    streakCheckbox.checked = true;
+    streakCheckbox.disabled = true;
+}
      
+     streakCheckbox?.addEventListener("click", () => {
+       
        if (streakCheckbox.checked) {
-         
+         //03-08**********************
+       
          let currentUser = JSON.parse(localStorage.getItem("currentUser"));
          let registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
- 
+         
          //find the currentuser.habitlist.habititem that user has clicked on its checkbox and then update the currentuser with new streak
          if(currentUser && currentUser.habitList){
+           let currentDate = new Date().toISOString().split('T')[0];
+
            currentUser.habitList = currentUser.habitList.map(item => {
              if (item.itemId === habitItem.itemId) {
-               item.streak = (item.streak || 0) + 1;
- 
-               //Render streak
-               showStreak.textContent = item.streak; 
+
+              if(item.lastCheckedDate!==currentDate){
+
+                item.streak = (item.streak || 0) + 1;
+                item.lastCheckedDate=currentDate;
+                streakCheckbox.disabled=true;
+              }
+      
+      //Render streak
+      showStreak.textContent = item.streak; 
  
              }
              return item;
@@ -164,13 +180,13 @@ window.onload = () => {
                  localStorage.setItem("currentUser", JSON.stringify(currentUser));
                  localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
        }
+     } 
+     //03-08*************************
+     else{
+      streakCounter = 0;
      }
 
      });
- 
-     //-------------STREAK ENDS---------------
-
-
      
 
     //-------------STREAK STARTS---------------
@@ -411,6 +427,7 @@ window.onload = () => {
       title,
       priority,
       streak,
+      lastCheckedDate:""
     };
 
     //Create a copy of currentUser to avoid modifying the original object
