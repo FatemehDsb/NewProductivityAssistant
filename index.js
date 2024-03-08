@@ -312,12 +312,15 @@ window.onload = () => {
     //let greeting = finalquote + "\n" + "- " + author;
 
     quoteParagraph.innerText = finalQuote;
-    authorParagraph.innerText = "- " + author;
+    authorParagraph.innerText = ' - ' + author;
 
     //Set timeout and remove quoteContainer after 30 sec
     setTimeout(() => {
-      if(quoteContainer){
-      quoteContainer.style.display = 'none';
+      if(quoteContainer) {
+        quoteContainer.classList.add('fade-quote');
+        setTimeout(() => {
+          quoteContainer.style.display = 'none';
+        }, 1000);
       }
     }, 10000); //10 seconds
   };
