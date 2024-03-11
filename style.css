@@ -188,7 +188,7 @@ nav a:hover {
   background-color: #e7e7e7;
 }
 
-.filterAndSort {
+/* .filterAndSort {
   border: 0.01px solid #ccc;
   width: 100%;
   height: 100px;
@@ -219,7 +219,7 @@ nav a:hover {
 #estimatedTimeSortDropdown,
 #deadlineSortDropdown {
   border-radius: 5px;
-}
+} */
 
 .toDoItems,
 .hibitsItems {
@@ -493,17 +493,16 @@ nav a:hover {
 
 /*FIELDSET*/
 
-/* .categoryContainer{
- 
-} */
+
 .categoryContainer{
   margin: 15px;
   border: 1px solid rgb(194, 14, 200);
   border-radius:5px ;
   display: flex;
   flex-direction: column;
-  padding: 10px;
   justify-content: space-around;
+  padding: 5px;
+  
 }
 #general-all-category{
   display: flex;
@@ -511,11 +510,11 @@ nav a:hover {
   justify-content: space-between;
   gap: 10px;
   /* border: 1px solid rgb(192, 182, 42); */
-  
 }
 
 #category-title{
   /* border: 1px solid blue; */
+  
 }
 .category-div{
   display: flex;
@@ -523,28 +522,16 @@ nav a:hover {
   /* border: 1px solid red; */
   justify-content: space-between;
   align-items: center;
+  height: 30px;
   
 }
-.category-item{
-  /* border: 1px solid rgb(9, 123, 79); */
-}
-/* .sortContainer{
-  
-} */
-
 
 .sortContainer{
-
   border: 1px solid rgb(194, 14, 200);
   border-radius: 5px;
   margin: 15px;
   display: flex;
   flex-direction: row;
-
-  
- 
-
-
- 
- 
+  justify-content: space-around;
+  align-items: center;
 }
