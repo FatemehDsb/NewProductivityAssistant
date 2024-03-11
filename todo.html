@@ -155,76 +155,94 @@
         </div>
       </div>
 
-      <!---------Filter------>
-      <div class="filterContainer">
-        <fieldset>
-          <label for="selectAll">All</label>
-          <input
-            type="checkbox"
-            name="filterCategoryAll"
-            id="selectAll"
-            value="All"
-          />
-
-          <label for="general">General</label>
-          <input
-            type="checkbox"
-            name="filterCategory"
-            id="general"
-            value="General"
-          />
-
-          <label for="shopping">Shopping</label>
-          <input
-            type="checkbox"
-            name="filterCategory"
-            id="shopping"
-            value="Shopping"
-          />
-
-          <label for="health">Health</label>
-          <input
-            type="checkbox"
-            name="filterCategory"
-            id="health"
-            value="Health"
-          />
-
-          <label for="home">Home</label>
-          <input type="checkbox" name="filterCategory" id="home" value="Home" />
-
-          <label for="work">Work</label>
-          <input type="checkbox" name="filterCategory" id="work" value="Work" />
-        </fieldset>
+     <!---------GATEGORY-Filter-FIELD------>
+     <div class="categoryContainer">
+      <div class="category-div">
+        <p id="category-title">Category</p>
+        <div id="general-all-category">
+            <div class="category-item">
+                <label for="selectAll">All</label>
+                <input
+                type="checkbox"
+                name="filterCategoryAll"
+                id="selectAll"
+                value="All"
+                />
+              </div>
+              <div class="category-item">
+                <label for="general">General</label>
+                <input
+                type="checkbox"
+                name="filterCategory"
+                id="general"
+                value="General"
+                />
+              </div>
+        </div>
       </div>
-      <!----------Filter ends------------->
+            
+          <div class="category-div">
+            <div class="category-item">
+              <label for="shopping"><img src="images/shopping-cart-349544_1280.png" width="30px"></label>
+              <input
+              type="checkbox"
+              name="filterCategory"
+              id="shopping"
+              value="Shopping"
+              />
+            </div>
+            <div class="category-item">
+              <label for="health"><img src="images/home-icon-4.svg" width="30px"></label>
+              <input
+              type="checkbox"
+              name="filterCategory"
+              id="health"
+              value="Health"
+              />
+            </div>
 
-      <!----------Sorting---------->
-      <div class="sortContainer">
-        <fieldset>
-          <div id="deadlineContainer">
-            <label for="deadlineSortDropdown">Sort by Deadline:</label>
-            <select id="deadlineSortDropdown">
-              <option value="" selected disabled>Sort By Deadline</option>
+            <div class="category-item">
+            <label for="home"><img src="images/health-4.svg" width="30px"></label>
+            <input type="checkbox" name="filterCategory" id="home" value="Home" />
+            </div>
 
-              <option value="asc">Highest</option>
-              <option value="desc">Lowest</option>
-            </select>
-          </div>
-          <div id="estimatedTimeContainer">
-            <label for="estimatedTimeSortDropdown"
-              >Sort by Estimated Time:</label
-            >
-            <select id="estimatedTimeSortDropdown">
-              <option value="" selected disabled>Sort By Estimated Time</option>
+            <div class="category-item">
+              <label for="work"><img src="images/work-47.svg" width="30px"></label>
+              <input type="checkbox" name="filterCategory" id="work" value="Work" />
+            </div>
+        </div>
+     
+    </div>
+    <!---------- GATEGORY-Filter-END------------->
 
-              <option value="asc">Highest</option>
-              <option value="desc">Lowest</option>
-            </select>
-          </div>
-        </fieldset>
-      </div>
-      <!-----------------Sorting ends-------------->
+
+     <!----------Sorting---------->
+     <div class="sortContainer">
+      <!-- <fieldset id="sort-fieldset"> -->
+        <!-- <legend>Sort By</legend> -->
+        <!-- <p id="category-title">Sorting</p> -->
+        <div id="deadlineContainer">
+          <!-- <label for="deadlineSortDropdown">Sort by Deadline:</label> -->
+          <select id="deadlineSortDropdown">
+            <option value="" selected disabled> Deadline</option>
+            <option value="asc">Highest </option>
+            <option value="desc">Lowest </option>
+          </select>
+        </div>
+
+        <div id="estimatedTimeContainer">
+          <!-- <label for="estimatedTimeSortDropdown"
+            >Sort by Estimated Time:</label
+          > -->
+          <select id="estimatedTimeSortDropdown">
+            <option value="" selected disabled> Estimated Time</option>
+            <option value="asc">Highest to Lowest</option>
+            <option value="desc">Lowest to Highest</option>
+          </select>
+        </div>
+
+      <!-- </fieldset> -->
+    </div>
 
       <h1>Your Todos</h1>
       <div id="todosContainer"></div>
