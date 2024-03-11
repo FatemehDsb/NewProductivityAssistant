@@ -111,10 +111,27 @@ window.onload = () => {
       statusValue,
     } = toDoItem;
 
+    const todoCardCoverContainer = document.createElement("div");
+    todoCardCoverContainer.classList.add("todo-card-cover-container");
+
     const todoCard = document.createElement("div");
     todoCard.classList.add("todo-card");
 
     todoCard.setAttribute("data-id", toDoItem.itemId); // Use the data-id attribute to store the unique ID
+
+    const todoCategoryCover = document.createElement("div");
+    todoCategoryCover.classList.add("todo-category-cover");
+    if (category == "General") {
+      todoCategoryCover.innerHTML = `<div>CATEGORY: GENERAL</div> <div>${deadline}</div>`;
+    } else if (category == "Shopping") {
+      todoCategoryCover.innerText = "CATEGORY: SHOPPING" + deadline;
+    } else if (category == "Health") {
+      todoCategoryCover.innerText = "CATEGORY: HEALTH" + deadline;
+    } else if (category == "Home") {
+      todoCategoryCover.innerText = "CATEGORY: HOME" + deadline;
+    } else if (category == "Work") {
+      todoCategoryCover.innerText = "CATEGORY: WORK" + deadline;
+    }
 
     const todoInfo = document.createElement("div");
     todoInfo.classList.add("todo-info");
@@ -148,8 +165,8 @@ window.onload = () => {
     const estimatedTimeElement = document.createElement("p");
     estimatedTimeElement.textContent = `${hours}h ${minutes}m`;
 
-    const deadlineElement = document.createElement("p");
-    deadlineElement.textContent = `Deadline: ${deadline}`;
+    // const deadlineElement = document.createElement("p");
+    // deadlineElement.textContent = `Deadline: ${deadline}`;
 
     const categoryElement = document.createElement("p");
     categoryElement.textContent = `Category: ${category}`;
@@ -207,7 +224,10 @@ window.onload = () => {
     }
 
     todoCard.append(statusElement);
-    todoCard.append(todoInfo);
+    todoCard.append(todoCardCoverContainer);
+
+    todoCardCoverContainer.append(todoCategoryCover);
+    todoCardCoverContainer.append(todoInfo);
 
     todoInfo.append(todoTitleInfo);
     todoInfo.append(todoDetails);
@@ -222,8 +242,7 @@ window.onload = () => {
     todoDetails.append(
       categoryElement,
       descriptionElement,
-      estimatedTimeElement,
-      deadlineElement
+      estimatedTimeElement
     );
 
     deleteBtn.style.width = "50px";
@@ -314,14 +333,14 @@ window.onload = () => {
     const userName = currentUser ? currentUser.newUsername : "Guest";
 
     quoteParagraph.innerText = `Hello, ${userName}! \n${finalQuote}`;
-    authorParagraph.innerText = ' - ' + author;
+    authorParagraph.innerText = " - " + author;
 
     //Set timeout and remove quoteContainer after 30 sec
     setTimeout(() => {
-      if(quoteContainer) {
-        quoteContainer.classList.add('fade-quote');
+      if (quoteContainer) {
+        quoteContainer.classList.add("fade-quote");
         setTimeout(() => {
-          quoteContainer.style.display = 'none';
+          quoteContainer.style.display = "none";
         }, 1000);
       }
     }, 10000); //10 seconds
@@ -372,10 +391,12 @@ window.onload = () => {
     let newPassword = passwordInput.value;
     userIdCounter++;
 
-    let userNameExist = registeredUsers.find((user)=> newUsername===user.newUsername);
-   if(userNameExist){
-     alert("Username already exists");
-    }else{
+    let userNameExist = registeredUsers.find(
+      (user) => newUsername === user.newUsername
+    );
+    if (userNameExist) {
+      alert("Username already exists");
+    } else {
       alert("User registered!");
     }
 
