@@ -158,7 +158,7 @@
      <!---------GATEGORY-Filter-FIELD------>
      <div class="categoryContainer">
       <div class="category-div">
-        <p id="category-title">Category</p>
+        <p id="category-title">Filter by Category</p>
         <div id="general-all-category">
             <div class="category-item">
                 <label for="selectAll">All</label>
@@ -220,13 +220,15 @@
      <div class="sortContainer">
       <!-- <fieldset id="sort-fieldset"> -->
         <!-- <legend>Sort By</legend> -->
-        <!-- <p id="category-title">Sorting</p> -->
+        <p id="category-title">Sorting</p>
         <div id="deadlineContainer">
           <!-- <label for="deadlineSortDropdown">Sort by Deadline:</label> -->
           <select id="deadlineSortDropdown">
             <option value="" selected disabled> Deadline</option>
-            <option value="asc">Highest </option>
-            <option value="desc">Lowest </option>
+            <option value="asc">Oldest to Newest</option>
+            <option value="desc">Newest to Oldest</option>
+            <option value="resetSortingPriority">Reset</option>
+         
           </select>
         </div>
 
@@ -236,8 +238,9 @@
           > -->
           <select id="estimatedTimeSortDropdown">
             <option value="" selected disabled> Estimated Time</option>
-            <option value="asc">Highest to Lowest</option>
-            <option value="desc">Lowest to Highest</option>
+            <option value="asc">Lowest to Highest</option>
+            <option value="desc">Highest to lowest</option>
+            <option value="resetSortingPriority">Reset</option>
           </select>
         </div>
 
