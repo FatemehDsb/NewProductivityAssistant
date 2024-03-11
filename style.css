@@ -1,7 +1,13 @@
 :root {
   --color-brand-primary: #9ba9db;
-  --color-brand-secondary: rgb(159, 180, 185);
-  --color-brand-tertiary: rgb(242, 242, 242);
+  --color-brand-primary-dark: #34428b;
+  --color-brand-primary-medium: #6f78ab;
+  --color-brand-primary-light: #9ba9db;
+  --color-brand-secondary-dark: #2f372e;
+  --color-brand-secondary-medium: #637b61;
+  --color-brand-secondary-light: #9ba9db;
+  --color-brand-tertiary: #8b9d8a;
+  --color-gray-light: #d6d6d6;
 }
 
 * {
@@ -408,7 +414,7 @@ nav a:hover {
   width: 100%;
   height: 82px;
   box-sizing: border-box;
-  background-color: rgba(30, 161, 254, 0.25);
+  background-color: var(--color-brand-primary-dark);
   position: fixed;
   bottom: 0px;
   z-index: 2;
