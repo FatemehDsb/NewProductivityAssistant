@@ -372,7 +372,12 @@ window.onload = () => {
     let newPassword = passwordInput.value;
     userIdCounter++;
 
-    alert("User registered!");
+    let userNameExist = registeredUsers.find((user)=> newUsername===user.newUsername);
+   if(userNameExist){
+     alert("Username already exists");
+    }else{
+      alert("User registered!");
+    }
 
     newUser = {
       id: userIdCounter,
