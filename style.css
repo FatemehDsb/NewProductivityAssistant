@@ -486,3 +486,65 @@ nav a:hover {
 .fa-stopwatch {
   color: var(--color-brand-primary-medium);
 }
+
+
+
+
+
+/*FIELDSET*/
+
+/* .categoryContainer{
+ 
+} */
+.categoryContainer{
+  margin: 15px;
+  border: 1px solid rgb(194, 14, 200);
+  border-radius:5px ;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: space-around;
+}
+#general-all-category{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  /* border: 1px solid rgb(192, 182, 42); */
+  
+}
+
+#category-title{
+  /* border: 1px solid blue; */
+}
+.category-div{
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid red; */
+  justify-content: space-between;
+  align-items: center;
+  
+}
+.category-item{
+  /* border: 1px solid rgb(9, 123, 79); */
+}
+/* .sortContainer{
+  
+} */
+
+
+.sortContainer{
+
+  border: 1px solid rgb(194, 14, 200);
+  border-radius: 5px;
+  margin: 15px;
+  display: flex;
+  flex-direction: row;
+
+  
+ 
+
+
+ 
+ 
+}
