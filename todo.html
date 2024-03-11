@@ -23,7 +23,10 @@
         <div id="topHeaderLeft">
           <i class="fa fa-duotone fa-user fa-xl"></i>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <i class="fa fa-duotone fa-arrow-right-from-bracket fa-xl"></i>
+          <i
+            class="fa fa-duotone fa-arrow-right-from-bracket fa-xl"
+            id="logOutBtn"
+          ></i>
         </div>
         <div id="topHeaderRight">
           <i class="fa fa-duotone fa-cloud fa-xl"></i>
@@ -35,7 +38,7 @@
       </div>
 
       <!---------Pomodoro MODAL STARTS-------------------------------------->
-      <button id="openPomodoroBtn">Open Pomodoro</button>
+      <!-- <button id="openPomodoroBtn">Open Pomodoro</button> -->
       <div id="pomodoroModal" class="pomodoro-modal">
         <div class="pomodoro-modal-content">
           <span class="pomodoro-close">&times;</span>
@@ -54,8 +57,8 @@
       <!---------Pomodoro MODAL ENDS-------------------------------------->
 
       <!-- Trigger/Open The Modal -->
-      <button id="logOutBtn">Log out</button>
-      <button>+</button>
+      <!-- <button id="logOutBtn">Log out</button>
+      <button>+</button> -->
 
       <!--------KNAPPAR--HABITS/TODOS------->
       <nav class="header-container">
@@ -234,8 +237,8 @@
         ><i class="fa-solid fa-caret-down fa-2xl" id="arrowDown"></i>
       </div>
       <div id="completedTodosContainer"></div>
-      <div id="footer">
-        <i class="fa fa-duotone fa-stopwatch fa-2x"></i>
+      <div id="footer" class="todo-footer">
+        <i class="fa fa-duotone fa-stopwatch fa-2x" id="openPomodoroBtn"></i>
 
         <i class="fa fa-duotone fa-circle-plus fa-4x" id="openModalBtn"></i>
         <i class="fa fa-duotone fa-calendar fa-2x"></i>
