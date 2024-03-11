@@ -42,11 +42,13 @@ main {
 }
 
 .container {
+ 
+  border: 1px solid rgb(59, 14, 132);
   width: 390px;
   margin: auto;
   padding: auto;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  /* border: 1px solid #ccc; */
 }
 
 .signInContainer {
@@ -129,6 +131,9 @@ main {
   margin: 5px;
   padding: 20px;
 }
+#todosContainer-title{
+  padding: 20px;
+}
 
 /* The Modal (background) */
 .modal {
@@ -174,6 +179,7 @@ nav {
   padding: 10px;
   text-align: center;
   border-radius: 5px;
+  margin-top: 40px;
 }
 
 nav a {
@@ -215,11 +221,16 @@ nav a:hover {
   margin: 0.2rem;
   justify-content: space-between;
 }
+*/
 
 #estimatedTimeSortDropdown,
 #deadlineSortDropdown {
   border-radius: 5px;
-} */
+  border: 1px solid var(--color-brand-primary-light);
+  font-size: 13px;
+  padding: 2px;
+  
+} 
 
 .toDoItems,
 .hibitsItems {
@@ -499,9 +510,10 @@ nav a:hover {
 /*FIELDSET*/
 
 
+
 .categoryContainer{
-  margin: 15px;
-  border: 1px solid rgb(194, 14, 200);
+  margin: 5px 15px;
+  border: 1px solid #6f78ab;
   border-radius:5px ;
   display: flex;
   flex-direction: column;
@@ -509,34 +521,52 @@ nav a:hover {
   padding: 5px;
   
 }
-#general-all-category{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  gap: 10px;
-  /* border: 1px solid rgb(192, 182, 42); */
-}
+
 
 #category-title{
+  font-size: 12px;
+  background-color: #6f78ab;
+  padding: 3px;
+  border-radius: 5px;
+  color: white;
   /* border: 1px solid blue; */
   
 }
 .category-div{
   display: flex;
-  flex-direction: row;
-  /* border: 1px solid red; */
-  justify-content: space-between;
   align-items: center;
-  height: 30px;
-  
+  justify-content: space-evenly;
+  text-align: center;
+  gap: 3px;
+  /* border: 1px solid red; */
+}
+
+.category-item{
+  text-align: center;
+  /* border: 1px solid rgb(194, 14, 200); */
+}
+
+label{
+  font-size: 12x;
 }
 
 .sortContainer{
-  border: 1px solid rgb(194, 14, 200);
+  border: 1px solid #6f78ab;
   border-radius: 5px;
-  margin: 15px;
+  margin: 2px 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  height: 35px;
+}
+
+
+/* Todos-completed container*/
+
+.todos-completed-container{
+  border: 0.1px solid lightgray;/*just to check it */
+  border-radius: 5px;
+  margin: 10px 15px;
+
 }
