@@ -168,8 +168,8 @@ window.onload = () => {
     // const deadlineElement = document.createElement("p");
     // deadlineElement.textContent = `Deadline: ${deadline}`;
 
-    const categoryElement = document.createElement("p");
-    categoryElement.textContent = `Category: ${category}`;
+    /*const categoryElement = document.createElement("p");
+    categoryElement.textContent = `Category: ${category}`;*/
 
     //-----------------Status function starts here
 
@@ -240,7 +240,7 @@ window.onload = () => {
     todoBtn.appendChild(deleteBtn);
 
     todoDetails.append(
-      categoryElement,
+      //categoryElement,
       descriptionElement,
       estimatedTimeElement
     );
