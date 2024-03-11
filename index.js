@@ -309,9 +309,11 @@ window.onload = () => {
 
     let finalQuote = quote.content;
     let author = quote.author;
-    //let greeting = finalquote + "\n" + "- " + author;
 
-    quoteParagraph.innerText = finalQuote;
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const userName = currentUser ? currentUser.newUsername : "Guest";
+
+    quoteParagraph.innerText = `Hello, ${userName}! \n${finalQuote}`;
     authorParagraph.innerText = ' - ' + author;
 
     //Set timeout and remove quoteContainer after 30 sec
