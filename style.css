@@ -228,45 +228,49 @@ nav a:hover {
   height: 400px;
 }
 
+/* Sharlins del */
+
 #todosContainer {
   border-radius: 10px;
-  margin: 5px;
-  padding: 20px;
+  margin: 0.5em;
+  padding: 0.5em;
   background-color: rgb(238, 238, 238);
 }
 
 #completedTodosContainer {
   border-radius: 10px;
-  margin: 5px;
-  padding: 20px;
+  margin: 0.5em;
+  padding: 0.5em;
   background-color: lightgray;
 }
-
-/* Sharlins del */
 
 .todo-card-cover-container,
 .habit-card-cover-container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  max-width: 80%;
+  width: 80%;
+  margin: 1em;
 }
 
 .todo-card {
   border-radius: 10px;
-  padding: 10px;
-  margin: 5px;
+  padding: 0.5em;
+  margin: 0.5em;
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: space-around;
-  gap: 10px;
+  gap: 1em;
 }
 
 .todo-info {
   border-radius: 0px 0px 8px 8px;
   background-color: var(--color-brand-primary);
   width: 100%;
-  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.5em 1em;
 }
 
 .completed-todo-info {
@@ -279,16 +283,16 @@ nav a:hover {
 .todo-details {
   border-radius: 20px;
   display: flex;
-  flex-direction: row;
-  padding: 10px 20px;
+  margin: 0.5em;
+  width: 100%;
   justify-content: space-between;
+  font-size: 0.8rem;
+  color: white;
 }
 
 .todo-title-info {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  padding: 10px 20px;
 }
 
 .todo-btn {
@@ -299,9 +303,9 @@ nav a:hover {
 
 .edit-btn,
 .delete-btn {
-  border: 0px;
+  border: none;
   border-radius: 5px;
-  margin: 4px;
+  margin: 0.5em;
   padding: 0px;
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -315,7 +319,8 @@ nav a:hover {
   border-top-right-radius: 8px;
   padding: 10px 20px;
   overflow: hidden;
-  height: 40px;
+  height: 20%;
+  align-items: center;
   font-size: 12px;
 }
 
@@ -323,7 +328,7 @@ nav a:hover {
   background-color: var(--color-brand-primary-extra-dark);
   color: white;
   display: flex;
-  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   gap: 10px;
 }
