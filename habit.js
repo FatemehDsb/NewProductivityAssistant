@@ -23,7 +23,9 @@ window.onload = () => {
     if (editedHabitItem) {
       //
       editedHabitItem.title = titleInput.value;
+      const editStreakInput = document.getElementById("editStreakInput"); 
       editedHabitItem.streak=editStreakInput.value;
+      editedHabitItem.priority=priorityInput.value
 
       //
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -235,6 +237,14 @@ window.onload = () => {
 
     editBtn?.addEventListener("click", (e) => {
       e.preventDefault();
+
+       //
+       modal.style.display = "block";
+       addHabitBtn.style.display = "none";
+       saveBtn.style.display = "block";
+      //  modalSpan.style.display ="none";
+ 
+       //
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
       const editHabitItem = currentUser.habitList.find(
         (item) => item.itemId === habitItem.itemId
@@ -243,17 +253,26 @@ window.onload = () => {
 
       //
       titleInput.value = editHabitItem.title;
+      const editStreakInput = document.getElementById("editStreakInput"); // Ensure you have this line if you haven't already defined editStreakInput elsewhere
+      editStreakInput.value = editHabitItem.streak;
 
-      //
-      modal.style.display = "block";
-      addHabitBtn.style.display = "none";
 
-      saveBtn.style.display = "block";
-
-      //
+     
       saveBtn.onclick = () => {
         saveHabitChanges(editHabitItem.itemId);
+
         modal.style.display = "none";
+        addHabitBtn.style.display="block";
+        saveBtn.style.display="none";
+
+      
+          priorityInput.value ="0";
+
+       
+        editStreakInput.value = "";
+        titleInput.value="";
+
+
       };
     });
   };
@@ -293,6 +312,18 @@ window.onload = () => {
   if (modalSpan) {
     modalSpan.onclick = function () {
       modal.style.display = "none";
+
+
+      //************* */
+        addHabitBtn.style.display = "block";
+        saveBtn.style.display = "none";
+        modal.style.display = "none";
+        addHabitBtn.style.display="block";
+        priorityInput.value ="0";
+        editStreakInput.value = "";
+        titleInput.value="";
+
+      //************************** */
     };
   }
 
@@ -300,6 +331,17 @@ window.onload = () => {
   window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
+
+       //************* */
+       addHabitBtn.style.display = "block";
+       saveBtn.style.display = "none";
+       modal.style.display = "none";
+       addHabitBtn.style.display="block";
+       priorityInput.value ="0";
+       editStreakInput.value = "";
+       titleInput.value="";
+
+     //************************** */
     }
   };
 

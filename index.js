@@ -294,8 +294,7 @@ window.onload = () => {
 
       saveBtn.onclick = () => {
         saveTodoChanges(editedTodoItem.itemId);
-        /*********************Nullställa alla input fält- nullställa hela modalen? */
-        //when we click on savebutton, it deletes all input fields, it should
+
         const checkedCategoryInput = document.querySelector(
           'input[name="category"]:checked'
         );
@@ -371,6 +370,29 @@ window.onload = () => {
   if (modalSpan) {
     modalSpan.onclick = function () {
       modal.style.display = "none";
+
+      //************* */
+      addTodoBtn.style.display = "block";
+      saveBtn.style.display = "none";
+      modal.style.display = "none";
+  
+      const checkedCategoryInput = document.querySelector(
+        'input[name="category"]:checked'
+      );
+      if (checkedCategoryInput) {
+        checkedCategoryInput.checked = false;
+      }
+      titleInput.value = "";
+        deadlineInput.value = "";
+        descriptionInput.value = "";
+        todoStatusInput.checked = "";
+        document.getElementById("estimatedTimeHours").value = "";
+        document.getElementById("estimatedTimeMinutes").value = "";
+        modal.style.display = "none";
+        addTodoBtn.style.display = "block";
+        saveBtn.style.display = "none";
+
+    //************************** */
     };
   }
 
@@ -378,6 +400,29 @@ window.onload = () => {
   window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
+
+      //************* */
+      addTodoBtn.style.display = "block";
+      saveBtn.style.display = "none";
+      modal.style.display = "none";
+  
+      const checkedCategoryInput = document.querySelector(
+        'input[name="category"]:checked'
+      );
+      if (checkedCategoryInput) {
+        checkedCategoryInput.checked = false;
+      }
+      titleInput.value = "";
+        deadlineInput.value = "";
+        descriptionInput.value = "";
+        todoStatusInput.checked = "";
+        document.getElementById("estimatedTimeHours").value = "";
+        document.getElementById("estimatedTimeMinutes").value = "";
+        modal.style.display = "none";
+        addTodoBtn.style.display = "block";
+        saveBtn.style.display = "none";
+
+    //************************** */
     }
   };
 
