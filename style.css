@@ -257,8 +257,15 @@ nav a:hover {
   background-color: var(--color-brand-secondary-light)
 }
 
-.todo-card-cover-container,
-.habit-card-cover-container {
+.todo-card-cover-container{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 1em;
+}
+
+.habit-card-cover-container{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -350,33 +357,55 @@ nav a:hover {
   gap: 10px;
 }
 
+#habitContainer{
+  
+  background: #637b61;
+  display: flex;
+  flex-direction: column;
+}
+
 .habit-priority-high-cover {
-  background-image: linear-gradient(
-    rgb(255, 98, 0),
-    var(--color-brand-tertiary)
-  );
+  background: rgb(255, 0, 0);
+  
 }
 
 .habit-priority-medium-cover {
-  background-image: linear-gradient(darkorange, var(--color-brand-tertiary));
+  background: darkorange;
 }
 
 .habit-priority-low-cover {
-  background-image: linear-gradient(
-    rgb(255, 221, 0),
-    var(--color-brand-tertiary)
-  );
+  background:
+    rgba(3, 191, 19, 0.978);
 }
 
 .habit-priority-none-cover {
   background-color: var(--color-brand-tertiary);
 }
 
+.habit-details {
+  background: white;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.habit-details p{
+  font-size: 1.2em;
+  font-weight: 600;
+  border-radius: 50%;
+  padding: 0.5em;
+  background: rgb(241, 235, 235);
+}
+
 .habit-info {
   border-radius: 0px 0px 8px 8px;
   background-color: var(--color-brand-tertiary);
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 1em;
+  margin: 1em;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80%;
 }
 
 /*Streak element*/
