@@ -23,6 +23,7 @@ window.onload = () => {
     if (editedHabitItem) {
       //
       editedHabitItem.title = titleInput.value;
+      const editStreakInput = document.getElementById("editStreakInput"); 
       editedHabitItem.streak=editStreakInput.value;
 
       //
@@ -235,6 +236,13 @@ window.onload = () => {
 
     editBtn?.addEventListener("click", (e) => {
       e.preventDefault();
+
+       //
+       modal.style.display = "block";
+       addHabitBtn.style.display = "none";
+       saveBtn.style.display = "block";
+ 
+       //
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
       const editHabitItem = currentUser.habitList.find(
         (item) => item.itemId === habitItem.itemId
@@ -243,17 +251,21 @@ window.onload = () => {
 
       //
       titleInput.value = editHabitItem.title;
+      const editStreakInput = document.getElementById("editStreakInput"); // Ensure you have this line if you haven't already defined editStreakInput elsewhere
+      editStreakInput.value = editHabitItem.streak;
 
-      //
-      modal.style.display = "block";
-      addHabitBtn.style.display = "none";
 
-      saveBtn.style.display = "block";
-
-      //
+     
       saveBtn.onclick = () => {
         saveHabitChanges(editHabitItem.itemId);
         modal.style.display = "none";
+        addHabitBtn.style.display="block";
+        saveBtn.style.display="none";
+        
+
+        titleInput.value = "";
+        editStreakInput.value = "";
+
       };
     });
   };

@@ -294,8 +294,7 @@ window.onload = () => {
 
       saveBtn.onclick = () => {
         saveTodoChanges(editedTodoItem.itemId);
-        /*********************Nullställa alla input fält- nullställa hela modalen? */
-        //when we click on savebutton, it deletes all input fields, it should
+        
         const checkedCategoryInput = document.querySelector(
           'input[name="category"]:checked'
         );
