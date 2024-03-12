@@ -42,7 +42,6 @@ main {
 }
 
 .container {
- 
   border: 1px solid rgb(59, 14, 132);
   width: 390px;
   margin: auto;
@@ -112,7 +111,7 @@ main {
   margin: 1.5em;
   margin-bottom: 0.5rem;
 }
-#quote{
+#quote {
   margin-bottom: 0;
 }
 #author {
@@ -135,7 +134,7 @@ main {
   margin: 5px;
   padding: 20px;
 }
-#todosContainer-title{
+#todosContainer-title {
   padding: 20px;
 }
 
@@ -233,8 +232,7 @@ nav a:hover {
   border: 1px solid var(--color-brand-primary-light);
   font-size: 13px;
   padding: 2px;
-  
-} 
+}
 
 .toDoItems,
 .hibitsItems {
@@ -507,36 +505,27 @@ nav a:hover {
   color: var(--color-brand-primary-medium);
 }
 
-
-
-
-
 /*FIELDSET*/
 
-
-
-.categoryContainer{
+.categoryContainer {
   margin: 5px 15px;
   border: 1px solid #6f78ab;
-  border-radius:5px ;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 5px;
-  
 }
 
-
-#category-title{
+#category-title {
   font-size: 12px;
   background-color: #6f78ab;
   padding: 3px;
   border-radius: 5px;
   color: white;
   /* border: 1px solid blue; */
-  
 }
-.category-div{
+.category-div {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -545,16 +534,16 @@ nav a:hover {
   /* border: 1px solid red; */
 }
 
-.category-item{
+.category-item {
   text-align: center;
   /* border: 1px solid rgb(194, 14, 200); */
 }
 
-label{
+label {
   font-size: 12x;
 }
 
-.sortContainer{
+.sortContainer {
   border: 1px solid #6f78ab;
   border-radius: 5px;
   margin: 2px 15px;
@@ -565,12 +554,10 @@ label{
   height: 35px;
 }
 
-
 /* Todos-completed container*/
 
-.todos-completed-container{
-  border: 0.1px solid lightgray;/*just to check it */
+.todos-completed-container {
+  border: 0.1px solid lightgray; /*just to check it */
   border-radius: 5px;
   margin: 10px 15px;
-
 }

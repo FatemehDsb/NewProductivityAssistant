@@ -124,13 +124,13 @@ window.onload = () => {
     if (category == "General") {
       todoCategoryCover.innerHTML = `<div>CATEGORY: GENERAL</div> <div>${deadline}</div>`;
     } else if (category == "Shopping") {
-      todoCategoryCover.innerText = "CATEGORY: SHOPPING" + deadline;
+      todoCategoryCover.innerHTML = `<div>CATEGORY: SHOPPING</div> <div>${deadline}</div>`;
     } else if (category == "Health") {
-      todoCategoryCover.innerText = "CATEGORY: HEALTH" + deadline;
+      todoCategoryCover.innerHTML = `<div>CATEGORY: HEALTH</div> <div>${deadline}</div>`;
     } else if (category == "Home") {
-      todoCategoryCover.innerText = "CATEGORY: HOME" + deadline;
+      todoCategoryCover.innerHTML = `<div>CATEGORY: HOME</div> <div>${deadline}</div>`;
     } else if (category == "Work") {
-      todoCategoryCover.innerText = "CATEGORY: WORK" + deadline;
+      todoCategoryCover.innerHTML = `<div>CATEGORY: WORK</div> <div>${deadline}</div>`;
     }
 
     const todoInfo = document.createElement("div");
