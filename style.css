@@ -312,16 +312,18 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  width: 80%;
-  margin: 1em;
+  width: 90%;
+  margin: 0.9em;
 }
 
-.habit-card-cover-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 80%;
-  margin: 1em;
+.todo-category-cover{ /*Unfolded*/
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 0.8em;
+  overflow: hidden;
+  height: 20%;
+  align-items: center;
+  font-size: 0.8em;
 }
 
 .todo-card {
@@ -335,22 +337,20 @@ nav a:hover {
 }
 
 .todo-info {
-  border-radius: 0px 0px 8px 8px;
-  background-color: var(--color-brand-primary);
-  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color:#fcfbf0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 0.5em 1em;
+  width: 100%;
 }
 
 .completed-todo-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background-color: var(--color-gray-light);
+  background-color: #fcfbf0;
   width: 100%;
   padding: 0.5em 1em;
 }
@@ -362,27 +362,37 @@ nav a:hover {
   width: 100%;
   justify-content: space-between;
   font-size: 0.8rem;
-  color: white;
+  color: var(--color-brand-primary-medium);
+  align-self: flex-start;
 }
 
 .todo-title-info {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.todo-title-info button{
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 1.6em;
+  background-color: rgb(39, 140, 173);
+  margin-left: 0.2em; /*spacing between buttons */
 }
 
 .todo-btn {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
 .edit-btn,
 .delete-btn {
   border: none;
   border-radius: 5px;
-  margin: 0.5em;
-  padding: 0px;
-  background-color: rgba(0, 0, 0, 0.1);
+  height: 1.6em;  
+  background-color: rgb(39, 140, 173);
+  margin-left: 0.5em;
 }
 
 .todo-category-cover,
@@ -397,6 +407,14 @@ nav a:hover {
   height: 20%;
   align-items: center;
   font-size: 12px;
+}
+
+.habit-card-cover-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 1em;
 }
 
 .todo-category-cover {
