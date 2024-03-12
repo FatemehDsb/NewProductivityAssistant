@@ -6,8 +6,8 @@
   --color-brand-primary-light: #9ba9db;
   --color-brand-secondary-dark: #2f372e;
   --color-brand-secondary-medium: #637b61;
-  --color-brand-secondary-light: #9ba9db;
-  --color-brand-tertiary: #8b9d8a;
+  --color-brand-secondary-light: #8b9d8a;
+  --color-brand-tertiary: 
   --color-gray-light: #d6d6d6;
 }
 
@@ -15,15 +15,19 @@
   font-family: "Afacad", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
+
   font-style: normal;
 }
 
+/* Elements section starts here */
+
 body {
   width: 390px;
+  height: 1000px;
   margin: auto;
   padding: auto;
   box-sizing: border-box;
-  background-color: var(--color-brand-tertiary);
+  /* background-color: var(--color-brand-tertiary); */
 }
 
 h1,
@@ -34,6 +38,18 @@ h4 {
 button {
   width: 64px;
   border-radius: 8px;
+  border: 0px;
+  font-size: 16px;
+  margin: 5px;
+  padding: 4px 7px;
+  filter: drop-shadow(2px 4px 1px lightgray);
+
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 main {
@@ -41,8 +57,25 @@ main {
   background-color: white;
 }
 
+input {
+  border-radius: 5px;
+    border: 1px solid var(--color-brand-primary-light);
+    font-size: 13px;
+    padding: 2px;
+    margin: 10px;
+    filter: drop-shadow(2px 4px 1px lightgray);
+}
+
+/* Elements section ends here */
+
+#index-main {
+  width: 390px;
+  height: 1000px;
+  background-color: var(--color-brand-primary-light);
+}
+
 .container {
-  border: 1px solid rgb(59, 14, 132);
+  /* border: 1px solid rgb(59, 14, 132); */
   width: 390px;
   margin: auto;
   padding: auto;
@@ -51,24 +84,37 @@ main {
 }
 
 .signInContainer {
-  background-color: darkgray;
   padding: 30px;
+  margin: 0.5em;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  background-color: var(--color-brand-primary);
-  border-radius: 20px;
+  background-color: white;
+  border-radius: 5px;
+  filter: drop-shadow(2px 4px 4px var(--color-brand-primary-medium));
 }
 
-.registerContainer {
+#registerBtn {
+  background-color: var(--color-brand-secondary-light);
+  color:white;
+  display: inline;
+}
+
+#loginBtn {
+  background-color: var(--color-brand-primary-extra-dark);
+  color: white;
+  display: inline;
+}
+/* .registerContainer {
   background-color: bisque;
   padding: 10px;
+  margin: 0.5em;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
-}
+} */
 
 #todosTopHeader {
   background-color: var(--color-brand-primary-dark);

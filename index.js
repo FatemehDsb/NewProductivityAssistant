@@ -180,7 +180,7 @@ window.onload = () => {
     statusElement.checked = statusValue;
     // statusElement.addEventListener("change", () => { //Fatemehs
 
-    statusElement.addEventListener("click", () => {
+    statusElement?.addEventListener("click", () => {
       //Siris
       // toDoItem.statusValue = statusElement.checked; //Fatemehs
 
@@ -217,9 +217,9 @@ window.onload = () => {
     // Checking if saved toDoItem has statusValue == true or false
     // and putting it in "My todos" or "Completed todos" because of that
     if (toDoItem.statusValue === false) {
-      todosContainer.appendChild(todoCard);
+      todosContainer?.appendChild(todoCard);
     } else {
-      completedTodosContainer.appendChild(todoCard);
+      completedTodosContainer?.appendChild(todoCard);
       todoInfo.classList.add("completed-todo-info");
     }
 
