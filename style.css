@@ -664,11 +664,8 @@ nav a:hover {
 
 .categoryContainer {
   margin: 5px 15px;
-  border: 1px solid #6f78ab;
+  border: 1px solid #1f2122;
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   padding: 5px;
 }
 
@@ -682,20 +679,26 @@ nav a:hover {
 }
 .category-div {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+text-align: center;
+align-items: center;
+margin: auto;
+padding: auto;
+  justify-content: space-around;
   text-align: center;
-  gap: 3px;
   /* border: 1px solid red; */
 }
 
+
 .category-item {
-  text-align: center;
+ 
   /* border: 1px solid rgb(194, 14, 200); */
+  .category-icon{
+    height: 30px;
+  }
 }
 
 label {
-  font-size: 12x;
+  font-size: 12px;
 }
 
 .sortContainer {
