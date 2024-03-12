@@ -253,7 +253,7 @@ window.onload = () => {
 
       //
       titleInput.value = editHabitItem.title;
-      const editStreakInput = document.getElementById("editStreakInput"); // Ensure you have this line if you haven't already defined editStreakInput elsewhere
+      const editStreakInput = document.getElementById("editStreakInput"); 
       editStreakInput.value = editHabitItem.streak;
 
 
@@ -300,6 +300,7 @@ window.onload = () => {
   // Btn onclick funktion
   let openModal = () => {
     modal.style.display = "block";
+    
   };
 
   // When the user clicks the button, open the modal
@@ -346,6 +347,11 @@ window.onload = () => {
   };
 
   addHabitBtn?.addEventListener("click", () => {
+    if(modal){
+
+      const editStreakInput = document.getElementById("editStreakInput");
+      editStreakInput.style.display="none";
+    }
     let title = titleInput.value;
     let priority = priorityInput ? priorityInput.value : "None"; // Default category if none selected
 
