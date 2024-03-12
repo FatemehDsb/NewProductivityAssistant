@@ -13,7 +13,7 @@
 * {
   font-family: "Afacad", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 600;
+  font-weight: 400;
   font-style: normal;
 }
 
@@ -41,6 +41,7 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 50px;
 }
 
 main {
@@ -54,6 +55,7 @@ input {
   font-size: 13px;
   padding: 2px;
   filter: drop-shadow(2px 4px 1px lightgray);
+  /* margin: 5px; */
 }
 
 h1 {
@@ -64,7 +66,7 @@ h1 {
 /* Login/Register page starts here */
 
 .login-input {
-  margin: 10px 0px;
+  margin: 5px 0px;
 }
 
 #index-main {
@@ -93,13 +95,14 @@ h1 {
   filter: drop-shadow(2px 4px 4px var(--color-brand-primary-medium));
   font-size: 14px;
   color: var(--color-brand-primary-extra-dark);
+  font-weight: 600;
 }
 
 #buttonContainer {
   display: flex;
   align-items: start;
   gap: 10px;
-  padding: 20px 0px 10px 0px;
+  padding: 20px 0px 8px 0px;
 }
 
 #registerBtn {
@@ -206,6 +209,7 @@ h1 {
   z-index: 1; /* Sit on top */
   padding-top: 100px; /* Location of the box */
   left: 0;
+  right: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
@@ -220,7 +224,7 @@ h1 {
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 50%;
+  width: 320px;
 }
 
 /* The Close Button */
@@ -314,6 +318,7 @@ nav a:hover {
 #completedTodosContainer {
   border-radius: 10px;
   margin: 0.5em;
+  margin-bottom: 96px;
   padding: 0.5em;
   background-color: var(--color-brand-secondary-light);
 }
@@ -461,7 +466,7 @@ nav a:hover {
   background-color: var(--color-brand-tertiary);
 }
 
-.habit-card{
+.habit-card {
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -476,7 +481,7 @@ nav a:hover {
   max-width: 50%;
 }
 
-.habit-title-info{
+.habit-title-info {
   display: flex;
   flex-direction: column;
   min-width: 80%;
@@ -491,7 +496,7 @@ nav a:hover {
   margin-top: 0.5em;
 }
 
-.habit-details input{
+.habit-details input {
   display: flex;
   background-color: red;
 }
@@ -728,9 +733,9 @@ label {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-#priorityFilterDropdown{
-  padding: 5px 6px;
-}
+  #priorityFilterDropdown {
+    padding: 5px 6px;
+  }
 }
 .sortContainerHabit {
   border: 1px solid #090c7a;
@@ -740,8 +745,7 @@ label {
   justify-content: space-around;
   flex-grow: 2;
   #prioritySortDropdown,
-  #streakSortDropdown{
+  #streakSortDropdown {
     padding: 5px 15px;
-  } 
-
+  }
 }
