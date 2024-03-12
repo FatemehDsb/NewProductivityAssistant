@@ -120,7 +120,7 @@ main {
 }
 
 .fade-quote {
-  opacity: 0;
+  opacity: 80%;
 }
 
 #todosTab {
@@ -254,7 +254,7 @@ nav a:hover {
   border-radius: 10px;
   margin: 0.5em;
   padding: 0.5em;
-  background-color: lightgray;
+  background-color: var(--color-brand-secondary-light)
 }
 
 .todo-card-cover-container,
@@ -268,7 +268,7 @@ nav a:hover {
 
 .todo-card {
   border-radius: 10px;
-  padding: 0.5em;
+  padding-right: 1em;
   margin: 0.5em;
   display: flex;
   align-items: center;
@@ -287,10 +287,14 @@ nav a:hover {
 }
 
 .completed-todo-info {
-  border-radius: 20px;
-  background-color: var(--color-brand-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: var(--color-gray-light);
   width: 100%;
-  padding: 10px 20px;
+  padding: 0.5em 1em;
 }
 
 .todo-details {
