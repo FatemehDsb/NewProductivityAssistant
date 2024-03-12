@@ -406,7 +406,6 @@ nav a:hover {
   margin-left: 0.5em;
 }
 
-.todo-category-cover,
 .habit-priority-high-cover,
 .habit-priority-medium-cover,
 .habit-priority-low-cover,
@@ -438,9 +437,12 @@ nav a:hover {
 }
 
 #habitContainer {
-  background: #637b61;
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
+  margin: 0.5em;
+  padding: 0.5em;
+  background: var(--color-brand-secondary-light);
 }
 
 .habit-priority-high-cover {
@@ -459,15 +461,45 @@ nav a:hover {
   background-color: var(--color-brand-tertiary);
 }
 
-.habit-details {
-  background: white;
+.habit-card{
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
+  border-radius: 10px;
+  background: #eeeeee;
+  margin: 0.2em;
+}
+
+.habit-btn {
+  display: flex;
+  width: 50%;
+  margin-left: -0.5rem;
+  max-width: 50%;
+}
+
+.habit-title-info{
+  display: flex;
+  flex-direction: column;
+  min-width: 80%;
+}
+
+.habit-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 20%;
+  padding: 0.5em;
+  margin-top: 0.5em;
+}
+
+.habit-details input{
+  display: flex;
+  background-color: red;
 }
 
 .habit-details p {
+  display: flex;
   font-size: 1.2em;
-  font-weight: 600;
+  margin: 0.2em;
   border-radius: 50%;
   padding: 0.5em;
   background: rgb(241, 235, 235);
@@ -476,8 +508,8 @@ nav a:hover {
 .habit-info {
   border-radius: 0px 0px 8px 8px;
   background-color: var(--color-brand-tertiary);
-  padding: 1em;
-  margin: 1em;
+  padding: 0.5em;
+  margin: 0.5em;
   margin-top: 0;
   display: flex;
   flex-direction: column;
