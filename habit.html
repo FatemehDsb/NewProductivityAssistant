@@ -78,58 +78,47 @@
 
       <!---------MODAL ENDS-->
 
+      <div class="filterSortMainContainer">
+        
+        
       <!---------Filter------>
-      <div class="filterContainer">
-        <fieldset>
-          <legend>Filtering</legend>
-
+        <fieldset class="filterSortContainerHabit">
+          <legend class="filter-sort-title">Filter By</legend>
           <div id="priorityFilterContainer">
-            <label for="priorityFilterDropdown">Filtered by Priority:</label>
             <select id="priorityFilterDropdown">
               <option value="" selected disabled>Priority</option>
-
               <option value="high">High</option>
               <option value="medium">Medium</option>
               <option value="low">Low</option>
-              <!---->
-              <!-- **************************reset-priority-filter--03-06-->
               <option value="Resetfiltering">Reset</option>
             </select>
           </div>
         </fieldset>
-      </div>
       <!----------Filter ends------------->
 
       <!----------Sorting---------->
-      <div class="sortContainer">
-        <fieldset>
-          <legend id="sort">Sortera</legend>
+      
+        <fieldset class="filterSortContainerHabit">
+          <legend class="filter-sort-title">Sort By</legend>
           <div id="prioritySortContainer">
-            <label for="prioritySortDropdown">Sort by Priority:</label>
             <select id="prioritySortDropdown">
-              <!--    03-05------Fatemeh -->
-              <option value="" selected disabled>Sorted By Priority</option>
-              <!--**********Fatemeh-changed value name *******************-->
-              <option value="lowToHigh">Lowest to Highest</option>
-              <option value="highToLow">Highest to Lowest</option>
-              <!-- **************************reset-priority-sorting-03-06-->
+              <option value="" selected disabled> Priority</option>
+              <option value="lowToHigh">Lowest</option>
+              <option value="highToLow">Highest</option>
               <option value="resetSortingPriority">Reset</option>
             </select>
           </div>
           <div id="streakSortContainer">
-            <label for="streakSortDropdown">Sort by Streak:</label>
             <select id="streakSortDropdown">
-              <!--    03-05------Fatemeh -->
-              <option value="" selected disabled>Sorted By Streak</option>
-              <!--**********Fatemeh-changed value name *******************-->
-              <option value="lowToHigh">Lowest to Highest</option>
-              <option value="highToLow">Highest to Lowest</option>
-              <!-- **************************reset-streak-sorting-03-06-->
+              <option value="" selected disabled> Streak</option>
+              <option value="lowToHigh">Lowest</option>
+              <option value="highToLow">Highest</option>
               <option value="resetSortingStreak">Reset</option>
             </select>
           </div>
         </fieldset>
       </div>
+
       <!-----------------Sorting ends-------------->
 
       <h1>Your Habits</h1>
