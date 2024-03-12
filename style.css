@@ -560,7 +560,8 @@ label {
 
 /* Todos-completed container*/
 
-.todos-completed-container {
+.todos-completed-container,
+.habit-container{
   border: 0.1px solid lightgray; /*just to check it */
   border-radius: 5px;
   margin: 10px 15px;
