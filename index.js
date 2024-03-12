@@ -217,7 +217,7 @@ window.onload = () => {
     // Checking if saved toDoItem has statusValue == true or false
     // and putting it in "My todos" or "Completed todos" because of that
     if (toDoItem.statusValue === false) {
-      todosContainer?.appendChild(todoCard);
+      todosContainer?.prepend(todoCard);
     } else {
       completedTodosContainer?.appendChild(todoCard);
       todoInfo.classList.add("completed-todo-info");

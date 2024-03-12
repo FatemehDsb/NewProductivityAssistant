@@ -155,112 +155,123 @@
         </div>
       </div>
 
-     <!---------GATEGORY-Filter-FIELD------>
-    
+      <!---------GATEGORY-Filter-FIELD------>
+
       <fieldset class="categoryContainer">
         <legend class="filter-sort-title">Filter by Category</legend>
-          <div class="category-div">
-            <div class="category-item">
-              <label for="selectAll">All</label>
-              <input
+        <div class="category-div">
+          <div class="category-item">
+            <label for="selectAll">All</label>
+            <input
               type="checkbox"
               name="filterCategoryAll"
               id="selectAll"
               value="All"
-              />
-            </div>
-            <div class="category-item">
-              <label for="general">General</label>
-              <input
+            />
+          </div>
+          <div class="category-item">
+            <label for="general">General</label>
+            <input
               type="checkbox"
               name="filterCategory"
               id="general"
               value="General"
-              />
-            </div>
-            <div class="category-item">
-              <label for="shopping"><img src="images/shopping-cart-349544_1280.png" width="30px"></label>
-              <input
+            />
+          </div>
+          <div class="category-item">
+            <label for="shopping"
+              ><img src="images/shopping-cart-349544_1280.png" width="30px"
+            /></label>
+            <input
               type="checkbox"
               name="filterCategory"
               id="shopping"
               value="Shopping"
-              />
-            </div>
-            <div class="category-item">
-              <label for="health"><img src="images/home-icon-4.svg" width="30px"></label>
-              <input
+            />
+          </div>
+          <div class="category-item">
+            <label for="health"
+              ><img src="images/home-icon-4.svg" width="30px"
+            /></label>
+            <input
               type="checkbox"
               name="filterCategory"
               id="health"
               value="Health"
-              />
-            </div>
-            <div class="category-item">
-              <label for="home"><img src="images/health-4.svg" width="30px"></label>
-              <input type="checkbox" name="filterCategory" id="home" value="Home" />
-            </div>
-            <div class="category-item">
-              <label for="work"><img src="images/work-47.svg" width="30px"></label>
-              <input type="checkbox" name="filterCategory" id="work" value="Work" />
-            </div>
+            />
+          </div>
+          <div class="category-item">
+            <label for="home"
+              ><img src="images/health-4.svg" width="30px"
+            /></label>
+            <input
+              type="checkbox"
+              name="filterCategory"
+              id="home"
+              value="Home"
+            />
+          </div>
+          <div class="category-item">
+            <label for="work"
+              ><img src="images/work-47.svg" width="30px"
+            /></label>
+            <input
+              type="checkbox"
+              name="filterCategory"
+              id="work"
+              value="Work"
+            />
+          </div>
+        </div>
+      </fieldset>
+
+      <!---------- GATEGORY-Filter-END------------->
+
+      <!----------Sorting---------->
+      <div>
+        <fieldset class="sortContainer">
+          <legend class="filter-sort-title">Sort By</legend>
+          <div id="deadlineContainer">
+            <select id="deadlineSortDropdown">
+              <option value="" selected disabled>Deadline</option>
+              <option value="asc">Oldest to Newest</option>
+              <option value="desc">Newest to Oldest</option>
+              <option value="resetSortingPriority">Reset</option>
+            </select>
+          </div>
+
+          <div id="estimatedTimeContainer">
+            <select id="estimatedTimeSortDropdown">
+              <option value="" selected disabled>Estimated Time</option>
+              <option value="asc">Lowest to Highest</option>
+              <option value="desc">Highest to lowest</option>
+              <option value="resetSortingPriority">Reset</option>
+            </select>
           </div>
         </fieldset>
-        
-  
-    <!---------- GATEGORY-Filter-END------------->
-    
-    
-     <!----------Sorting---------->
-     <div >
-      <fieldset class="sortContainer">
-        <legend class="filter-sort-title">Sort By</legend>
-        <div id="deadlineContainer">
-          <select id="deadlineSortDropdown">
-            <option value="" selected disabled> Deadline</option>
-            <option value="asc">Oldest to Newest</option>
-            <option value="desc">Newest to Oldest</option>
-            <option value="resetSortingPriority">Reset</option>
-          </select>
-        </div>
-
-        <div id="estimatedTimeContainer">
-          <select id="estimatedTimeSortDropdown">
-            <option value="" selected disabled> Estimated Time</option>
-            <option value="asc">Lowest to Highest</option>
-            <option value="desc">Highest to lowest</option>
-            <option value="resetSortingPriority">Reset</option>
-          </select>
-        </div>
-
-      </fieldset>
-    </div>
-
-    <div class="todos-completed-container">
-
-      
-      <h1 id="todosContainer-title">Your Todos</h1>
-      <div id="todosContainer">
-        
       </div>
-      <div id="todoDiv"></div>
-      <!-- <br />
+
+      <div class="todos-completed-container">
+        <h1 id="todosContainer-title">Your Todos</h1>
+        <div id="todosContainer"></div>
+        <div id="todoDiv"></div>
+        <!-- <br />
         <br /> -->
         <div class="completed-todos-heading">
-        <h2 class="completed-todos-h2">Completed Todos</h2>
-        <i class="fa-solid fa-caret-right fa-2xl" id="arrowRight"></i
+          <h2 class="completed-todos-h2">Completed Todos</h2>
+          <i class="fa-solid fa-caret-right fa-2xl" id="arrowRight"></i
           ><i class="fa-solid fa-caret-down fa-2xl" id="arrowDown"></i>
         </div>
-        
+
         <div id="completedTodosContainer"></div>
-    </div>
-    
-        <div id="footer" class="todo-footer">
-          <i class="fa fa-duotone fa-stopwatch fa-2x" id="openPomodoroBtn"></i>
-          
-          <i class="fa fa-duotone fa-circle-plus fa-4x" id="openModalBtn"></i>
-          <i class="fa fa-duotone fa-calendar fa-2x"></i>
-        </div>
+      </div>
+
+      <div id="footer" class="todo-footer">
+        <i class="fa fa-duotone fa-stopwatch fa-2x" id="openPomodoroBtn"></i>
+
+        <i class="fa fa-duotone fa-circle-plus fa-4x" id="openModalBtn"></i>
+        <i class="fa fa-duotone fa-calendar fa-2x"></i>
+      </div>
     </main>
   </body>
 </html>
