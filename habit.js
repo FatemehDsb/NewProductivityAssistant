@@ -25,6 +25,7 @@ window.onload = () => {
       editedHabitItem.title = titleInput.value;
       const editStreakInput = document.getElementById("editStreakInput"); 
       editedHabitItem.streak=editStreakInput.value;
+      editedHabitItem.priority=priorityInput.value
 
       //
       localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -241,6 +242,7 @@ window.onload = () => {
        modal.style.display = "block";
        addHabitBtn.style.display = "none";
        saveBtn.style.display = "block";
+      //  modalSpan.style.display ="none";
  
        //
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -258,13 +260,18 @@ window.onload = () => {
      
       saveBtn.onclick = () => {
         saveHabitChanges(editHabitItem.itemId);
+
         modal.style.display = "none";
         addHabitBtn.style.display="block";
         saveBtn.style.display="none";
-        
 
-        titleInput.value = "";
+      
+          priorityInput.value ="0";
+
+       
         editStreakInput.value = "";
+        titleInput.value="";
+
 
       };
     });
@@ -305,6 +312,18 @@ window.onload = () => {
   if (modalSpan) {
     modalSpan.onclick = function () {
       modal.style.display = "none";
+
+
+      //************* */
+        addHabitBtn.style.display = "block";
+        saveBtn.style.display = "none";
+        modal.style.display = "none";
+        addHabitBtn.style.display="block";
+        priorityInput.value ="0";
+        editStreakInput.value = "";
+        titleInput.value="";
+
+      //************************** */
     };
   }
 
@@ -312,6 +331,17 @@ window.onload = () => {
   window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
+
+       //************* */
+       addHabitBtn.style.display = "block";
+       saveBtn.style.display = "none";
+       modal.style.display = "none";
+       addHabitBtn.style.display="block";
+       priorityInput.value ="0";
+       editStreakInput.value = "";
+       titleInput.value="";
+
+     //************************** */
     }
   };
 
