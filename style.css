@@ -690,11 +690,26 @@ label {
 }
 /*Habit-sida*/
 
-.filterSortContainerHabit {
+.filterContainerHabit {
   border: 1px solid #090c7a;
   border-radius: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+#priorityFilterDropdown{
+  padding: 5px 6px;
+}
+}
+.sortContainerHabit {
+  border: 1px solid #090c7a;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-grow: 2;
+  #prioritySortDropdown,
+  #streakSortDropdown{
+    padding: 5px 15px;
+  } 
+
 }
