@@ -409,15 +409,17 @@ window.onload = () => {
 
   let priorityFilter = document.getElementById("priorityFilterDropdown");
   priorityFilter?.addEventListener("change", () => {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     let selectedPriority = priorityFilter.value;
-    /*************REFRESH PRIORITY filter******03-06  */
+    
     if (selectedPriority === "Resetfiltering") {
-      //render all of habits as normal
+      
       if (
         currentUser &&
         currentUser.habitList &&
         currentUser.habitList.length > 0
-      ) {
+      )
+       {
         habitContainer.innerHTML = "";
         currentUser.habitList.forEach((habitItem) => {
           renderHabitCard(habitItem);
@@ -428,7 +430,6 @@ window.onload = () => {
         return habitItem.priority === selectedPriority;
       });
 
-      const habitContainer = document.getElementById("habitContainer");
       habitContainer.innerHTML = "";
 
       filteredHabits.forEach((habitItem) => {
@@ -445,29 +446,29 @@ window.onload = () => {
   const priorityOrder = ["low", "medium", "high"];
   let prioritySortDropdown = document.getElementById("prioritySortDropdown");
 
+  
   const sortedHabitsByPriority = (sortOrder) => {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const sortedPriority = currentUser.habitList.slice().sort((a, b) => {
       let indexA = priorityOrder.indexOf(a.priority);
       let indexB = priorityOrder.indexOf(b.priority);
 
-      console.log("indexa" + indexA);
-
-      console.log("indexB" + indexB);
-
-      return sortOrder === "lowToHigh" ? indexA - indexB : indexB - indexA;
+      return sortOrder === "lowToHigh" ? indexB - indexA : indexA - indexB;
     });
 
     renderSortedPriority(sortedPriority);
   };
 
   const renderSortedPriority = (sortedPriority) => {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     habitContainer.innerHTML = "";
     sortedPriority.forEach((habitItem) => renderHabitCard(habitItem));
   };
 
   prioritySortDropdown?.addEventListener("change", () => {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const sortOrder = prioritySortDropdown.value;
-    /*************REFRESH PRIORITY sort******03-06  */
+
     if (sortOrder === "resetSortingPriority") {
       //render all of habits as normal
       if (
@@ -489,24 +490,28 @@ window.onload = () => {
   //streak
 
   const sortedHabitsByStreak = (order) => {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const sortedStreak = currentUser.habitList.slice().sort((a, b) => {
-      return order === "lowToHigh" ? a.streak - b.streak : b.streak - a.streak;
+      return order === "lowToHigh" ? b.streak - a.streak : a.streak - b.streak;
     });
     renderSortedStreak(sortedStreak);
   };
 
   const renderSortedStreak = (sortedStreak) => {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     habitContainer.innerHTML = "";
     sortedStreak.forEach((habitItem) => renderHabitCard(habitItem));
   };
-
+  
   let streakSortedDropdown = document.getElementById("streakSortDropdown");
-
+  
   streakSortedDropdown?.addEventListener("change", () => {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const sortOrder = streakSortedDropdown.value;
-    /*************REFRESH streak sort******03-06  */
+    
     if (sortOrder === "resetSortingStreak") {
-      //render all of habits as normal
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+ 
       if (
         currentUser &&
         currentUser.habitList &&
@@ -518,10 +523,9 @@ window.onload = () => {
         });
       }
     } else {
-      console.log(sortOrder);
-      sortedHabitsByPriority(sortOrder);
+      
+      sortedHabitsByStreak(sortOrder);
     }
 
-    sortedHabitsByStreak(sortOrder);
   });
 };

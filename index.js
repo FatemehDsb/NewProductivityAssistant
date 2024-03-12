@@ -554,6 +554,7 @@ window.onload = () => {
   //----------------SORTERING-------------------------------------
 
   const sortByDeadline = (order) => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const sortedTodos = currentUser.toDoList.slice().sort((a, b) => {
       const deadlineA = new Date(a.deadline);
       const deadlineB = new Date(b.deadline);
@@ -565,6 +566,7 @@ window.onload = () => {
   };
 
   const sortByEstimatedTime = (order) => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const sortedTodos = currentUser.toDoList.slice().sort((a, b) => {
       return order === "asc"
         ? a.estimatedTime - b.estimatedTime
@@ -576,6 +578,7 @@ window.onload = () => {
   };
 
   const renderSortedTodos = (sortedTodos) => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     todosContainer.innerHTML = "";
     completedTodosContainer.innerHTML = "";
     sortedTodos.forEach((todo) => renderToDoCard(todo));
@@ -583,17 +586,51 @@ window.onload = () => {
 
   const deadlineSortDropdown = document.getElementById("deadlineSortDropdown");
   deadlineSortDropdown?.addEventListener("change", () => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const order = deadlineSortDropdown.value;
+
+    if (order === "resetSortingPriority") {
+      
+      if (
+        currentUser &&
+        currentUser.toDoList &&
+        currentUser.toDoList.length > 0
+      )
+       {
+        toDoList.innerHTML = "";
+        currentUser.toDoList.forEach((todoItem) => {
+          renderToDoCard(todoItem);
+        });
+      }
+    } else {
     sortByDeadline(order, toDoList);
+    }
   });
 
   const estimatedTimeSortDropdown = document.getElementById(
     "estimatedTimeSortDropdown"
   );
   estimatedTimeSortDropdown?.addEventListener("change", () => {
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const order = estimatedTimeSortDropdown.value;
-    sortByEstimatedTime(order, toDoList);
+    if (order === "resetSortingPriority") {
+      
+      if (
+        currentUser &&
+        currentUser.toDoList &&
+        currentUser.toDoList.length > 0
+      )
+       {
+        toDoList.innerHTML = "";
+        currentUser.toDoList.forEach((todoItem) => {
+          renderToDoCard(todoItem);
+        });
+      }
+    } else {
+      sortByEstimatedTime(order, toDoList);
+    }
   });
+
 
   //----------------SORTERING-------------------------------------
 
