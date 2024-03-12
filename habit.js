@@ -347,11 +347,7 @@ window.onload = () => {
   };
 
   addHabitBtn?.addEventListener("click", () => {
-    if(modal){
 
-      const editStreakInput = document.getElementById("editStreakInput");
-      editStreakInput.style.display="none";
-    }
     let title = titleInput.value;
     let priority = priorityInput ? priorityInput.value : "None"; // Default category if none selected
 
