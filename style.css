@@ -521,7 +521,7 @@ nav a:hover {
   padding: 5px;
 }
 
-#category-title {
+.filter-sort-title{
   font-size: 12px;
   background-color: #6f78ab;
   padding: 3px;
@@ -560,8 +560,30 @@ label {
 
 /* Todos-completed container*/
 
-.todos-completed-container {
+.todos-completed-container,
+.habit-container{
   border: 0.1px solid lightgray; /*just to check it */
   border-radius: 5px;
   margin: 10px 15px;
+}
+
+
+
+.filterSortMainContainer{
+  display: flex;
+  
+  margin: 5px 15px;
+  justify-content: space-around;
+  align-items: center;
+
+}
+/*Habit-sida*/
+
+.filterSortContainerHabit{
+  border: 1px solid #090c7a;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
