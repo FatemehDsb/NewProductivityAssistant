@@ -341,9 +341,9 @@ window.onload = () => {
         quoteContainer.classList.add("fade-quote");
         setTimeout(() => {
           quoteContainer.style.display = "none";
-        }, 1000);
+        }, 500);
       }
-    }, 10000); //10 seconds
+    }, 8000); //10 seconds
   };
 
   // Modal begins here
