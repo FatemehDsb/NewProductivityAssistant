@@ -109,8 +109,12 @@ main {
   overflow: hidden;
   transition: opacity is ease;
   max-height: fit-content;
+  margin: 1.5em;
+  margin-bottom: 0.5rem;
 }
-
+#quote{
+  margin-bottom: 0;
+}
 #author {
   font-size: 0.8em;
   font-style: italic;
