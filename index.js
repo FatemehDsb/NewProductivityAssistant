@@ -34,6 +34,7 @@ window.onload = () => {
     }
   );
 
+  //Uppdatering
   //WEATHER ENDS
   const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
@@ -611,20 +612,18 @@ window.onload = () => {
     const order = deadlineSortDropdown.value;
 
     if (order === "resetSortingPriority") {
-      
       if (
         currentUser &&
         currentUser.toDoList &&
         currentUser.toDoList.length > 0
-      )
-       {
+      ) {
         toDoList.innerHTML = "";
         currentUser.toDoList.forEach((todoItem) => {
           renderToDoCard(todoItem);
         });
       }
     } else {
-    sortByDeadline(order, toDoList);
+      sortByDeadline(order, toDoList);
     }
   });
 
@@ -635,13 +634,11 @@ window.onload = () => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const order = estimatedTimeSortDropdown.value;
     if (order === "resetSortingPriority") {
-      
       if (
         currentUser &&
         currentUser.toDoList &&
         currentUser.toDoList.length > 0
-      )
-       {
+      ) {
         toDoList.innerHTML = "";
         currentUser.toDoList.forEach((todoItem) => {
           renderToDoCard(todoItem);
@@ -651,7 +648,6 @@ window.onload = () => {
       sortByEstimatedTime(order, toDoList);
     }
   });
-
 
   //----------------SORTERING-------------------------------------
 
