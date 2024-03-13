@@ -5,10 +5,11 @@
   --color-brand-primary-medium: #6f78ab;
   --color-brand-primary-light: #9ba9db;
   --color-brand-secondary-extra-dark: #2f372e;
-  --color-brand-secondary-dark: #2dae70;
+  --color-brand-secondary-dark: #105e38;
   --color-brand-secondary-medium: #2dae70;
-  --color-brand-secondary-light: #a3f7c5;
+  --color-brand-secondary-light: #bbeecf;
   --color-gray-light: #d6d6d6;
+  --color-gray-medium: #a3a3a3;
   --color-priority-red: #ff5b5b;
   --color-priority-yellow: #fff73f;
   --color-priority-green: #a1d4a6;
@@ -384,7 +385,7 @@ nav a:hover {
 
 .completed-todo-cover {
   /*Unfolded*/
-  background-color: var(--color-brand-primary-dark);
+  background-color: var(--color-gray-medium);
   color: white;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -496,6 +497,7 @@ nav a:hover {
   /* border-radius: 10px; */
   margin: 0.5em;
   padding: 0.5em;
+  padding-bottom: 64px;
   background: var(--color-brand-secondary-light);
 }
 
@@ -520,7 +522,8 @@ nav a:hover {
   flex-direction: column;
   border-radius: 10px;
   background: #eeeeee;
-  margin: 0.2em;
+  /* margin: 0.2em; */
+  margin: 1em;
 }
 
 .habit-btn {
@@ -702,10 +705,12 @@ nav a:hover {
 
 .todo-footer {
   background-color: var(--color-brand-primary-dark);
-  .fa-circle-plus,
   .fa-calendar,
   .fa-stopwatch {
     color: var(--color-brand-primary-medium);
+  }
+  .fa-circle-plus {
+    color: var(--color-brand-primary-light);
   }
 }
 
@@ -826,60 +831,55 @@ label {
 }
 
 /*MODAL*/
-#addTodoBtn, 
+#addTodoBtn,
 #saveTodoBtn,
 #addHabitBtn,
-#saveHabitBtn{
-  width: 100px; 
+#saveHabitBtn {
+  width: 100px;
   padding: 10px;
   margin-top: 10px;
-
- 
 }
 
-.modal-details{
+.modal-details {
   display: flex;
   flex-direction: column;
   gap: 10px;
   /* justify-content: space-around; */
   /* align-items: center; */
 }
-.modal-item{
+.modal-item {
   /* border: 1px solid rgb(186, 21, 21); */
   display: flex;
   /* justify-content: space-around; */
   gap: 30px;
 }
 #modalCategoryFieldset,
-#description-input{
+#description-input {
   margin: 5px 1px;
   border-radius: 5px;
   border: 1px solid #6f78ab;
-  
 }
-#estimatedTimeHours, 
-#estimatedTimeMinutes{
+#estimatedTimeHours,
+#estimatedTimeMinutes {
   width: 50px;
 }
-#editStreakInput{
+#editStreakInput {
   width: 50px;
   padding: 4px;
 }
-#input-title{
+#input-title {
   width: 150px;
   padding: 4px;
 }
-#priorityInput{
+#priorityInput {
   border: 1px solid #6f78ab;
   border-radius: 5px;
   padding: 4px;
-  
 }
 #habitTitle,
-#todoTitle{
+#todoTitle {
   font-size: 15px;
   font-weight: bold;
-  
 }
 
 /*CALENDAR CSS*/
@@ -891,17 +891,17 @@ label {
   background: #bdd7f3;
 }
 
-#eventForm{
+#eventForm {
   display: flex;
   flex-direction: column;
   margin: 2rem;
 }
 
-#eventForm label{
+#eventForm label {
   margin: 0.2rem;
 }
 
-#eventForm input{
+#eventForm input {
   width: 100%;
   padding: 0.5rem;
   border: none;
@@ -909,7 +909,7 @@ label {
   font-size: 1rem;
 }
 
-#submit{
+#submit {
   padding: 0.5rem 1rem;
   margin: 0.5rem;
   border: none;
@@ -927,7 +927,7 @@ label {
   flex-direction: column;
 }
 
-li{
+li {
   display: flex;
   flex-direction: column;
   padding: 0;
