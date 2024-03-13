@@ -14,6 +14,27 @@ window.onload = () => {
     "completedTodosContainer"
   );
 
+  //WEATHER STARTS
+
+  let getWeather = async (lat, lon, timezone) => {
+    return axios
+      .get("https://api.open-meteo.com/v1/forecast", {
+        params: { latitude: lat, longitude: lon, timezone },
+      })
+      .then(({ data }) => {
+        return {
+          current: parseCurrentWeather(data),
+        };
+      });
+  };
+
+  getWeather(10, 10, Intl.DateTimeFormat().resolvedOptions().timeZone).then(
+    (res) => {
+      console.log(res.data);
+    }
+  );
+
+  //WEATHER ENDS
   const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
   let titleInput = document.getElementById("input-title");
@@ -375,7 +396,7 @@ window.onload = () => {
       addTodoBtn.style.display = "block";
       saveBtn.style.display = "none";
       modal.style.display = "none";
-  
+
       const checkedCategoryInput = document.querySelector(
         'input[name="category"]:checked'
       );
@@ -383,16 +404,16 @@ window.onload = () => {
         checkedCategoryInput.checked = false;
       }
       titleInput.value = "";
-        deadlineInput.value = "";
-        descriptionInput.value = "";
-        todoStatusInput.checked = "";
-        document.getElementById("estimatedTimeHours").value = "";
-        document.getElementById("estimatedTimeMinutes").value = "";
-        modal.style.display = "none";
-        addTodoBtn.style.display = "block";
-        saveBtn.style.display = "none";
+      deadlineInput.value = "";
+      descriptionInput.value = "";
+      todoStatusInput.checked = "";
+      document.getElementById("estimatedTimeHours").value = "";
+      document.getElementById("estimatedTimeMinutes").value = "";
+      modal.style.display = "none";
+      addTodoBtn.style.display = "block";
+      saveBtn.style.display = "none";
 
-    //************************** */
+      //************************** */
     };
   }
 
@@ -405,7 +426,7 @@ window.onload = () => {
       addTodoBtn.style.display = "block";
       saveBtn.style.display = "none";
       modal.style.display = "none";
-  
+
       const checkedCategoryInput = document.querySelector(
         'input[name="category"]:checked'
       );
@@ -413,16 +434,16 @@ window.onload = () => {
         checkedCategoryInput.checked = false;
       }
       titleInput.value = "";
-        deadlineInput.value = "";
-        descriptionInput.value = "";
-        todoStatusInput.checked = "";
-        document.getElementById("estimatedTimeHours").value = "";
-        document.getElementById("estimatedTimeMinutes").value = "";
-        modal.style.display = "none";
-        addTodoBtn.style.display = "block";
-        saveBtn.style.display = "none";
+      deadlineInput.value = "";
+      descriptionInput.value = "";
+      todoStatusInput.checked = "";
+      document.getElementById("estimatedTimeHours").value = "";
+      document.getElementById("estimatedTimeMinutes").value = "";
+      modal.style.display = "none";
+      addTodoBtn.style.display = "block";
+      saveBtn.style.display = "none";
 
-    //************************** */
+      //************************** */
     }
   };
 
