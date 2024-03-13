@@ -47,17 +47,25 @@
 
       <!---------Pomodoro MODAL STARTS-------------------------------------->
       <!-- <button id="openPomodoroBtn">Open Pomodoro</button> -->
-      <div id="pomodoroModal" class="pomodoro-modal">
+      <div id="pomodoroModal" >
         <div class="pomodoro-modal-content">
           <span class="pomodoro-close">&times;</span>
           <div class="pomodoro-modal-details">
             <div class="timer-display">
               <input type="text" id="timerTime" value="25" />:00
             </div>
-            <div class="timer-buttons">
-              <button class="timer-start">Start</button>
-              <button class="timer-pause">Pause</button>
-              <button class="timer-stop">Stop</button>
+          <div class="timer-buttons">
+           <div>
+             <button class="timer-start">Start</button>
+             <button class="timer-pause">Pause</button>
+             <button class="timer-stop">Stop</button>
+          </div>  
+          <div>
+            <button class="timer-work">Work</button>
+            <button class="timer-shortBreak">Short Break</button>
+            <button class="timer-longBreak"> Long Break</button>
+          </div>
+
             </div>
           </div>
         </div>
