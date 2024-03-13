@@ -177,6 +177,11 @@ fieldset {
   }
 }
 
+.weather-icon {
+  width: 20px;
+  fill: #fff;
+}
+
 .top-header {
   width: 390px;
   height: 24px;
@@ -646,6 +651,10 @@ justify-content: space-between;
 
 .hide-element {
   display: none;
+}
+
+.show-element {
+  display: inline-block;
 }
 
 /* End of Arrows to display Completed todos or not*/
