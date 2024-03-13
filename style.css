@@ -703,7 +703,7 @@ padding: auto;
  
   /* border: 1px solid rgb(194, 14, 200); */
   .category-icon{
-    height: 30px;
+    width: 30px;
   }
 }
 
