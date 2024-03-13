@@ -863,8 +863,9 @@ label {
 #estimatedTimeMinutes {
   width: 50px;
 }
-#editStreakInput {
-  width: 50px;
+
+#editStreakInput{
+  width: 60px;
   padding: 4px;
 }
 #input-title {
