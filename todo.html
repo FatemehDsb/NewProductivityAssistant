@@ -19,7 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <main class="container">
+    <main class="container" id="todoMain">
       <div id="todosTopHeader" class="top-header">
         <div id="topHeaderLeft">
           <i class="fa fa-duotone fa-user fa-xl"></i>
@@ -173,7 +173,9 @@
       <!---------GATEGORY-Filter-FIELD------>
 
       <fieldset class="categoryContainer">
-        <legend class="filter-sort-title">Filter by Category</legend>
+        <legend class="filter-sort-title todo-filter-sort-title">
+          Filter by Category
+        </legend>
         <div class="category-div">
           <div class="category-item">
             <label for="selectAll">All</label>
@@ -195,7 +197,9 @@
           </div>
           <div class="category-item">
             <label for="shopping"
-              ><img src="images/shopping-cart-349544_1280.png" class="category-icon"
+              ><img
+                src="images/shopping-cart-349544_1280.png"
+                class="category-icon"
             /></label>
             <input
               type="checkbox"
@@ -246,7 +250,9 @@
       <!----------Sorting---------->
       <div>
         <fieldset class="sortContainer">
-          <legend class="filter-sort-title">Sort By</legend>
+          <legend class="filter-sort-title todo-filter-sort-title">
+            Sort By
+          </legend>
           <div id="deadlineContainer">
             <select id="deadlineSortDropdown">
               <option value="" selected disabled>Deadline</option>
