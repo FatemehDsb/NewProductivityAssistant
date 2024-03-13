@@ -19,7 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <main class="container">
+    <main class="container" id="habitMain">
       <div id="habitsTopHeader" class="top-header">
         <div id="topHeaderLeft">
           <i class="fa fa-duotone fa-user fa-xl"></i>
@@ -98,7 +98,9 @@
       <div class="filterSortMainContainer">
         <!---------Filter  ------>
         <fieldset class="filterContainerHabit">
-          <legend class="filter-sort-title">Filter By</legend>
+          <legend class="filter-sort-title habit-filter-sort-title">
+            Filter By
+          </legend>
           <div id="priorityFilterContainer">
             <select id="priorityFilterDropdown">
               <option value="" selected disabled>Priority</option>
@@ -113,7 +115,9 @@
 
         <!----------Sorting---------->
         <fieldset class="sortContainerHabit">
-          <legend class="filter-sort-title">Sort By</legend>
+          <legend class="filter-sort-title habit-filter-sort-title">
+            Sort By
+          </legend>
           <div id="prioritySortContainer">
             <select id="prioritySortDropdown">
               <option value="" selected disabled>Priority</option>
