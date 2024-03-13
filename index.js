@@ -303,6 +303,10 @@ window.onload = async () => {
   };
 
   // Api greeting
+
+  const greeting=document.getElementById("greeting");
+  let greetingContainer=document.getElementById("greeting-container")
+  
   let quoteParagraph = document.getElementById("quote");
   let authorParagraph = document.getElementById("author");
 
@@ -318,7 +322,8 @@ window.onload = async () => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const userName = currentUser ? currentUser.newUsername : "Guest";
 
-    quoteParagraph.innerText = `Hello, ${userName}! \n${finalQuote}`;
+    greeting.innerText= `Hello, ${userName}!`;
+    quoteParagraph.innerText = `${finalQuote}`;
     authorParagraph.innerText = " - " + author;
 
     //Set timeout and remove quoteContainer after 30 sec
@@ -327,6 +332,8 @@ window.onload = async () => {
         quoteContainer.classList.add("fade-quote");
         setTimeout(() => {
           quoteContainer.style.display = "none";
+          greetingContainer.style.display="none";
+          
         }, 500);
       }
     }, 8000); //10 seconds

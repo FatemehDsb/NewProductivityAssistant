@@ -210,10 +210,21 @@ fieldset {
   max-height: fit-content;
   margin: 1.5em;
   margin-bottom: 0.5rem;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.421);
 }
 #quote {
   margin-bottom: 0;
+
+}
+#greeting{
+margin-top: 30px;
+padding-top: 10px;
+text-align: center;
+font-size: 20px;
+font-weight: bold;
+
+
+ 
 }
 #author {
   font-size: 0.8em;
@@ -347,21 +358,25 @@ nav a:hover {
   height: 400px;
 }
 
-/* Sharlins del. TEST! */
+/* Sharlins del TEST FÖR GITTT*/
 
 #todosContainer {
   border-radius: 10px;
   margin: 0.5em;
   padding: 0.5em;
+  margin-bottom: auto;
   background-color: var(--color-brand-primary-light);
 }
 
 #completedTodosContainer {
   border-radius: 10px;
   margin: 0.5em;
-  margin-bottom: 200px;
+  /* margin-bottom: 200px;*/
+  margin-bottom: auto;
   padding: 0.5em;
-  padding-bottom: 96px;
+  /*padding-bottom: 96px;*/
+  padding-bottom: auto;
+  background-color: var(--color-brand-primary-light);
 }
 
 .completed-todos-h2 {
@@ -492,6 +507,7 @@ nav a:hover {
   font-size: 0.8em;
   font-weight: 500;
   color: var(--color-brand-secondary-extra-dark);
+
 }
 
 .habit-card-cover-container {
@@ -500,9 +516,11 @@ nav a:hover {
   flex-wrap: wrap;
   width: 80%;
   margin: 1em;
+  border: 1px solid red;
 }
 
 #habitContainer {
+  
   display: flex;
   flex-direction: column;
   /* border-radius: 10px; */
@@ -528,80 +546,91 @@ nav a:hover {
   background-color: var(--color-gray-light);
 }
 
+
 .habit-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border-radius: 10px;
-  background: #eeeeee;
-  /* margin: 0.2em; */
+  /* background: #eeeeee; */
   margin: 1em;
   filter: drop-shadow(2px 4px 1px var(--color-shadow));
 }
 
 .habit-btn {
   display: flex;
+  flex-direction: row;
   width: 50%;
-  margin-left: -0.5rem;
   max-width: 50%;
+  /* border: 1px solid rgb(14, 167, 14) ; */
 }
 
 .habit-title-info {
   display: flex;
   flex-direction: column;
   min-width: 80%;
-}
+  background-color: rgb(255, 255, 255);
+  padding: 5px;
+ padding-bottom: 20px;
+ border-radius: 0px 0px 8px 8px;
+ 
 
-.habit-details {
+}
+.title-element{
+  font-size: 15px;
+
+}
+/* .habit-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-width: 20%;
   padding: 0.5em;
   margin-top: 0.5em;
-}
+  border: 1px solid blue ;
+} */
 
-.habit-details input {
+/* .habit-details input {
   display: flex;
   background-color: red;
-}
+} */
 
-.habit-details p {
+/* .habit-details p {
   display: flex;
   font-size: 1.2em;
   margin: 0.2em;
   border-radius: 50%;
   padding: 0.5em;
   background: rgb(241, 235, 235);
+  border: 1px solid rgb(25, 25, 22) ;
+} */
+.title-streak-div{
+/* border: 1px solid red; */
+padding: 0px 10px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
 }
 
 .habit-info {
-  border-radius: 0px 0px 8px 8px;
+  border-radius: 8px 8px 8px 8px;
   background-color: var(--color-brand-tertiary);
   padding: 0.5em;
-  margin: 0.5em;
-  margin-top: 0;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 80%;
+  width: 90%;
 }
-
-/*Streak element*/
-.streak-element {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: end;
-}
-
-#showStreak {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid gray;
-}
-
-#addNewStreak {
+.streak-show{
   border: 1px solid black;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: white;
 }
+
+
+
 
 /* Arrows to display Completed todos or not*/
 
@@ -915,8 +944,17 @@ label {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem;
-  background: #bdd7f3;
+  padding: 0.2em;
+  margin-bottom: 3.5em;
+  background: #e1f0fe;
+}
+
+.calContainer h1{
+  margin-bottom: 0;
+}
+
+.calContainer h2{
+  margin: auto;
 }
 
 #eventForm {
@@ -926,7 +964,8 @@ label {
 }
 
 #eventForm label {
-  margin: 0.2rem;
+  margin: 0.6rem;
+  font-size: 0.8rem;
 }
 
 #eventForm input {
@@ -937,15 +976,17 @@ label {
   font-size: 1rem;
 }
 
-#submit {
+#submitCalendarBtn {
   padding: 0.5rem 1rem;
   margin: 0.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   background-color: #007bff;
   color: #fff;
   cursor: pointer;
   font-size: 1rem;
+  width: fit-content;
+  align-self: center;
 }
 
 #eventList {
@@ -953,23 +994,32 @@ label {
   padding: 0;
   display: flex;
   flex-direction: column;
+  align-content: center;
+  margin: 0.5em;
+  margin-bottom: 2rem;
 }
 
-li {
+.calContainer li {
   display: flex;
   flex-direction: column;
-  padding: 0;
-  border-bottom: 1px solid #ccc;
+  padding: 1em;
+  border: 1px solid #d8d8d8;
+  margin: 1.5em;
+  border-radius: 10px;
 }
 
 .pastEvent {
-  color: #999;
+  color: #e2dede;
+  font-style: italic;
+  background: #9aaee9;
 }
 
 .upcomingEvent {
-  font-weight: bold;
+  color: #000;
+  background: #f6f7fa;
 }
 
 .currentEvent {
-  font-style: italic;
+  font-style: bold;
+  background: #f6f7fa;
 }

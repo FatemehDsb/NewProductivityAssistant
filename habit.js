@@ -71,6 +71,10 @@ window.onload = () => {
     // Destructuring habitItem for ease of use, including the category
     const { title, priority, streak, lastCheckedDate } = habitItem;
 
+    
+    // const habitMainCard = document.createElement("div");
+    // habitMainCard.classList.add("habit-main-card");
+
     const habitCard = document.createElement("div");
     habitCard.classList.add("habit-card");
 
@@ -99,14 +103,13 @@ window.onload = () => {
 
     const titleElement = document.createElement("h4");
     titleElement.textContent = title;
+    titleElement.classList.add("title-element")
 
     const priorityElement = document.createElement("div");
     priorityElement.classList.add("priority-element");
     priorityElement.textContent = priority;
 
-    // const streakElement = document.createElement("div");
-    // streakElement.classList.add("streak-element");
-    // streakElement.textContent = streak;
+ 
 
     const habitBtn = document.createElement("div");
     habitBtn.classList.add("habit-btn");
@@ -114,23 +117,31 @@ window.onload = () => {
     const editBtn = document.createElement("button");
     editBtn.innerHTML = `<i class="fa-solid fa-pen" style="color: #ffffff;"></i>`;
     editBtn.classList.add("edit-btn");
-
+    
     const deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = `<i class="fa-solid fa-trash" style="color: #ffffff;"></i>`;
     deleteBtn.classList.add("delete-btn");
-
+    
     const habitDetails = document.createElement("div");
     habitDetails.classList.add("habit-details");
 
+    const titleStreakDiv=document.createElement("div");
+    habitTitleInfo.append(titleStreakDiv);
+    titleStreakDiv.classList.add("title-streak-div")
+    
+    habitInfo.append(habitPriorityCover);
+    titleStreakDiv.append(titleElement);
     //-------------STREAK STARTS---------------
-
+    
     const streakCheckbox = document.createElement("input");
     streakCheckbox.setAttribute("type", "checkbox");
+    streakCheckbox.classList.add("streak-checkbox")
     const showStreak = document.createElement("p");
     showStreak.textContent = streak;
+    showStreak.classList.add("streak-show")
 
-    habitDetails.append(streakCheckbox);
-    habitDetails.append(showStreak);
+    habitCard.append(streakCheckbox);
+    titleStreakDiv.append(showStreak);
 
     //when page loads, check if todaysdate equal to habititem.lastcheckeddate, if user has already checked in today, disabled checkbox, and leave checkbox , checked.
     let initialDate = new Date().toISOString().split("T")[0];
@@ -194,14 +205,13 @@ window.onload = () => {
     });
     updateLocalStorage(updatedHabitList);
 
-    habitCard.append(habitPriorityCover);
+    // habitMainCard.append(habitCard)
     habitCard.append(habitInfo);
 
     habitInfo.append(habitTitleInfo);
     habitInfo.append(habitDetails);
     habitInfo.append(habitDetails);
 
-    habitTitleInfo.append(titleElement);
     habitTitleInfo.append(habitBtn);
 
     habitBtn.appendChild(editBtn);
@@ -209,8 +219,7 @@ window.onload = () => {
 
     // habitDetails.append(streakElement);
 
-    deleteBtn.style.width = "50px";
-    editBtn.style.width = "50px";
+   
     habitContainer.prepend(habitCard);
 
     //*****************************************DELETE BUTTON*/
