@@ -323,6 +323,11 @@ nav a:hover {
   background-color: var(--color-brand-secondary-light);
 }
 
+.completed-todos-h2{
+  display: flex;
+  text-align: center;
+}
+
 .todo-card-cover-container {
   display: flex;
   flex-direction: column;
@@ -337,7 +342,7 @@ nav a:hover {
   border-top-right-radius: 8px;
   padding: 0.8em;
   overflow: hidden;
-  height: 20%;
+  max-height: 1em;
   align-items: center;
   font-size: 0.8em;
 }
@@ -391,9 +396,8 @@ nav a:hover {
 .todo-title-info button {
   display: flex;
   justify-content: center;
-  border: 1px solid black;
   border-radius: 5px;
-  height: 1.6em;
+  height: 1.5em;
   background-color: rgb(39, 140, 173);
   margin-left: 0.2em; /*spacing between buttons */
 }
@@ -544,6 +548,8 @@ nav a:hover {
 .completed-todos-heading {
   display: flex;
   align-items: center;
+  margin: 0.8em;
+  margin-top: 1.8em;
 }
 
 #arrowRight {
