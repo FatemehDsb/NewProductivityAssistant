@@ -225,6 +225,7 @@ h1 {
   padding: 20px;
   border: 1px solid #888;
   width: 320px;
+  border-radius: 5px;
 }
 
 /* The Close Button */
@@ -677,7 +678,8 @@ nav a:hover {
   padding: 5px;
 }
 
-.filter-sort-title {
+.filter-sort-title,
+#category-modal-title {
   font-size: 12px;
   background-color: #6f78ab;
   padding: 3px;
@@ -760,3 +762,35 @@ label {
     padding: 5px 15px;
   }
 }
+
+/*MODAL*/
+#addTodoBtn, 
+#saveTodoBtn{
+  width: 100px; 
+ 
+}
+
+.modal-details{
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  justify-content: space-around;
+  align-items: center;
+}
+.modal-item{
+  /* border: 1px solid black; */
+}
+#modalCategoryFieldset,
+#description-input{
+  margin: 5px 1px;
+  border-radius: 5px;
+  border: 1px solid #6f78ab;
+  
+}
+#estimatedTimeHours, 
+#estimatedTimeMinutes{
+  width: 50px;
+}
+
+
+

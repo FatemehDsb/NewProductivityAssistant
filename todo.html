@@ -71,87 +71,99 @@
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close">&times;</span>
-          <button id="addTodoBtn">Add Todo</button>
-
-          <!--2024-03-03 FATEMEH--Deleting delete button and ADDING SAVE BUTTON****************-->
-          <!-- <button id="delete">Delete</button> -->
-          <button id="saveTodoBtn">Save changes</button>
-
-          <div class="modal-details">
+         
+       <div class="modal-details">
+          <div class="modal-item">
             <label for="input-title">Title</label>
             <input type="text" placeholder="Title" id="input-title" />
-
             <label for="status-checkbox">Status</label>
             <input type="checkbox" id="status-checkbox" />
+          </div>
 
+          <div class="modal-item">
             <!--category-->
-            <fieldset>
-              <legend>Categories</legend>
-
+            <fieldset id="modalCategoryFieldset">
+              <legend id="category-modal-title">Categories</legend>
+              
               <label for="category-shopping">Shopping</label>
               <input
-                type="radio"
-                id="category-shopping"
-                name="category"
-                value="Shopping"
+              type="radio"
+              id="category-shopping"
+              name="category"
+              value="Shopping"
               />
-
+              
               <label for="category-health">Health</label>
               <input
-                type="radio"
-                id="category-health"
-                name="category"
+              type="radio"
+              id="category-health"
+              name="category"
                 value="Health"
-              />
-
-              <label for="category-home">Home</label>
-              <input
+                />
+                
+                <label for="category-home">Home</label>
+                <input
                 type="radio"
                 id="category-home"
                 name="category"
                 value="Home"
-              />
-
-              <label for="category-work">Work</label>
+                />
+                
+                <label for="category-work">Work</label>
               <input
-                type="radio"
-                id="category-work"
-                name="category"
-                value="Work"
+              type="radio"
+              id="category-work"
+              name="category"
+              value="Work"
               />
             </fieldset>
 
+          </div>
             <!--Deadline-->
+          
+          <div class="modal-item">
+          
             <label for="deadline-input">Deadline</label>
             <input type="date" id="deadline-input" name="deadline" />
+          </div>
+
+          <div class="modal-item">
             <label for="estimatedTimeHours">Hours:</label>
             <input
-              type="number"
-              id="estimatedTimeHours"
-              name="estimatedTimeHours"
-              min="0"
+            type="number"
+            id="estimatedTimeHours"
+            name="estimatedTimeHours"
+            min="0"
               placeholder="Hours"
-            />
+              />
 
-            <label for="estimatedTimeMinutes">Minutes:</label>
-            <input
+              <label for="estimatedTimeMinutes">Minutes:</label>
+              <input
               type="number"
               id="estimatedTimeMinutes"
               name="estimatedTimeMinutes"
               min="0"
               max="59"
               placeholder="Minutes"
-            />
+              />
+        </div>
+        <div class="modal-item">
+          <!--Description-->
+          <label for="description-input">Description</label>
+          <textarea
+          id="description-input"
+          name="description"
+          rows="2"
+          cols="30"
+          placeholder="Enter task description here..."
+          ></textarea>
+        </div>
 
-            <!--Description-->
-            <label for="description-input">Description</label>
-            <textarea
-              id="description-input"
-              name="description"
-              rows="4"
-              cols="50"
-              placeholder="Enter task description here..."
-            ></textarea>
+        <div class="modal-item">
+          <button id="addTodoBtn">Add Todo</button>
+          <button id="saveTodoBtn">Save changes</button>
+        </div>
+            
           </div>
         </div>
       </div>
@@ -225,6 +237,7 @@
           </div>
         </div>
       </fieldset>
+      
 
       <!---------- GATEGORY-Filter-END------------->
 
