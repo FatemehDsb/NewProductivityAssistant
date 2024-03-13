@@ -514,7 +514,7 @@ nav a:hover {
 }
 
 .habit-priority-none-cover {
-  background-color: var(--color-brand-tertiary);
+  background-color: var(--color-gray-light);
 }
 
 .habit-card {
@@ -864,7 +864,7 @@ label {
   width: 50px;
 }
 
-#editStreakInput{
+#editStreakInput {
   width: 60px;
   padding: 4px;
 }
