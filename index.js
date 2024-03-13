@@ -551,6 +551,12 @@ window.onload = () => {
       "[name ='filterCategory']:checked"
     );
 
+    if (selectedCategories.length === 0) {
+      currentUser.toDoList.forEach((toDoItem) => {
+          renderToDoCard(toDoItem);
+      });
+  } else {
+
     let pickedCategories = Array.from(selectedCategories).map(
       (box) => box.value
     );
@@ -562,6 +568,7 @@ window.onload = () => {
     filteredTodos.forEach((toDoItem) => {
       renderToDoCard(toDoItem);
     });
+  }
   };
 
   //----------------FILTRERING SLUT-------------------------------
