@@ -141,18 +141,18 @@ window.onload = () => {
 
     todoCard.setAttribute("data-id", toDoItem.itemId); // Use the data-id attribute to store the unique ID
 
-    const todoCategoryCover = document.createElement("div");
-    todoCategoryCover.classList.add("todo-category-cover");
+    const todoCover = document.createElement("div");
+    todoCover.classList.add("todo-cover");
     if (category == "General") {
-      todoCategoryCover.innerHTML = `<div>CATEGORY: GENERAL</div> <div>${deadline}</div>`;
+      todoCover.innerHTML = `<div>CATEGORY: GENERAL</div> <div>${deadline}</div>`;
     } else if (category == "Shopping") {
-      todoCategoryCover.innerHTML = `<div>CATEGORY: SHOPPING</div> <div>${deadline}</div>`;
+      todoCover.innerHTML = `<div>CATEGORY: SHOPPING</div> <div>${deadline}</div>`;
     } else if (category == "Health") {
-      todoCategoryCover.innerHTML = `<div>CATEGORY: HEALTH</div> <div>${deadline}</div>`;
+      todoCover.innerHTML = `<div>CATEGORY: HEALTH</div> <div>${deadline}</div>`;
     } else if (category == "Home") {
-      todoCategoryCover.innerHTML = `<div>CATEGORY: HOME</div> <div>${deadline}</div>`;
+      todoCover.innerHTML = `<div>CATEGORY: HOME</div> <div>${deadline}</div>`;
     } else if (category == "Work") {
-      todoCategoryCover.innerHTML = `<div>CATEGORY: WORK</div> <div>${deadline}</div>`;
+      todoCover.innerHTML = `<div>CATEGORY: WORK</div> <div>${deadline}</div>`;
     }
 
     const todoInfo = document.createElement("div");
@@ -187,35 +187,27 @@ window.onload = () => {
     const estimatedTimeElement = document.createElement("p");
     estimatedTimeElement.textContent = `${hours}h ${minutes}m`;
 
-    // const deadlineElement = document.createElement("p");
-    // deadlineElement.textContent = `Deadline: ${deadline}`;
-
-    /*const categoryElement = document.createElement("p");
-    categoryElement.textContent = `Category: ${category}`;*/
-
     //-----------------Status function starts here
 
     const statusElement = document.createElement("input");
-    // statusElement.type = "checkbox"; //Fatemehs
-    statusElement.setAttribute("type", "checkbox"); //Siris
+    statusElement.setAttribute("type", "checkbox");
     statusElement.classList.add("status-element");
     statusElement.checked = statusValue;
-    // statusElement.addEventListener("change", () => { //Fatemehs
 
     statusElement?.addEventListener("click", () => {
-      //Siris
-      // toDoItem.statusValue = statusElement.checked; //Fatemehs
-
       toDoItem.statusValue = !toDoItem.statusValue;
-
       statusElement.checked = toDoItem.statusValue;
 
       //if item has been checked before, move back item
       if (toDoItem.statusValue) {
+        todoCover.classList.add("completed-todo-cover");
+        todoCover.classList.remove("todo-cover");
         todoInfo.classList.add("completed-todo-info");
         todoInfo.classList.remove("todo-info");
         completedTodosContainer.prepend(todoCard);
       } else {
+        todoCover.classList.add("todo-cover");
+        todoCover.classList.remove("completed-todo-cover");
         todoInfo.classList.add("todo-info");
         todoInfo.classList.remove("completed-todo-info");
         todosContainer.append(todoCard);
@@ -248,7 +240,7 @@ window.onload = () => {
     todoCard.append(statusElement);
     todoCard.append(todoCardCoverContainer);
 
-    todoCardCoverContainer.append(todoCategoryCover);
+    todoCardCoverContainer.append(todoCover);
     todoCardCoverContainer.append(todoInfo);
 
     todoInfo.append(todoTitleInfo);

@@ -4,10 +4,10 @@
   --color-brand-primary-dark: #34428b;
   --color-brand-primary-medium: #6f78ab;
   --color-brand-primary-light: #9ba9db;
-  --color-brand-secondary-extra-dark: #1e1e1e;
-  --color-brand-secondary-dark: #2f372e;
-  --color-brand-secondary-medium: #637b61;
-  --color-brand-secondary-light: #8b9d8a;
+  --color-brand-secondary-extra-dark: #2f372e;
+  --color-brand-secondary-dark: #2dae70;
+  --color-brand-secondary-medium: #2dae70;
+  --color-brand-secondary-light: #a3f7c5;
   --color-gray-light: #d6d6d6;
   --color-priority-red: #ff5b5b;
   --color-priority-yellow: #fff73f;
@@ -46,7 +46,6 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 50px;
 }
 
 main {
@@ -68,8 +67,12 @@ input[type="checkbox"] {
 
 h1 {
   margin: 0.4em;
+  padding: 5px;
 }
 
+fieldset {
+  border: none;
+}
 /* Elements section ends here */
 
 /* Login/Register page starts here */
@@ -78,6 +81,9 @@ h1 {
   margin: 5px 0px;
 }
 
+.login-img {
+  padding-top: 50px;
+}
 #indexMain {
   background-color: var(--color-brand-primary-light);
   height: 100vh;
@@ -156,7 +162,7 @@ h1 {
 }
 
 #habitsTopHeader {
-  background-color: var(--color-brand-secondary-dark);
+  background-color: var(--color-brand-secondary-extra-dark);
   width: 390px;
   box-sizing: border-box;
   .fa-user,
@@ -220,7 +226,8 @@ h1 {
 }
 
 #todosContainer-title {
-  padding: 20px;
+  /* padding: 20px; */
+  padding: 5px;
 }
 
 /* The Modal (background) */
@@ -341,9 +348,10 @@ nav a:hover {
 
 #completedTodosContainer {
   border-radius: 10px;
+  margin: 0.5em;
   margin-bottom: 200px;
   padding: 0.5em;
-  background-color: var(--color-gray-light);
+  padding-bottom: 96px;
 }
 
 .completed-todos-h2 {
@@ -359,8 +367,9 @@ nav a:hover {
   margin: 0.9em;
 }
 
-.todo-category-cover {
-  /*Unfolded*/
+.todo-cover {
+  background-color: var(--color-brand-primary-extra-dark);
+  color: white;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   padding: 0.8em;
@@ -368,6 +377,25 @@ nav a:hover {
   max-height: 1em;
   align-items: center;
   font-size: 0.8em;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.completed-todo-cover {
+  /*Unfolded*/
+  background-color: var(--color-brand-primary-dark);
+  color: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 0.8em;
+  overflow: hidden;
+  max-height: 1em;
+  align-items: center;
+  font-size: 0.8em;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 }
 
 .todo-card {
@@ -460,15 +488,6 @@ nav a:hover {
   flex-wrap: wrap;
   width: 80%;
   margin: 1em;
-}
-
-.todo-category-cover {
-  background-color: var(--color-brand-primary-extra-dark);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
 }
 
 #habitContainer {
@@ -671,8 +690,10 @@ nav a:hover {
 }
 
 .habit-footer {
-  background-color: var(--color-brand-secondary-dark);
-  .fa-circle-plus,
+  background-color: var(--color-brand-secondary-extra-dark);
+  .fa-circle-plus {
+    color: var(--color-brand-secondary-light);
+  }
   .fa-calendar,
   .fa-stopwatch {
     color: var(--color-brand-secondary-medium);
@@ -696,7 +717,7 @@ nav a:hover {
 
 .categoryContainer {
   margin: 5px 15px;
-  border: 1px solid #1f2122;
+  /* border: 1px solid #1f2122; */
   border-radius: 5px;
   padding: 5px;
   background-color: white;
@@ -732,8 +753,16 @@ nav a:hover {
 
 .category-item {
   /* border: 1px solid rgb(194, 14, 200); */
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
   .category-icon {
-    height: 30px;
+    height: 20px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-around;
   }
 }
 
@@ -742,14 +771,16 @@ label {
 }
 
 .sortContainer {
-  border: 1px solid #6f78ab;
+  background-color: white;
+  /* border: 1px solid #6f78ab; */
   border-radius: 5px;
-  margin: 2px 15px;
+  margin: 4px 15px;
+  padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  height: 35px;
+  height: 50px;
 }
 
 /* Todos-completed container*/
@@ -770,7 +801,8 @@ label {
 /*Habit-sida*/
 
 .filterContainerHabit {
-  border: 1px solid #090c7a;
+  background-color: white;
+  /* border: 1px solid #090c7a; */
   border-radius: 5px;
   display: flex;
   flex-direction: row;
@@ -780,7 +812,8 @@ label {
   }
 }
 .sortContainerHabit {
-  border: 1px solid var(--color-brand-secondary-dark);
+  background-color: white;
+  /* border: 1px solid var(--color-brand-secondary-dark); */
   border-radius: 5px;
   display: flex;
   flex-direction: row;
