@@ -1,7 +1,8 @@
-window.onload = () => {
+window.onload = async () => {
   //Declaring username and password input
   let usernameInput = document.getElementById("userName");
   let passwordInput = document.getElementById("password");
+  let weatherTemp = document.getElementById("weatherTemp");
   let todosContainer = document.getElementById("todosContainer");
   let quoteContainer = document.getElementById("quoteContainer");
   let apiUrl = "https://api.quotable.io/random";
@@ -14,28 +15,6 @@ window.onload = () => {
     "completedTodosContainer"
   );
 
-  //WEATHER STARTS
-
-  let getWeather = async (lat, lon, timezone) => {
-    return axios
-      .get("https://api.open-meteo.com/v1/forecast", {
-        params: { latitude: lat, longitude: lon, timezone },
-      })
-      .then(({ data }) => {
-        return {
-          current: parseCurrentWeather(data),
-        };
-      });
-  };
-
-  getWeather(10, 10, Intl.DateTimeFormat().resolvedOptions().timeZone).then(
-    (res) => {
-      console.log(res.data);
-    }
-  );
-
-  //Uppdatering
-  //WEATHER ENDS
   const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
   let titleInput = document.getElementById("input-title");
