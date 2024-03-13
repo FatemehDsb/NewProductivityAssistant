@@ -14,6 +14,28 @@ window.onload = () => {
     "completedTodosContainer"
   );
 
+  //WEATHER STARTS
+
+  let getWeather = async (lat, lon, timezone) => {
+    return axios
+      .get("https://api.open-meteo.com/v1/forecast", {
+        params: { latitude: lat, longitude: lon, timezone },
+      })
+      .then(({ data }) => {
+        return {
+          current: parseCurrentWeather(data),
+        };
+      });
+  };
+
+  getWeather(10, 10, Intl.DateTimeFormat().resolvedOptions().timeZone).then(
+    (res) => {
+      console.log(res.data);
+    }
+  );
+
+  //Uppdatering
+  //WEATHER ENDS
   const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
   let titleInput = document.getElementById("input-title");
@@ -375,7 +397,7 @@ window.onload = () => {
       addTodoBtn.style.display = "block";
       saveBtn.style.display = "none";
       modal.style.display = "none";
-  
+
       const checkedCategoryInput = document.querySelector(
         'input[name="category"]:checked'
       );
@@ -383,16 +405,16 @@ window.onload = () => {
         checkedCategoryInput.checked = false;
       }
       titleInput.value = "";
-        deadlineInput.value = "";
-        descriptionInput.value = "";
-        todoStatusInput.checked = "";
-        document.getElementById("estimatedTimeHours").value = "";
-        document.getElementById("estimatedTimeMinutes").value = "";
-        modal.style.display = "none";
-        addTodoBtn.style.display = "block";
-        saveBtn.style.display = "none";
+      deadlineInput.value = "";
+      descriptionInput.value = "";
+      todoStatusInput.checked = "";
+      document.getElementById("estimatedTimeHours").value = "";
+      document.getElementById("estimatedTimeMinutes").value = "";
+      modal.style.display = "none";
+      addTodoBtn.style.display = "block";
+      saveBtn.style.display = "none";
 
-    //************************** */
+      //************************** */
     };
   }
 
@@ -405,7 +427,7 @@ window.onload = () => {
       addTodoBtn.style.display = "block";
       saveBtn.style.display = "none";
       modal.style.display = "none";
-  
+
       const checkedCategoryInput = document.querySelector(
         'input[name="category"]:checked'
       );
@@ -413,16 +435,16 @@ window.onload = () => {
         checkedCategoryInput.checked = false;
       }
       titleInput.value = "";
-        deadlineInput.value = "";
-        descriptionInput.value = "";
-        todoStatusInput.checked = "";
-        document.getElementById("estimatedTimeHours").value = "";
-        document.getElementById("estimatedTimeMinutes").value = "";
-        modal.style.display = "none";
-        addTodoBtn.style.display = "block";
-        saveBtn.style.display = "none";
+      deadlineInput.value = "";
+      descriptionInput.value = "";
+      todoStatusInput.checked = "";
+      document.getElementById("estimatedTimeHours").value = "";
+      document.getElementById("estimatedTimeMinutes").value = "";
+      modal.style.display = "none";
+      addTodoBtn.style.display = "block";
+      saveBtn.style.display = "none";
 
-    //************************** */
+      //************************** */
     }
   };
 
@@ -590,20 +612,18 @@ window.onload = () => {
     const order = deadlineSortDropdown.value;
 
     if (order === "resetSortingPriority") {
-      
       if (
         currentUser &&
         currentUser.toDoList &&
         currentUser.toDoList.length > 0
-      )
-       {
+      ) {
         toDoList.innerHTML = "";
         currentUser.toDoList.forEach((todoItem) => {
           renderToDoCard(todoItem);
         });
       }
     } else {
-    sortByDeadline(order, toDoList);
+      sortByDeadline(order, toDoList);
     }
   });
 
@@ -614,13 +634,11 @@ window.onload = () => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const order = estimatedTimeSortDropdown.value;
     if (order === "resetSortingPriority") {
-      
       if (
         currentUser &&
         currentUser.toDoList &&
         currentUser.toDoList.length > 0
-      )
-       {
+      ) {
         toDoList.innerHTML = "";
         currentUser.toDoList.forEach((todoItem) => {
           renderToDoCard(todoItem);
@@ -630,7 +648,6 @@ window.onload = () => {
       sortByEstimatedTime(order, toDoList);
     }
   });
-
 
   //----------------SORTERING-------------------------------------
 

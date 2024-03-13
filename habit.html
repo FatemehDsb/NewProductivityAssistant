@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Habits</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="habit.js" defer></script>
-    <script
-      src="https://kit.fontawesome.com/74a3d29713.js"
-      crossorigin="anonymous"
-    ></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
       rel="stylesheet"
     />
+    <script src="habit.js" defer></script>
+    <script
+      src="https://kit.fontawesome.com/74a3d29713.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <main class="container">
@@ -59,11 +60,19 @@
             <!--priority-->
             <fieldset>
               <!--streak-->
-              <input type="number" value="" id="editStreakInput" min="0" placeholder="Streak Number" />
+              <input
+                type="number"
+                value=""
+                id="editStreakInput"
+                min="0"
+                placeholder="Streak Number"
+              />
               <div id="prioritySortInputContainer">
                 <!-- <label for="priorityInput">Set Priority:</label> -->
                 <select id="priorityInput">
-                  <option value="0" selected disabled id="disabled-value">Set Priority</option>
+                  <option value="0" selected disabled id="disabled-value">
+                    Set Priority
+                  </option>
                   <option value="high">High</option>
                   <option value="medium">Medium</option>
                   <option value="low">Low</option>
