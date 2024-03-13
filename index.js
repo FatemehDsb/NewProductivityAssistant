@@ -104,13 +104,6 @@ window.onload = () => {
       //
       modal.style.display = "none";
 
-      /*Siris radera?
-      //
-      todosContainer.innerHTML = "";
-      completedTodosContainer.innerHTML = "";
-      currentUser.toDoList.forEach((todoItem) => {
-*/
-
       todosContainer.innerHTML = "";
       completedTodosContainer.innerHTML = "";
 
@@ -235,6 +228,7 @@ window.onload = () => {
     } else {
       completedTodosContainer?.appendChild(todoCard);
       todoInfo.classList.add("completed-todo-info");
+      todoCover.classList.add("completed-todo-cover");
     }
 
     todoCard.append(statusElement);
@@ -553,22 +547,21 @@ window.onload = () => {
 
     if (selectedCategories.length === 0) {
       currentUser.toDoList.forEach((toDoItem) => {
-          renderToDoCard(toDoItem);
+        renderToDoCard(toDoItem);
       });
-  } else {
+    } else {
+      let pickedCategories = Array.from(selectedCategories).map(
+        (box) => box.value
+      );
 
-    let pickedCategories = Array.from(selectedCategories).map(
-      (box) => box.value
-    );
+      let filteredTodos = currentUser.toDoList.filter((todo) => {
+        return pickedCategories.includes(todo.category);
+      });
 
-    let filteredTodos = currentUser.toDoList.filter((todo) => {
-      return pickedCategories.includes(todo.category);
-    });
-
-    filteredTodos.forEach((toDoItem) => {
-      renderToDoCard(toDoItem);
-    });
-  }
+      filteredTodos.forEach((toDoItem) => {
+        renderToDoCard(toDoItem);
+      });
+    }
   };
 
   //----------------FILTRERING SLUT-------------------------------
@@ -809,7 +802,6 @@ window.onload = () => {
 
   //start timer
   startButton?.addEventListener("click", () => {
-    
     //Medan timer är igång, dölj allt annat på sidan förutom tillhörande-knappar och tiden.
     // När tiden är pausad eller stoppad, ska allt annat på sidan kunna visas.
 
