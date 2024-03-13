@@ -787,106 +787,183 @@ window.onload = async () => {
   let timeLeft;
 
   //start timer
-  startButton?.addEventListener("click", () => {
-    //Medan timer är igång, dölj allt annat på sidan förutom tillhörande-knappar och tiden.
-    // När tiden är pausad eller stoppad, ska allt annat på sidan kunna visas.
+  // startButton?.addEventListener("click", () => {
+   
+  //   pomodoroModal.style.background = "white";
 
-    pomodoroModal.style.background = "white";
-    clearInterval(countdown);
+  //   const timerInput = document.getElementById("timerTime");
+  //   if (!timerInput) {
+  //     // Create the timer input if it doesn't exist
+  //     timerInput = document.createElement("input");
+  //     timerInput.type = "text";
+  //     timerInput.id = "timerTime";
+  //     timerInput.value = "25"; // Default value
+  //     // Append it to a specific location in your document, for example, inside a div with a known ID
+  //     const container = document.getElementById("timerContainer"); // Make sure this exists in your HTML
+  //     if (container) {
+  //         container.appendChild(timerInput);
+  //     } else {
+  //         console.error("Container for timer input not found.");
+  //         return;
+  //     }
+  // }
 
-    let timerValue = timerInput.value;
-    const durationInSeconds = parseInt(timerValue) * 60; //convert input value to seconds
-    timeLeft = durationInSeconds;
+  // let timerValue = timerInput.value;
 
-    if (isNaN(durationInSeconds)) {
-      //JavaScript function  "is Not a Number."
-      alert("invalid number.");
-      return;
-    }
+  //   clearInterval(countdown);
 
-    clearInterval(countdown); //Clears any ongoing countdown (to ensure only one timer runs at a time).
 
-    //displaying userInput- timerInput
-    const minutes = Math.floor(timeLeft / 60);
-    const remainingSeconds = timeLeft % 60;
-    timerDisplay.textContent = `${minutes}:${
-      remainingSeconds < 10 ? "0" : ""
-    }${remainingSeconds}`;
-    //displaying-END
+  //   const durationInSeconds = parseInt(timerValue) * 60; //convert input value to seconds
+  //   timeLeft = durationInSeconds;
 
-    //Sets up a countdown that decreases every second.
-    countdown = setInterval(() => {
-      timeLeft -= 1;
-      //updated display time
-      const minutes = Math.floor(timeLeft / 60);
-      const remainingSeconds = timeLeft % 60;
-      timerDisplay.textContent = `${minutes}:${
-        remainingSeconds < 10 ? "0" : ""
-      }${remainingSeconds}`;
-      //displaying-END
+  //   if (isNaN(durationInSeconds)) {
+  //     //JavaScript function  "is Not a Number."
+  //     alert("invalid number.");
+  //     return;
+  //   }
 
-      if (timeLeft <= 0) {
-        // Stop the timer when it reaches 0
-        clearInterval(countdown); //stopping the timer.
-      }
-    }, 1000); // Update every 1000 milliseconds/1 second.
-  });
+  //   clearInterval(countdown); //Clears any ongoing countdown (to ensure only one timer runs at a time).
 
-  //stop button
+  //   //displaying userInput- timerInput
+  //   const minutes = Math.floor(timeLeft / 60);
+  //   const remainingSeconds = timeLeft % 60;
+  //   timerDisplay.textContent = `${minutes}:${
+  //     remainingSeconds < 10 ? "0" : ""
+  //   }${remainingSeconds}`;
+  //   //displaying-END
 
-  /* Siri saving this just to be sure - MERGE CONFLICT
+  //   //Sets up a countdown that decreases every second.
+  //   countdown = setInterval(() => {
+  //     timeLeft -= 1;
+  //     //updated display time
+  //     const minutes = Math.floor(timeLeft / 60);
+  //     const remainingSeconds = timeLeft % 60;
+  //     timerDisplay.textContent = `${minutes}:${
+  //       remainingSeconds < 10 ? "0" : ""
+  //     }${remainingSeconds}`;
+  //     //displaying-END
 
-  stopButton.addEventListener("click", () => {
-    clearInterval(countdown);
-    timeLeft = 0;
-    //updated display time
-    const minutes = Math.floor(timeLeft / 60);
-    const remainingSeconds = timeLeft % 60;
-    timerDisplay.textContent = `${minutes}:${
-      remainingSeconds < 10 ? "0" : ""
-    }${remainingSeconds}`;
-*/
+  //     if (timeLeft <= 0) {
+  //       // Stop the timer when it reaches 0
+  //       clearInterval(countdown); //stopping the timer.
+  //     }
+  //   }, 1000); // Update every 1000 milliseconds/1 second.
+  // });
 
-  stopButton?.addEventListener("click", () => {
-    pomodoroModal.style.background = "white";
-    clearInterval(countdown);
-    timeLeft = 0;
-    // //updated display time
-    // const minutes = Math.floor(timeLeft/60);
-    // const remainingSeconds = timeLeft % 60;
-    timerDisplay.textContent = "0:00";
-    timerInput.value = "";
-    timerInput.disabled = false;
-  });
+  
 
-  let isPaused = false;
-  pauseButton?.addEventListener("click", () => {
-    if (!isPaused) {
-      clearInterval(countdown); // Pause the timer
-      pauseButton.innerHTML = "Resume";
-      isPaused = true;
-    } else {
-      // Resume the timer
-      isPaused = false;
-      pauseButton.innerHTML = "Pause";
-      countdown = setInterval(() => {
-        if (timeLeft <= 0) {
-          clearInterval(countdown); // Stop the timer if time runs out
-          pauseButton.innerHTML = "Pause"; // Reset button text
-          isPaused = false; // Reset pause state
-        } else {
-          timeLeft -= 1; // Decrement the time left by one second
-          //displaying userInput- timerInput
-          const minutes = Math.floor(timeLeft / 60);
-          const remainingSeconds = timeLeft % 60;
-          timerDisplay.textContent = `${minutes}:${
-            remainingSeconds < 10 ? "0" : ""
-          }${remainingSeconds}`;
-          //
-        }
-      }, 1000); // Update every second
-      isPaused = false;
-    }
-  });
+  // stopButton?.addEventListener("click", () => {
+  //   pomodoroModal.style.background = "white";
+  //   clearInterval(countdown);
+  //   timeLeft = 0;
+  //   // //updated display time
+  //   // const minutes = Math.floor(timeLeft/60);
+  //   // const remainingSeconds = timeLeft % 60;
+  //   timerDisplay.textContent = "25:00";
+  //   timerInput.value = "";
+  //   timerInput.disabled = false;
+  //  /******* */
+  //  const oldInput = document.getElementById("timerTime");
+  //   if (oldInput) {
+  //       const newInput = document.createElement("input");
+  //       newInput.type = "text";
+  //       newInput.id = oldInput.id; // Keep the same ID for consistency
+  //       newInput.value = "25"; // Reset value or set to default
+  //       oldInput.parentNode.replaceChild(newInput, oldInput);
+  //   } else {
+  //       console.error('Timer input element not found. Cannot replace.');
+  //   }
+  // });
+
+  // let isPaused = false;
+  // pauseButton?.addEventListener("click", () => {
+    
+  //   if (!isPaused) {
+  //     clearInterval(countdown); // Pause the timer
+  //     pauseButton.innerHTML = "Resume";
+  //     isPaused = true;
+  //   } else {
+  //     // Resume the timer
+  //     isPaused = false;
+  //     pauseButton.innerHTML = "Pause";
+  //     countdown = setInterval(() => {
+  //       if (timeLeft <= 0) {
+  //         clearInterval(countdown); // Stop the timer if time runs out
+  //         pauseButton.innerHTML = "Pause"; // Reset button text
+  //         isPaused = false; // Reset pause state
+  //       } else {
+  //         timeLeft -= 1; // Decrement the time left by one second
+  //         //displaying userInput- timerInput
+  //         const minutes = Math.floor(timeLeft / 60);
+  //         const remainingSeconds = timeLeft % 60;
+  //         timerDisplay.textContent = `${minutes}:${
+  //           remainingSeconds < 10 ? "0" : ""
+  //         }${remainingSeconds}`;
+  //         //
+  //       }
+  //     }, 1000); // Update every second
+  //     isPaused = false;
+  //   }
+  // });
   // POMODORA Modal end here ----------------------------------------
+
+
+  document.addEventListener('DOMContentLoaded', () => {
+    let interval;
+    let remainingTime = 0; // Store remaining time in seconds
+    let isTimerRunning = false;
+
+    const startButton = document.querySelector('.timer-start');
+    const pauseButton = document.querySelector('.timer-pause');
+    const stopButton = document.querySelector('.timer-stop');
+    const timerDisplay = document.getElementById('timerTime');
+
+    // Initialize the display
+    updateTimerDisplay(25, 0);
+
+    startButton.addEventListener('click', function() {
+        if (!isTimerRunning) {
+            isTimerRunning = true;
+            const timeParts = timerDisplay.value.split(':');
+            if (remainingTime <= 0) { // Only reset if timer is not paused
+                remainingTime = parseInt(timeParts[0], 10) * 60; // Convert minutes to seconds
+            }
+            startInterval();
+        }
+    });
+
+    pauseButton.addEventListener('click', function() {
+        clearInterval(interval);
+        isTimerRunning = false;
+    });
+
+    stopButton.addEventListener('click', function() {
+        clearInterval(interval);
+        isTimerRunning = false;
+        remainingTime = 0; // Reset the timer
+        updateTimerDisplay(25, 0); // Reset to 25 minutes
+    });
+
+    function startInterval() {
+        interval = setInterval(() => {
+            if (remainingTime <= 0) {
+                clearInterval(interval);
+                isTimerRunning = false;
+                alert('Time is up!');
+                return;
+            }
+            remainingTime--;
+            const minutes = Math.floor(remainingTime / 60);
+            const seconds = remainingTime % 60;
+            updateTimerDisplay(minutes, seconds);
+        }, 1000);
+    }
+
+    function updateTimerDisplay(minutes, seconds) {
+        timerDisplay.value = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    }
+});
+
+
+
 };
