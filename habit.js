@@ -453,7 +453,7 @@ window.onload = () => {
       let indexA = priorityOrder.indexOf(a.priority);
       let indexB = priorityOrder.indexOf(b.priority);
 
-      return sortOrder === "lowToHigh" ? indexB - indexA : indexA - indexB;
+      return sortOrder === "lowToHigh" ? indexA - indexB : indexB - indexA;
     });
 
     renderSortedPriority(sortedPriority);
