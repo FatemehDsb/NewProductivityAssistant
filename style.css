@@ -487,6 +487,7 @@ nav a:hover {
   font-size: 0.8em;
   font-weight: 500;
   color: var(--color-brand-secondary-extra-dark);
+
 }
 
 .habit-card-cover-container {
@@ -495,9 +496,11 @@ nav a:hover {
   flex-wrap: wrap;
   width: 80%;
   margin: 1em;
+  border: 1px solid red;
 }
 
 #habitContainer {
+  
   display: flex;
   flex-direction: column;
   /* border-radius: 10px; */
@@ -523,80 +526,96 @@ nav a:hover {
   background-color: var(--color-gray-light);
 }
 
+
 .habit-card {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border-radius: 10px;
-  background: #eeeeee;
-  /* margin: 0.2em; */
+  /* background: #eeeeee; */
   margin: 1em;
   filter: drop-shadow(2px 4px 1px var(--color-shadow));
 }
 
 .habit-btn {
   display: flex;
+  flex-direction: row;
   width: 50%;
-  margin-left: -0.5rem;
   max-width: 50%;
+  /* border: 1px solid rgb(14, 167, 14) ; */
 }
 
 .habit-title-info {
   display: flex;
   flex-direction: column;
   min-width: 80%;
+  background: #eeeeee; 
+  padding: 5px;
+ padding-bottom: 20px;
 }
+.title-element{
+  font-size: 15px;
 
-.habit-details {
+}
+/* .habit-details {
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-width: 20%;
   padding: 0.5em;
   margin-top: 0.5em;
-}
+  border: 1px solid blue ;
+} */
 
-.habit-details input {
+/* .habit-details input {
   display: flex;
   background-color: red;
-}
+} */
 
-.habit-details p {
+/* .habit-details p {
   display: flex;
   font-size: 1.2em;
   margin: 0.2em;
   border-radius: 50%;
   padding: 0.5em;
   background: rgb(241, 235, 235);
+  border: 1px solid rgb(25, 25, 22) ;
+} */
+.title-streak-div{
+/* border: 1px solid red; */
+padding: 0px 10px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+
 }
 
 .habit-info {
   border-radius: 0px 0px 8px 8px;
   background-color: var(--color-brand-tertiary);
   padding: 0.5em;
-  margin: 0.5em;
-  margin-top: 0;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 80%;
+  width: 90%;
+  /* border: 1px solid rgb(37, 184, 59) ; */
 }
-
+.streak-show{
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: white;
+}
 /*Streak element*/
-.streak-element {
+/* .streak-element {
   display: flex;
   flex-direction: column-reverse;
   align-items: end;
-}
+  border: 1px solid rgb(225, 27, 176) ;
+ 
+} */
 
-#showStreak {
-  display: flex;
-  flex-direction: row;
-  border: 1px solid gray;
-}
 
-#addNewStreak {
-  border: 1px solid black;
-}
 
 /* Arrows to display Completed todos or not*/
 
