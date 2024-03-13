@@ -71,6 +71,9 @@ h1 {
   padding: 5px;
 }
 
+h2 {
+  margin: 0.2em;
+}
 fieldset {
   border: none;
 }
@@ -422,7 +425,7 @@ nav a:hover {
   border-radius: 10px;
   padding-right: 1em;
   /* margin: 0.5em; */
-  margin: 0.2em 0.5em;
+  margin: 0.1em 0.5em;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -547,6 +550,7 @@ nav a:hover {
   /* margin: 1em; */
   margin: 0.2em 0.5em;
   filter: drop-shadow(2px 4px 1px var(--color-shadow));
+  gap: 1em;
 }
 
 .habit-btn {
@@ -623,7 +627,7 @@ nav a:hover {
 .completed-todos-heading {
   display: flex;
   align-items: center;
-  margin: 0.8em;
+  /* margin: 0.8em; */
   margin-top: 1.8em;
 }
 
@@ -766,6 +770,7 @@ nav a:hover {
   padding: 3px;
   border-radius: 5px;
   color: white;
+  background-color: var(--color-brand-primary-medium);
   /* border: 1px solid blue; */
 }
 
@@ -806,14 +811,15 @@ nav a:hover {
 }
 
 label {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .sortContainer {
   background-color: white;
   /* border: 1px solid #6f78ab; */
   border-radius: 5px;
-  margin: 4px 15px;
+  margin: 4px 15px 20px 15px;
+
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -985,7 +991,6 @@ label {
   margin-bottom: 2rem;
 }
 
-
 .calContainer li {
   display: flex;
   flex-direction: column;
@@ -1003,12 +1008,11 @@ label {
   background: #9aaee9;
 }
 
-.upcomingEvent{
+.upcomingEvent {
   background: #f7f8fc;
 }
 
 .currentEvent {
-  
   background: #f7f8fc;
   color: black;
 }
