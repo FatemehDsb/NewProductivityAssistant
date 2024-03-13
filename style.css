@@ -819,3 +819,66 @@ label {
   
 }
 
+/*CALENDAR CSS*/
+.calContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  background: #bdd7f3;
+}
+
+#eventForm{
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+#eventForm label{
+  margin: 0.2rem;
+}
+
+#eventForm input{
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+#submit{
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#eventList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+li{
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.pastEvent {
+  color: #999;
+}
+
+.upcomingEvent {
+  font-weight: bold;
+}
+
+.currentEvent {
+  font-style: italic;
+}
