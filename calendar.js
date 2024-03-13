@@ -5,7 +5,7 @@ const eventTitleInput = document.getElementById('eventTitle');
 const eventStartTimeInput = document.getElementById('eventStartTime');
 const eventEndTimeInput = document.getElementById('eventEndTime');
 const eventList = document.getElementById('eventList');
-const submit = document.getElementById('submit');
+const submit = document.getElementById('submitCalendarBtn');
 
 const createEvent = (title, startTime, endTime) => {
     if (startTime >= endTime) {
