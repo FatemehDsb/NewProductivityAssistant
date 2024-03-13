@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="calendar.js" defer></script>
+  </head>
+  <body>
+    <div class="calContainer">
+      <h1>Add Event</h1>
+      <form id="eventForm">
+        <label for="eventTitle">Title:</label>
+        <input type="text" id="eventTitle" required />
+        <label for="eventStartTime">Start:</label>
+        <input type="datetime-local" id="eventStartTime" required />
+        <label for="eventEndTime">End:</label>
+        <input type="datetime-local" id="eventEndTime" required />
+        <button type="submit" id="submit">Add Event</button>
+      </form>
+      <h2>Your Events</h2>
+      <ul id="eventList"></ul>
+    </div>
+  </body>
+</html>
