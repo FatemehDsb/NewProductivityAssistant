@@ -733,7 +733,6 @@ label {
 
 .filterSortMainContainer {
   display: flex;
-
   margin: 5px 15px;
   justify-content: space-around;
   align-items: center;
@@ -778,12 +777,15 @@ label {
 .modal-details{
   display: flex;
   flex-direction: column;
-  gap: 17px;
-  justify-content: space-around;
+  gap: 10px;
+  /* justify-content: space-around; */
   /* align-items: center; */
 }
 .modal-item{
   /* border: 1px solid rgb(186, 21, 21); */
+  display: flex;
+  /* justify-content: space-around; */
+  gap: 30px;
 }
 #modalCategoryFieldset,
 #description-input{
@@ -797,10 +799,23 @@ label {
   width: 50px;
 }
 #editStreakInput{
-  width: 100px;
+  width: 50px;
+  padding: 4px;
 }
 #input-title{
-  width: 100px;
+  width: 150px;
+  padding: 4px;
 }
-
+#priorityInput{
+  border: 1px solid #6f78ab;
+  border-radius: 5px;
+  padding: 4px;
+  
+}
+#habitTitle,
+#todoTitle{
+  font-size: 15px;
+  font-weight: bold;
+  
+}
 
