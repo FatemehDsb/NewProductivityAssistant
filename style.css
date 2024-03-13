@@ -653,9 +653,9 @@ justify-content: space-between;
 /*************POMODORO MODAL******************/
 
 /* Pomodoro Modal Overall Styling */
-.pomodoro-modal {
+#pomodoroModal {
   
- 
+  display: "none";
   position: fixed;
   top: 0;
   left: 0;

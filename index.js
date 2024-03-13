@@ -1,5 +1,7 @@
 window.onload = () => {
   //Declaring username and password input
+  const pomodoroModal = document.getElementById("pomodoroModal");
+  pomodoroModal.style.display = "none";
   let usernameInput = document.getElementById("userName");
   let passwordInput = document.getElementById("password");
   let todosContainer = document.getElementById("todosContainer");
@@ -784,7 +786,7 @@ window.onload = () => {
 
   // POMODORA Modal begins here ----------------------------------------
   const openPomodoroModalBtn = document.getElementById("openPomodoroBtn");
-  const pomodoroModal = document.getElementById("pomodoroModal");
+ 
   const pomodoroModalSpan =
     document.getElementsByClassName("pomodoro-close")[0];
 
@@ -831,8 +833,6 @@ function updateTimerDisplay(timeLeft) {
 }
 
 
-
-
 function startCountdown(duration) {
   let timeLeft = duration;
   countdown = setInterval(() => {
@@ -848,7 +848,6 @@ function startCountdown(duration) {
 
 
 workButton.addEventListener('click', () => setTimer(25));
-
 shortBreakButton.addEventListener('click', () => setTimer(5));
 longBreakButton.addEventListener('click', () => setTimer(15));
 
@@ -857,8 +856,6 @@ longBreakButton.addEventListener('click', () => setTimer(15));
   startButton?.addEventListener("click", () => {
    
    
-    
-
     let timerInput = document.getElementById("timerTime");
     if (!timerInput) {
       // Create the timer input if it doesn't exist
@@ -921,7 +918,7 @@ longBreakButton.addEventListener('click', () => setTimer(15));
   
 
   stopButton?.addEventListener("click", () => {
-    pomodoroModal.style.background = "white";
+    
     clearInterval(countdown);
     timeLeft = 0;
     // //updated display time
@@ -950,9 +947,6 @@ longBreakButton.addEventListener('click', () => setTimer(15));
       clearInterval(countdown); // Pause the timer
       pauseButton.innerHTML = "Resume";
       isPaused = true;
-
-
-      
       pomodoroModal.style.background="rgba(0, 0, 0, 0.4)";
     } else {
       // Resume the timer
