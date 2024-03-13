@@ -765,8 +765,13 @@ label {
 
 /*MODAL*/
 #addTodoBtn, 
-#saveTodoBtn{
+#saveTodoBtn,
+#addHabitBtn,
+#saveHabitBtn{
   width: 100px; 
+  padding: 10px;
+  margin-top: 10px;
+
  
 }
 
@@ -775,10 +780,10 @@ label {
   flex-direction: column;
   gap: 17px;
   justify-content: space-around;
-  align-items: center;
+  /* align-items: center; */
 }
 .modal-item{
-  /* border: 1px solid black; */
+  /* border: 1px solid rgb(186, 21, 21); */
 }
 #modalCategoryFieldset,
 #description-input{
@@ -791,6 +796,11 @@ label {
 #estimatedTimeMinutes{
   width: 50px;
 }
-
+#editStreakInput{
+  width: 100px;
+}
+#input-title{
+  width: 100px;
+}
 
 
