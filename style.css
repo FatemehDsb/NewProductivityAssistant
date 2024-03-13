@@ -342,21 +342,25 @@ nav a:hover {
   height: 400px;
 }
 
-/* Sharlins del. TEST! */
+/* Sharlins del TEST FÖR GITTT*/
 
 #todosContainer {
   border-radius: 10px;
   margin: 0.5em;
   padding: 0.5em;
+  margin-bottom: auto;
   background-color: var(--color-brand-primary-light);
 }
 
 #completedTodosContainer {
   border-radius: 10px;
   margin: 0.5em;
-  margin-bottom: 200px;
+  /* margin-bottom: 200px;*/
+  margin-bottom: auto;
   padding: 0.5em;
-  padding-bottom: 96px;
+  /*padding-bottom: 96px;*/
+  padding-bottom: auto;
+  background-color: var(--color-brand-primary-light);
 }
 
 .completed-todos-h2 {
