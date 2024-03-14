@@ -15,28 +15,42 @@ let completedTodosContainer = document.getElementById(
 );
 let events = [];
 
-// //WEATHER STARTS
-// let getWeather = async () => {
-//   let response = await axios.get(
-//     "https://api.open-meteo.com/v1/forecast?latitude=59.3294&longitude=18.0687&current=temperature_2m,weather_code&wind_speed_unit=mph&timeformat=unixtime&timezone=Europe%2FBerlin",
-//     {
-//       params: {
-//         inc: "latitude, longitude, timezone, current",
-//       },
-//     }
-//   );
-//   return response.data.current.temperature_2m;
-// };
-// window.onload = async () => {
-//   let weatherTemp = document.getElementById("weatherTemp");
+window.onload = async () => {
+  let getWeather = async () => {
+    let response = await axios.get(
+      "https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,weather_code&wind_speed_unit=mph&timeformat=unixtime&timezone=Europe%2FBerlin",
+      {
+        params: {
+          inc: "latitude, longitude, timezone, current",
+        },
+      }
+    );
+    return response.data.current.temperature_2m;
+  };
 
-//   let temperature = await getWeather();
+  navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
-//   weatherTemp.innerHTML = "";
-//   weatherTemp.innerHTML = `${temperature}°c`;
-//   console.log(temperature);
-// };
-// //WEATHER ENDS
+  function positionSuccess({ coords }) {
+    getWeather(
+      coords.latitude,
+      coords.longitude,
+      Intl.DateTimeFormat().resolvedOptions().timeZone
+    );
+  }
+
+  function positionError() {
+    alert(
+      "Please allow us to use your location and refresh the page, or you can't get weather info for your position."
+    );
+  }
+
+  let weatherTemp = document.getElementById("weatherTemp");
+
+  let temperature = await getWeather();
+
+  weatherTemp.innerHTML = "";
+  weatherTemp.innerHTML = `${temperature}°c`;
+};
 
 window.onload = () => {
   //Declaring username and password input
@@ -989,61 +1003,60 @@ window.onload = () => {
   });
   // POMODORA Modal end here ----------------------------------------
 
-
   //-----CALENDAR EVENTS STARTS!--------------------------------------
-  
 
-const eventForm = document.getElementById('eventForm');
-const eventTitleInput = document.getElementById('eventTitle');
-const eventStartTimeInput = document.getElementById('eventStartTime');
-const eventEndTimeInput = document.getElementById('eventEndTime');
-const eventList = document.getElementById('eventList');
-const submit = document.getElementById('submitCalendarBtn');
+  const eventForm = document.getElementById("eventForm");
+  const eventTitleInput = document.getElementById("eventTitle");
+  const eventStartTimeInput = document.getElementById("eventStartTime");
+  const eventEndTimeInput = document.getElementById("eventEndTime");
+  const eventList = document.getElementById("eventList");
+  const submit = document.getElementById("submitCalendarBtn");
 
-const createEvent = (title, startTime, endTime) => {
+  const createEvent = (title, startTime, endTime) => {
     if (startTime >= endTime) {
-        alert('Start time cannot be later than or equal to end time!');
-        return;
+      alert("Start time cannot be later than or equal to end time!");
+      return;
     }
 
-    const isOverlap = events.some(event => (
+    const isOverlap = events.some(
+      (event) =>
         (startTime >= event.startTime && startTime < event.endTime) ||
         (endTime > event.startTime && endTime <= event.endTime) ||
         (startTime <= event.startTime && endTime >= event.endTime)
-    ));
+    );
 
     if (isOverlap) {
-        alert('Time conflict with other event!');
-        return;
+      alert("Time conflict with other event!");
+      return;
     }
-    events.push({title, startTime, endTime});
+    events.push({ title, startTime, endTime });
     displayEvents();
-};
+  };
 
-const displayEvents = () => {
-    eventList.innerHTML = '';
+  const displayEvents = () => {
+    eventList.innerHTML = "";
     const today = new Date();
 
     events.sort((a, b) => a.startTime - b.startTime);
 
     events.forEach((event) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `${event.title} 
+      const listItem = document.createElement("li");
+      listItem.textContent = `${event.title} 
                                 Starts: ${event.startTime.toLocaleString()} 
                                 Ends: ${event.endTime.toLocaleString()}`;
-        
-        if (event.endTime < today) {
-            listItem.classList.add('pastEvent');
-        } else if (event.startTime > today) {
-            listItem.classList.add('upcomingEvent');
-        } else {
-            listItem.classList.add('currentEvent');
-    }
-        eventList.appendChild(listItem);
-    });
-};
 
-eventForm?.addEventListener('submit', function(event) {
+      if (event.endTime < today) {
+        listItem.classList.add("pastEvent");
+      } else if (event.startTime > today) {
+        listItem.classList.add("upcomingEvent");
+      } else {
+        listItem.classList.add("currentEvent");
+      }
+      eventList.appendChild(listItem);
+    });
+  };
+
+  eventForm?.addEventListener("submit", function (event) {
     event.preventDefault();
     const title = eventTitleInput.value;
     const startTime = new Date(eventStartTimeInput.value);
@@ -1051,5 +1064,5 @@ eventForm?.addEventListener('submit', function(event) {
 
     createEvent(title, startTime, endTime);
     eventForm.reset();
-})
+  });
 };
