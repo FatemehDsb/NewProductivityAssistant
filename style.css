@@ -223,12 +223,6 @@ fieldset {
   color: var(--color-brand-primary-light);
 }
 
-.fa-user,
-.fa-arrow-right-from-bracket,
-.fa-cloud {
-  color: white;
-}
-
 #quoteContainer {
   display: flex;
   flex-direction: column;
