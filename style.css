@@ -81,6 +81,10 @@ fieldset {
 
 /* Login/Register page starts here */
 
+.login-image {
+  padding: 60px;
+}
+
 .login-input {
   margin: 5px 0px;
 }
@@ -180,9 +184,18 @@ fieldset {
   }
 }
 
+#topHeaderRight {
+  display: flex;
+  gap: 20px;
+}
+
+#weatherTemp {
+  color: white;
+}
+
 .weather-icon {
   width: 20px;
-  fill: #fff;
+  fill: var(--color-brand-primary-light);
 }
 
 .top-header {
@@ -292,9 +305,10 @@ fieldset {
 }
 .header-container {
   border: none;
+  padding-top: 16px;
 }
 nav {
-  background-color: #f2f2f2;
+  background-color: white;
   padding: 10px;
   text-align: center;
   /* border-radius: 5px; */

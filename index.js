@@ -1,20 +1,44 @@
-window.onload = async () => {
-  //Declaring username and password input
-  let usernameInput = document.getElementById("userName");
-  let passwordInput = document.getElementById("password");
-  let weatherTemp = document.getElementById("weatherTemp");
-  let todosContainer = document.getElementById("todosContainer");
-  let quoteContainer = document.getElementById("quoteContainer");
-  let apiUrl = "https://api.quotable.io/random";
-  let fetchData;
-  let logOutBtn = document.getElementById("logOutBtn");
-  let newUser;
-  const addTodoBtn = document.getElementById("addTodoBtn");
-  let registerBtn = document.getElementById("registerBtn");
-  let completedTodosContainer = document.getElementById(
-    "completedTodosContainer"
-  );
+//Declaring username and password input
+let usernameInput = document.getElementById("userName");
+let passwordInput = document.getElementById("password");
+let weatherTemp = document.getElementById("weatherTemp");
+let todosContainer = document.getElementById("todosContainer");
+let quoteContainer = document.getElementById("quoteContainer");
+let apiUrl = "https://api.quotable.io/random";
+let fetchData;
+let logOutBtn = document.getElementById("logOutBtn");
+let newUser;
+const addTodoBtn = document.getElementById("addTodoBtn");
+let registerBtn = document.getElementById("registerBtn");
+let completedTodosContainer = document.getElementById(
+  "completedTodosContainer"
+);
 
+window.onload = async () => {
+  //WEATHER STARTS
+  let getWeather = async () => {
+    let response = await axios.get(
+      "https://api.open-meteo.com/v1/forecast?latitude=59.3294&longitude=18.0687&current=temperature_2m,weather_code&wind_speed_unit=mph&timeformat=unixtime&timezone=Europe%2FBerlin",
+      {
+        params: {
+          inc: "latitude, longitude, timezone, current",
+        },
+      }
+    );
+    return response.data.current.temperature_2m;
+  };
+
+  let weatherTemp = document.getElementById("weatherTemp");
+
+  let temperature = await getWeather();
+
+  weatherTemp.innerHTML = "";
+  weatherTemp.innerHTML = `${temperature}°c`;
+  console.log(temperature);
+};
+//WEATHER ENDS
+
+window.onload = () => {
   const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
   let titleInput = document.getElementById("input-title");
@@ -304,9 +328,9 @@ window.onload = async () => {
 
   // Api greeting
 
-  const greeting=document.getElementById("greeting");
-  let greetingContainer=document.getElementById("greeting-container")
-  
+  const greeting = document.getElementById("greeting");
+  let greetingContainer = document.getElementById("greeting-container");
+
   let quoteParagraph = document.getElementById("quote");
   let authorParagraph = document.getElementById("author");
 
@@ -322,7 +346,7 @@ window.onload = async () => {
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const userName = currentUser ? currentUser.newUsername : "Guest";
 
-    greeting.innerText= `Hello, ${userName}!`;
+    greeting.innerText = `Hello, ${userName}!`;
     quoteParagraph.innerText = `${finalQuote}`;
     authorParagraph.innerText = " - " + author;
 
@@ -332,8 +356,7 @@ window.onload = async () => {
         quoteContainer.classList.add("fade-quote");
         setTimeout(() => {
           quoteContainer.style.display = "none";
-          greetingContainer.style.display="none";
-          
+          greetingContainer.style.display = "none";
         }, 500);
       }
     }, 8000); //10 seconds
