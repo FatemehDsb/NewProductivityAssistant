@@ -28,43 +28,41 @@ window.onload = () => {
   let toDoList = [];
 
   //WEATHER STARTS
-  let getWeather = async (latitude, longitude) => {
-    let response = await axios.get(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
-    );
-    return response.data.current_weather.temperature;
-  };
-  console.log(getWeather);
-  navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+  if (toDoList) {
+    let getWeather = async (latitude, longitude) => {
+      let response = await axios.get(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+      );
+      return response.data.current_weather.temperature;
+    };
 
-  function positionSuccess({ coords }) {
-    getWeather(coords.latitude, coords.longitude)
-      .then((temp) => {
-        let weatherTemp = document.getElementById("weatherTemp");
-        if (weatherTemp) {
-          weatherTemp.innerHTML = `${temp}°c`;
-          console.log(weatherTemp.innerHTML); // Log innerHTML if weatherTemp is found
-        } else {
-          console.error("Element with id 'weatherTemp' not found");
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching weather:", err);
-      });
+    navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+
+    function positionSuccess({ coords }) {
+      getWeather(coords.latitude, coords.longitude)
+        .then((temp) => {
+          let weatherTemp = document.getElementById("weatherTemp");
+          if (weatherTemp) {
+            weatherTemp.innerHTML = `${temp}°c`;
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching weather:", err);
+        });
+    }
+
+    function positionError() {
+      alert(
+        "Please allow us to use your location and refresh the page, or you can't get weather info for your position."
+      );
+    }
+
+    function getIconUrl(iconCode) {
+      return `icons/${ICON_MAP.get(iconCode)}.svg`;
+    }
+
+    const currentIcon = document.querySelector("[data-current-icon]");
   }
-
-  function positionError() {
-    alert(
-      "Please allow us to use your location and refresh the page, or you can't get weather info for your position."
-    );
-  }
-
-  function getIconUrl(iconCode) {
-    return `icons/${ICON_MAP.get(iconCode)}.svg`;
-  }
-
-  const currentIcon = document.querySelector("[data-current-icon]");
-
   // WEATHER ENDS
 
   function updateLocalStorage(updatedToDoList) {
@@ -712,28 +710,7 @@ window.onload = () => {
     };
 
     renderToDoCard(toDoItem);
-    //**************************************************************************************** */
 
-    // let registeredUsers =
-    //   JSON.parse(localStorage.getItem("registeredUsers")) || [];
-
-    // let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-    // if (currentUser.toDoList) {
-    //   currentUser.toDoList.push(toDoItem);
-    //   console.log(currentUser.toDoList);
-
-    //   registeredUsers = registeredUsers.map((user) =>
-    //     user.id === currentUser.id ? currentUser : user
-    //   );
-
-    //   localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    //   localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-    // } else {
-    //   console.error("error");
-    // }
-
-    //Create a copy of currentUser to avoid modifying the original object
     const updatedUser = { ...currentUser };
 
     if (!updatedUser.toDoList) {
