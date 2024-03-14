@@ -1,4 +1,4 @@
-window.onload = async () => {
+window.onload = () => {
   //WEATHER STARTS
   let getWeather = async (latitude, longitude) => {
     let response = await axios.get(
@@ -6,18 +6,22 @@ window.onload = async () => {
     );
     return response.data.current_weather.temperature;
   };
-
+  console.log(getWeather);
   navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
   function positionSuccess({ coords }) {
     getWeather(coords.latitude, coords.longitude)
       .then((temp) => {
         let weatherTemp = document.getElementById("weatherTemp");
-        weatherTemp.innerHTML = "";
-        weatherTemp.innerHTML = ` ${temp}°c`;
+        if (weatherTemp) {
+          weatherTemp.innerHTML = `${temp}°c`;
+          console.log(weatherTemp.innerHTML); // Log innerHTML if weatherTemp is found
+        } else {
+          console.error("Element with id 'weatherTemp' not found");
+        }
       })
-      .error((err) => {
-        console.log(err);
+      .catch((err) => {
+        console.error("Error fetching weather:", err);
       });
   }
 
@@ -26,9 +30,15 @@ window.onload = async () => {
       "Please allow us to use your location and refresh the page, or you can't get weather info for your position."
     );
   }
-};
 
-window.onload = () => {
+  function getIconUrl(iconCode) {
+    return `icons/${ICON_MAP.get(iconCode)}.svg`;
+  }
+
+  const currentIcon = document.querySelector("[data-current-icon]");
+
+  // WEATHER ENDS
+
   const pomodoroModal = document.getElementById("pomodoroModal");
   if (pomodoroModal) {
     pomodoroModal.style.display = "none";

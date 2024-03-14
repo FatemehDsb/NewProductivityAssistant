@@ -219,7 +219,7 @@ fieldset {
   z-index: 2;
 }
 
-#weather-temp {
+#weatherTemp {
   color: var(--color-brand-primary-light);
 }
 
