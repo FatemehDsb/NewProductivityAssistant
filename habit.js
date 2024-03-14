@@ -1,4 +1,10 @@
 window.onload = () => {
+
+  const pomodoroModal = document.getElementById("pomodoroModal");
+  if(pomodoroModal){
+    pomodoroModal.style.display = "none";
+  }
+  
   let logOutBtn = document.getElementById("logOutBtn");
   const addHabitBtn = document.getElementById("addHabitBtn");
 
