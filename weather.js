@@ -1,3 +1,19 @@
+navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+
+function positionSuccess({ coords }) {
+  getWeather(
+    coords.latitude,
+    coords.longitudem,
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  );
+}
+
+function positionError() {
+  alert(
+    "Please allow us to use your location and refresh the page. Otherwise you'll be left with the weather for Stockholm, Sweden."
+  );
+}
+
 window.onload = async () => {
   //WEATHER STARTS
   let getWeather = async () => {

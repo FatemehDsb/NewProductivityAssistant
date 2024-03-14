@@ -12,6 +12,7 @@
       rel="stylesheet"
     />
     <script src="index.js" defer></script>
+    <script src="weather.js" defer></script>
     <script
       src="https://kit.fontawesome.com/74a3d29713.js"
       crossorigin="anonymous"
@@ -33,7 +34,7 @@
           <div class="weather-icon">
             <i class="fa fa-duotone fa-cloud fa-xl"></i>
           </div>
-          <div id="weatherTemp"></div>
+          <div id="weatherTemp">°c</div>
         </div>
       </div>
 
@@ -48,25 +49,24 @@
 
       <!---------Pomodoro MODAL STARTS-------------------------------------->
       <!-- <button id="openPomodoroBtn">Open Pomodoro</button> -->
-      <div id="pomodoroModal" >
+      <div id="pomodoroModal">
         <div class="pomodoro-modal-content">
           <span class="pomodoro-close">&times;</span>
           <div class="pomodoro-modal-details">
             <div class="timer-display">
               <input type="text" id="timerTime" value="25" />:00
             </div>
-          <div class="timer-buttons">
-           <div>
-             <button class="timer-start">Start</button>
-             <button class="timer-pause">Pause</button>
-             <button class="timer-stop">Stop</button>
-          </div>  
-          <div>
-            <button class="timer-work">Work</button>
-            <button class="timer-shortBreak">Short Break</button>
-            <button class="timer-longBreak"> Long Break</button>
-          </div>
-
+            <div class="timer-buttons">
+              <div>
+                <button class="timer-start">Start</button>
+                <button class="timer-pause">Pause</button>
+                <button class="timer-stop">Stop</button>
+              </div>
+              <div>
+                <button class="timer-work">Work</button>
+                <button class="timer-shortBreak">Short Break</button>
+                <button class="timer-longBreak">Long Break</button>
+              </div>
             </div>
           </div>
         </div>

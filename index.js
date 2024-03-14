@@ -15,34 +15,33 @@ let completedTodosContainer = document.getElementById(
 );
 let events = [];
 
-window.onload = async () => {
-  //WEATHER STARTS
-  let getWeather = async () => {
-    let response = await axios.get(
-      "https://api.open-meteo.com/v1/forecast?latitude=59.3294&longitude=18.0687&current=temperature_2m,weather_code&wind_speed_unit=mph&timeformat=unixtime&timezone=Europe%2FBerlin",
-      {
-        params: {
-          inc: "latitude, longitude, timezone, current",
-        },
-      }
-    );
-    return response.data.current.temperature_2m;
-  };
+// //WEATHER STARTS
+// let getWeather = async () => {
+//   let response = await axios.get(
+//     "https://api.open-meteo.com/v1/forecast?latitude=59.3294&longitude=18.0687&current=temperature_2m,weather_code&wind_speed_unit=mph&timeformat=unixtime&timezone=Europe%2FBerlin",
+//     {
+//       params: {
+//         inc: "latitude, longitude, timezone, current",
+//       },
+//     }
+//   );
+//   return response.data.current.temperature_2m;
+// };
+// window.onload = async () => {
+//   let weatherTemp = document.getElementById("weatherTemp");
 
-  let weatherTemp = document.getElementById("weatherTemp");
+//   let temperature = await getWeather();
 
-  let temperature = await getWeather();
-
-  weatherTemp.innerHTML = "";
-  weatherTemp.innerHTML = `${temperature}°c`;
-  console.log(temperature);
-};
-//WEATHER ENDS
+//   weatherTemp.innerHTML = "";
+//   weatherTemp.innerHTML = `${temperature}°c`;
+//   console.log(temperature);
+// };
+// //WEATHER ENDS
 
 window.onload = () => {
   //Declaring username and password input
   const pomodoroModal = document.getElementById("pomodoroModal");
-  if(pomodoroModal){
+  if (pomodoroModal) {
     pomodoroModal.style.display = "none";
   }
   let usernameInput = document.getElementById("userName");
@@ -58,29 +57,6 @@ window.onload = () => {
   let completedTodosContainer = document.getElementById(
     "completedTodosContainer"
   );
-
-  //WEATHER STARTS
-
-  let getWeather = async (lat, lon, timezone) => {
-    return axios
-      .get("https://api.open-meteo.com/v1/forecast", {
-        params: { latitude: lat, longitude: lon, timezone },
-      })
-      .then(({ data }) => {
-        return {
-          current: parseCurrentWeather(data),
-        };
-      });
-  };
-
-  getWeather(10, 10, Intl.DateTimeFormat().resolvedOptions().timeZone).then(
-    (res) => {
-      console.log(res.data);
-    }
-  );
-
-  //Uppdatering
-  //WEATHER ENDS
   const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
   let titleInput = document.getElementById("input-title");
@@ -859,7 +835,7 @@ window.onload = () => {
 
   // Set Timer Function
   function setTimer(minutes) {
-    if(pomodoroModal){
+    if (pomodoroModal) {
       pomodoroModal.style.background = "#9ba9db";
     }
     clearInterval(countdown);
@@ -890,17 +866,15 @@ window.onload = () => {
     }, 1000);
   }
 
-
-workButton?.addEventListener('click', () => setTimer(25));
-shortBreakButton?.addEventListener('click', () => setTimer(5));
-longBreakButton?.addEventListener('click', () => setTimer(15));
-
+  workButton?.addEventListener("click", () => setTimer(25));
+  shortBreakButton?.addEventListener("click", () => setTimer(5));
+  longBreakButton?.addEventListener("click", () => setTimer(15));
 
   //start timer
   startButton?.addEventListener("click", () => {
     let timerInput = document.getElementById("timerTime");
 
-    if(pomodoroModal){
+    if (pomodoroModal) {
       pomodoroModal.style.background = "#9ba9db";
     }
 
@@ -991,7 +965,6 @@ longBreakButton?.addEventListener('click', () => setTimer(15));
       clearInterval(countdown); // Pause the timer
       pauseButton.innerHTML = "Resume";
       isPaused = true;
-      
     } else {
       // Resume the timer
       isPaused = false;
