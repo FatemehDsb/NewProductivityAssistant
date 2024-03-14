@@ -42,7 +42,6 @@ window.onload = () => {
   //Declaring username and password input
   const pomodoroModal = document.getElementById("pomodoroModal");
   if(pomodoroModal){
-
     pomodoroModal.style.display = "none";
   }
   let usernameInput = document.getElementById("userName");
@@ -857,6 +856,9 @@ window.onload = () => {
 
   // Set Timer Function
   function setTimer(minutes) {
+    if(pomodoroModal){
+      pomodoroModal.style.background = "#9ba9db";
+    }
     clearInterval(countdown);
     let timeLeft = minutes * 60;
     updateTimerDisplay(timeLeft);
@@ -894,6 +896,11 @@ longBreakButton?.addEventListener('click', () => setTimer(15));
   //start timer
   startButton?.addEventListener("click", () => {
     let timerInput = document.getElementById("timerTime");
+
+    if(pomodoroModal){
+      pomodoroModal.style.background = "#9ba9db";
+    }
+
     if (!timerInput) {
       // Create the timer input if it doesn't exist
       timerInput = document.createElement("input");
@@ -952,6 +959,7 @@ longBreakButton?.addEventListener('click', () => setTimer(15));
   });
 
   stopButton?.addEventListener("click", () => {
+    pomodoroModal.style.background = "rgba(0, 0, 0, 0.1)";
     clearInterval(countdown);
     timeLeft = 0;
     // //updated display time
@@ -975,11 +983,12 @@ longBreakButton?.addEventListener('click', () => setTimer(15));
 
   let isPaused = false;
   pauseButton?.addEventListener("click", () => {
+    pomodoroModal.style.background = "rgba(0, 0, 0, 0.1)";
     if (!isPaused) {
       clearInterval(countdown); // Pause the timer
       pauseButton.innerHTML = "Resume";
       isPaused = true;
-      pomodoroModal.style.background = "rgba(0, 0, 0, 0.4)";
+      
     } else {
       // Resume the timer
       isPaused = false;
