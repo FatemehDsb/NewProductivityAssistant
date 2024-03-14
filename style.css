@@ -199,10 +199,7 @@ fieldset {
 #topHeaderRight {
   display: flex;
   gap: 20px;
-}
-
-#weatherTemp {
-  color: white;
+  color: var(--color-brand-primary-light);
 }
 
 .weather-icon {

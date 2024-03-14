@@ -1,7 +1,6 @@
 //Declaring username and password input
 let usernameInput = document.getElementById("userName");
 let passwordInput = document.getElementById("password");
-let weatherTemp = document.getElementById("weatherTemp");
 let todosContainer = document.getElementById("todosContainer");
 let quoteContainer = document.getElementById("quoteContainer");
 let apiUrl = "https://api.quotable.io/random";
@@ -16,26 +15,26 @@ let completedTodosContainer = document.getElementById(
 let events = [];
 
 window.onload = async () => {
-  let getWeather = async () => {
+  //WEATHER STARTS
+  let getWeather = async (latitude, longitude) => {
     let response = await axios.get(
-      "https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude={longitude}&current=temperature_2m,weather_code&wind_speed_unit=mph&timeformat=unixtime&timezone=Europe%2FBerlin",
-      {
-        params: {
-          inc: "latitude, longitude, timezone, current",
-        },
-      }
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
     );
-    return response.data.current.temperature_2m;
+    return response.data.current_weather.temperature;
   };
 
   navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
   function positionSuccess({ coords }) {
-    getWeather(
-      coords.latitude,
-      coords.longitude,
-      Intl.DateTimeFormat().resolvedOptions().timeZone
-    );
+    getWeather(coords.latitude, coords.longitude)
+      .then((temp) => {
+        let weatherTemp = document.getElementById("weatherTemp");
+        console.log(weatherTemp);
+        weatherTemp.innerHTML = `${temp}°c`;
+      })
+      .error((err) => {
+        console.log(err);
+      });
   }
 
   function positionError() {
@@ -44,12 +43,11 @@ window.onload = async () => {
     );
   }
 
-  let weatherTemp = document.getElementById("weatherTemp");
+  function getIconUrl(iconCode) {
+    return `icons/${ICON_MAP.get(iconCode)}.svg`;
+  }
 
-  let temperature = await getWeather();
-
-  weatherTemp.innerHTML = "";
-  weatherTemp.innerHTML = `${temperature}°c`;
+  const currentIcon = document.querySelector("[data-current-icon]");
 };
 
 window.onload = () => {
@@ -1008,6 +1006,7 @@ window.onload = () => {
 
   let habitList = [];
   let updatedEvents = [];
+
   let events = JSON.parse(localStorage.getItem('events')) || [];
   registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
@@ -1027,7 +1026,9 @@ window.onload = () => {
       } else {
         console.error("error");
       }
+
     }
+  }
 
   /*********************************** */
 
@@ -1037,8 +1038,6 @@ window.onload = () => {
   const eventEndTimeInput = document.getElementById("eventEndTime");
   const eventList = document.getElementById("eventList");
   const submit = document.getElementById("submitCalendarBtn");
-
-  
 
   const createEvent = (title, startTime, endTime) => {
     if (startTime >= endTime) {
@@ -1057,15 +1056,13 @@ window.onload = () => {
       alert("Time conflict with other event!");
       return;
     }
-    events.push({title, startTime, endTime});
+    events.push({ title, startTime, endTime });
 
-    localStorage.setItem('events', JSON.stringify(events));
+    localStorage.setItem("events", JSON.stringify(events));
     updateLocalStorage(events);
 
     displayEvents();
-};
-
-
+  };
 
   const displayEvents = () => {
     eventList.innerHTML = "";
@@ -1088,11 +1085,11 @@ window.onload = () => {
       }
       eventList.appendChild(listItem);
     });
-};
+  };
 
-displayEvents();
+  displayEvents();
 
-  eventForm?.addEventListener('submit', function(event) {
+  eventForm?.addEventListener("submit", function (event) {
     event.preventDefault();
     const title = eventTitleInput.value;
     const startTime = new Date(eventStartTimeInput.value);
@@ -1100,5 +1097,5 @@ displayEvents();
 
     createEvent(title, startTime, endTime);
     eventForm.reset();
-  })
+  });
 };

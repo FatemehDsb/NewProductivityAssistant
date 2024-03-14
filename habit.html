@@ -30,7 +30,10 @@
           ></i>
         </div>
         <div id="topHeaderRight">
-          <i class="fa fa-duotone fa-cloud fa-xl"></i>
+          <div class="weather-icon">
+            <i class="fa fa-duotone fa-cloud fa-xl"></i>
+          </div>
+          <div id="weatherTemp">väder</div>
         </div>
       </div>
 
@@ -44,27 +47,25 @@
         <!-- Modal content -->
         <div class="modal-content">
           <span class="close">&times;</span>
-          
 
-         <div class="modal-details">
-          <div class="modal-item">
-           <label for="input-title" id="habitTitle">Title:</label>
-         </div>
-           <div class="modal-item">
-            <div>
-              <input type="text" placeholder="Title" id="input-title" />
+          <div class="modal-details">
+            <div class="modal-item">
+              <label for="input-title" id="habitTitle">Title:</label>
             </div>
+            <div class="modal-item">
+              <div>
+                <input type="text" placeholder="Title" id="input-title" />
+              </div>
               <!--streak-->
               <input
-              type="number"
-              value=""
-              id="editStreakInput"
-              min="0"
-              placeholder="Streak"
+                type="number"
+                value=""
+                id="editStreakInput"
+                min="0"
+                placeholder="Streak"
               />
             </div>
             <div class="modal-item">
-
               <div id="prioritySortInputContainer">
                 <!-- <label for="priorityInput">Set Priority:</label> -->
                 <select id="priorityInput">
@@ -76,13 +77,11 @@
                   <option value="low">Low</option>
                 </select>
               </div>
-           
-          </div>
+            </div>
           </div>
 
           <button id="addHabitBtn">Add Habit</button>
           <button id="saveHabitBtn">Save changes</button>
-          </div>
         </div>
       </div>
 
@@ -144,36 +143,35 @@
         <i class="fa fa-duotone fa-stopwatch fa-2x" id="openPomodoroBtn"></i>
         <i class="fa fa-duotone fa-circle-plus fa-4x" id="openModalBtn"></i>
         <a href="calendar.html"
-          ><i class="fa fa-duotone fa-calendar fa-2x"></i></a>
+          ><i class="fa fa-duotone fa-calendar fa-2x"></i
+        ></a>
       </div>
 
       <!---------Pomodoro MODAL STARTS-------------------------------------->
       <!-- <button id="openPomodoroBtn">Open Pomodoro</button> -->
-      <div id="pomodoroModal" >
+      <div id="pomodoroModal">
         <div class="pomodoro-modal-content">
           <span class="pomodoro-close">&times;</span>
           <div class="pomodoro-modal-details">
             <div class="timer-display">
               <input type="text" id="timerTime" value="25" />:00
             </div>
-          <div class="timer-buttons">
-           <div>
-             <button class="timer-start">Start</button>
-             <button class="timer-pause">Pause</button>
-             <button class="timer-stop">Stop</button>
-          </div>  
-          <div>
-            <button class="timer-work">Work</button>
-            <button class="timer-shortBreak">Short Break</button>
-            <button class="timer-longBreak"> Long Break</button>
-          </div>
-
+            <div class="timer-buttons">
+              <div>
+                <button class="timer-start">Start</button>
+                <button class="timer-pause">Pause</button>
+                <button class="timer-stop">Stop</button>
+              </div>
+              <div>
+                <button class="timer-work">Work</button>
+                <button class="timer-shortBreak">Short Break</button>
+                <button class="timer-longBreak">Long Break</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <!---------Pomodoro MODAL ENDS-------------------------------------->
-
     </main>
   </body>
 </html>
