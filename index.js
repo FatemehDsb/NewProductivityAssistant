@@ -1009,15 +1009,15 @@ window.onload = () => {
   let habitList = [];
   let updatedEvents = [];
   let events = JSON.parse(localStorage.getItem('events')) || [];
+  registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
 
   /**EVENT LIST******************************* */
   
     function updateLocalStorage(updatedEvents) {
       let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-      if (currentUser) {
+      if (currentUser && registeredUsers) {
         currentUser.event = updatedEvents;
-       
         registeredUsers = registeredUsers.map((user) =>
           user.id === currentUser.id ? currentUser : user
         );
@@ -1068,7 +1068,7 @@ window.onload = () => {
 
 
   const displayEvents = () => {
-    eventList.innerHTML = '';
+    eventList.innerHTML = "";
     const today = new Date();
 
     events.sort((a, b) => a.startTime - b.startTime);
