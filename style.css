@@ -1076,6 +1076,7 @@ label {
 .currentEvent {
   background: #f7f8fc;
   color: black;
+  color: #000;
   background: #f6f7fa;
 }
 
