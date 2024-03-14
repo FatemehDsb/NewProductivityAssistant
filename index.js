@@ -1007,25 +1007,27 @@ window.onload = () => {
   //-----CALENDAR EVENTS STARTS!--------------------------------------
 
   let habitList = [];
-  let updatedEvents;
+  let updatedEvents = [];
+  let events = JSON.parse(localStorage.getItem('events')) || [];
+
 
   /**EVENT LIST******************************* */
-
-  function updateLocalStorage(updatedEvents) {
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (currentUser) {
-      currentUser.event = updatedEvents;
-
-      registeredUsers = registeredUsers.map((user) =>
-        user.id === currentUser.id ? currentUser : user
-      );
-
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-    } else {
-      console.error("error");
+  
+    function updateLocalStorage(updatedEvents) {
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (currentUser) {
+        currentUser.event = updatedEvents;
+       
+        registeredUsers = registeredUsers.map((user) =>
+          user.id === currentUser.id ? currentUser : user
+        );
+  
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+      } else {
+        console.error("error");
+      }
     }
-  }
 
   /*********************************** */
 
@@ -1053,12 +1055,16 @@ window.onload = () => {
       alert("Time conflict with other event!");
       return;
     }
-    events.push({ title, startTime, endTime });
+    events.push({title, startTime, endTime});
+
+    localStorage.setItem('events', JSON.stringify(events));
+    updateLocalStorage(events);
+
     displayEvents();
-  };
+};
 
   const displayEvents = () => {
-    eventList.innerHTML = "";
+    eventList.innerHTML = '';
     const today = new Date();
 
     events.sort((a, b) => a.startTime - b.startTime);
@@ -1078,9 +1084,9 @@ window.onload = () => {
       }
       eventList.appendChild(listItem);
     });
-  };
+};
 
-  eventForm?.addEventListener("submit", function (event) {
+  eventForm?.addEventListener('submit', function(event) {
     event.preventDefault();
     const title = eventTitleInput.value;
     const startTime = new Date(eventStartTimeInput.value);
@@ -1088,5 +1094,5 @@ window.onload = () => {
 
     createEvent(title, startTime, endTime);
     eventForm.reset();
-  });
+  })
 };
