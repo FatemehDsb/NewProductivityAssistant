@@ -75,11 +75,6 @@ h2 {
   margin: 0.2em;
 }
 
-<<<<<<< HEAD
-h2 {
-  margin: 0.2em;
-}
-=======
 .container#indexMain h1{
   color: #ffff;
   text-align: center;
@@ -213,8 +208,6 @@ fieldset {
   fill: var(--color-brand-primary-light);
 }
 
-=======
->>>>>>> 5f5c5367d5380d97245fa737a9cf080e9b1edf5e
 .top-header {
   width: 390px;
   height: 24px;
@@ -1094,14 +1087,12 @@ label {
 }
 
 .upcomingEvent {
-<<<<<<< HEAD
   background: #f7f8fc;
 }
 
 .currentEvent {
   background: #f7f8fc;
   color: black;
-=======
   color: #000;
   background: #f6f7fa;
 }

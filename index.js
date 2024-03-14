@@ -510,6 +510,7 @@ window.onload = () => {
       newPassword,
       toDoList,
       habitList,
+      eventList,
     };
 
     registeredUsers.push(newUser);
