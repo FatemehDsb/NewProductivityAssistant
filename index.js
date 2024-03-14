@@ -64,7 +64,6 @@ window.onload = () => {
   const descriptionInput = document.getElementById("description-input");
   const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
   let toDoList = [];
-  let habitList = [];
 
   function updateLocalStorage(updatedToDoList) {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -398,8 +397,10 @@ window.onload = () => {
   // When the user clicks the button, open the modal
   if (openModalBtn) {
     openModalBtn.onclick = openModal;
-    saveBtn.style.display = "none";
+    if(saveBtn){
+      saveBtn.style.display = "none";
   }
+}
 
   // When the user clicks on <span> (x), close the modal
   if (modalSpan) {
@@ -992,6 +993,30 @@ window.onload = () => {
 
   //-----CALENDAR EVENTS STARTS!--------------------------------------
   
+  let habitList = [];
+  let updatedEvents;
+
+  /**EVENT LIST******************************* */
+  
+    function updateLocalStorage(updatedEvents) {
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (currentUser) {
+        currentUser.event = updatedEvents;
+       
+        registeredUsers = registeredUsers.map((user) =>
+          user.id === currentUser.id ? currentUser : user
+        );
+  
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+      } else {
+        console.error("error");
+      }
+    }
+  
+    
+
+    /*********************************** */
 
 const eventForm = document.getElementById('eventForm');
 const eventTitleInput = document.getElementById('eventTitle');
@@ -1018,6 +1043,7 @@ const createEvent = (title, startTime, endTime) => {
     }
     events.push({title, startTime, endTime});
     displayEvents();
+    
 };
 
 const displayEvents = () => {
@@ -1042,6 +1068,8 @@ const displayEvents = () => {
         eventList.appendChild(listItem);
     });
 };
+
+
 
 eventForm?.addEventListener('submit', function(event) {
     event.preventDefault();
