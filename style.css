@@ -75,18 +75,12 @@ h2 {
   margin: 0.2em;
 }
 
-<<<<<<< HEAD
-h2 {
-  margin: 0.2em;
-}
-=======
-.container#indexMain h1{
+.container#indexMain h1 {
   color: #ffff;
   text-align: center;
   margin: 0.2em;
   margin-bottom: 0px;
   padding: 5px;
-  
 }
 
 fieldset {
@@ -213,8 +207,6 @@ fieldset {
   fill: var(--color-brand-primary-light);
 }
 
-=======
->>>>>>> 5f5c5367d5380d97245fa737a9cf080e9b1edf5e
 .top-header {
   width: 390px;
   height: 24px;
@@ -228,7 +220,7 @@ fieldset {
 }
 
 #weather-temp {
-  color: var(--color-brand-primary-light)
+  color: var(--color-brand-primary-light);
 }
 
 .fa-user,
@@ -252,18 +244,14 @@ fieldset {
 #quote {
   margin-bottom: 0;
   font-size: 14px;
-
 }
-#greeting{
-margin-top: 30px;
-padding-top: 10px;
-text-align: center;
-font-size: 20px;
-font-weight: bold;
-color: white;
-
-
- 
+#greeting {
+  margin-top: 30px;
+  padding-top: 10px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
 }
 #author {
   font-size: 0.8em;
@@ -547,7 +535,6 @@ nav a:hover {
   font-size: 0.8em;
   font-weight: 500;
   color: var(--color-brand-secondary-extra-dark);
-
 }
 
 .habit-card-cover-container {
@@ -559,7 +546,6 @@ nav a:hover {
 }
 
 #habitContainer {
-  
   /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
@@ -587,7 +573,6 @@ nav a:hover {
   background-color: var(--color-gray-light);
 }
 
-
 .habit-card {
   display: flex;
   flex-direction: row;
@@ -612,14 +597,11 @@ nav a:hover {
   min-width: 80%;
   background-color: rgb(255, 255, 255);
   padding: 5px;
- padding-bottom: 20px;
- border-radius: 0px 0px 8px 8px;
- 
-
+  padding-bottom: 20px;
+  border-radius: 0px 0px 8px 8px;
 }
-.title-element{
+.title-element {
   font-size: 15px;
-
 }
 /* .habit-details {
   display: flex;
@@ -645,13 +627,12 @@ nav a:hover {
   background: rgb(241, 235, 235);
   border: 1px solid rgb(25, 25, 22) ;
 } */
-.title-streak-div{
-/* border: 1px solid red; */
-padding: 0px 10px;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-
+.title-streak-div {
+  /* border: 1px solid red; */
+  padding: 0px 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .habit-info {
@@ -664,15 +645,12 @@ justify-content: space-between;
   justify-content: space-around;
   width: 90%;
 }
-.streak-show{
+.streak-show {
   border: 1px solid black;
   border-radius: 50%;
   padding: 10px;
   background-color: white;
 }
-
-
-
 
 /* Arrows to display Completed todos or not*/
 
@@ -701,7 +679,6 @@ justify-content: space-between;
 
 /* Pomodoro Modal Overall Styling */
 #pomodoroModal {
-  
   display: "none";
   position: fixed;
   top: 0;
@@ -715,7 +692,6 @@ justify-content: space-between;
   padding-top: 100px;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-
 }
 
 .pomodoro-modal-content {
@@ -773,7 +749,7 @@ input[type="text"]#timerTime {
 }
 
 .timer-start {
-  background-color: #4CAF50; /* Green */
+  background-color: #4caf50; /* Green */
 }
 
 .timer-pause {
@@ -784,18 +760,15 @@ input[type="text"]#timerTime {
   background-color: #d9534f; /* Red */
 }
 
-.timer-work, .timer-shortBreak, .timer-longBreak {
+.timer-work,
+.timer-shortBreak,
+.timer-longBreak {
   background-color: var(--color-brand-primary); /* Light Blue */
 }
 
 .timer-buttons button:hover {
   opacity: 0.9;
 }
-
-
-
-
-
 
 /******************POMODORO MODAL ENDS******************/
 
@@ -1032,7 +1005,7 @@ label {
   font-size: 1.5em;
 }
 
-.calContainer h2{
+.calContainer h2 {
   margin: auto;
 }
 
@@ -1094,15 +1067,12 @@ label {
 }
 
 .upcomingEvent {
-<<<<<<< HEAD
   background: #f7f8fc;
 }
 
 .currentEvent {
   background: #f7f8fc;
   color: black;
-=======
-  color: #000;
   background: #f6f7fa;
 }
 
