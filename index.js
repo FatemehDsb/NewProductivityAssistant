@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //Declaring username and password input
 let usernameInput = document.getElementById("userName");
 let passwordInput = document.getElementById("password");
@@ -39,6 +40,48 @@ window.onload = async () => {
 //WEATHER ENDS
 
 window.onload = () => {
+=======
+window.onload = () => {
+  //Declaring username and password input
+  const pomodoroModal = document.getElementById("pomodoroModal");
+  pomodoroModal.style.display = "none";
+  let usernameInput = document.getElementById("userName");
+  let passwordInput = document.getElementById("password");
+  let todosContainer = document.getElementById("todosContainer");
+  let quoteContainer = document.getElementById("quoteContainer");
+  let apiUrl = "https://api.quotable.io/random";
+  let fetchData;
+  let logOutBtn = document.getElementById("logOutBtn");
+  let newUser;
+  const addTodoBtn = document.getElementById("addTodoBtn");
+  let registerBtn = document.getElementById("registerBtn");
+  let completedTodosContainer = document.getElementById(
+    "completedTodosContainer"
+  );
+
+  //WEATHER STARTS
+
+  let getWeather = async (lat, lon, timezone) => {
+    return axios
+      .get("https://api.open-meteo.com/v1/forecast", {
+        params: { latitude: lat, longitude: lon, timezone },
+      })
+      .then(({ data }) => {
+        return {
+          current: parseCurrentWeather(data),
+        };
+      });
+  };
+
+  getWeather(10, 10, Intl.DateTimeFormat().resolvedOptions().timeZone).then(
+    (res) => {
+      console.log(res.data);
+    }
+  );
+
+  //Uppdatering
+  //WEATHER ENDS
+>>>>>>> 5f5c5367d5380d97245fa737a9cf080e9b1edf5e
   const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
   let titleInput = document.getElementById("input-title");
@@ -786,7 +829,7 @@ window.onload = () => {
 
   // POMODORA Modal begins here ----------------------------------------
   const openPomodoroModalBtn = document.getElementById("openPomodoroBtn");
-  const pomodoroModal = document.getElementById("pomodoroModal");
+ 
   const pomodoroModalSpan =
     document.getElementsByClassName("pomodoro-close")[0];
 
@@ -806,18 +849,78 @@ window.onload = () => {
   const pauseButton = document.querySelector(".timer-pause");
   const stopButton = document.querySelector(".timer-stop");
   const timerInput = document.getElementById("timerTime"); //timer input
+  const workButton = document.querySelector('.timer-work');
+  const shortBreakButton = document.querySelector('.timer-shortBreak');
+  const longBreakButton = document.querySelector('.timer-longBreak');
+
+  
+
   let countdown; // countdown timer
   let timeLeft;
 
+
+
+// Set Timer Function
+function setTimer(minutes) {
+  clearInterval(countdown);
+  let timeLeft = minutes * 60;
+  updateTimerDisplay(timeLeft);
+  startCountdown(timeLeft);
+}
+
+// Update Timer Display
+function updateTimerDisplay(timeLeft) {
+  const minutes = Math.floor(timeLeft / 60);
+  const seconds = timeLeft % 60;
+  timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+
+function startCountdown(duration) {
+  let timeLeft = duration;
+  countdown = setInterval(() => {
+    timeLeft -= 1;
+    updateTimerDisplay(timeLeft);
+
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      alert('Time is up!');
+    }
+  }, 1000);
+}
+
+
+workButton.addEventListener('click', () => setTimer(25));
+shortBreakButton.addEventListener('click', () => setTimer(5));
+longBreakButton.addEventListener('click', () => setTimer(15));
+
+
   //start timer
   startButton?.addEventListener("click", () => {
-    //Medan timer är igång, dölj allt annat på sidan förutom tillhörande-knappar och tiden.
-    // När tiden är pausad eller stoppad, ska allt annat på sidan kunna visas.
+   
+   
+    let timerInput = document.getElementById("timerTime");
+    if (!timerInput) {
+      // Create the timer input if it doesn't exist
+      timerInput = document.createElement("input");
+      timerInput.type = "text";
+      timerInput.id = "timerTime";
+      timerInput.value = "25"; // Default value
+      // Append it to a specific location in your document, for example, inside a div with a known ID
+      const container = document.getElementById("timerContainer"); // Make sure this exists in your HTML
+      if (container) {
+          container.appendChild(timerInput);
+      } else {
+          console.error("Container for timer input not found.");
+          return;
+      }
+  }
 
-    pomodoroModal.style.background = "white";
+  let timerValue = timerInput.value;
+
     clearInterval(countdown);
 
-    let timerValue = timerInput.value;
+
     const durationInSeconds = parseInt(timerValue) * 60; //convert input value to seconds
     timeLeft = durationInSeconds;
 
@@ -855,39 +958,39 @@ window.onload = () => {
     }, 1000); // Update every 1000 milliseconds/1 second.
   });
 
-  //stop button
-
-  /* Siri saving this just to be sure - MERGE CONFLICT
-
-  stopButton.addEventListener("click", () => {
-    clearInterval(countdown);
-    timeLeft = 0;
-    //updated display time
-    const minutes = Math.floor(timeLeft / 60);
-    const remainingSeconds = timeLeft % 60;
-    timerDisplay.textContent = `${minutes}:${
-      remainingSeconds < 10 ? "0" : ""
-    }${remainingSeconds}`;
-*/
+  
 
   stopButton?.addEventListener("click", () => {
-    pomodoroModal.style.background = "white";
+    
     clearInterval(countdown);
     timeLeft = 0;
     // //updated display time
     // const minutes = Math.floor(timeLeft/60);
     // const remainingSeconds = timeLeft % 60;
-    timerDisplay.textContent = "0:00";
+    timerDisplay.textContent = "25:00";
     timerInput.value = "";
     timerInput.disabled = false;
+   /******* */
+   const oldInput = document.getElementById("timerTime");
+    if (oldInput) {
+        const newInput = document.createElement("input");
+        newInput.type = "text";
+        newInput.id = oldInput.id; // Keep the same ID for consistency
+        newInput.value = "25"; // Reset value or set to default
+        oldInput.parentNode.replaceChild(newInput, oldInput);
+    } else {
+        console.error('Timer input element not found. Cannot replace.');
+    }
   });
 
   let isPaused = false;
   pauseButton?.addEventListener("click", () => {
+    
     if (!isPaused) {
       clearInterval(countdown); // Pause the timer
       pauseButton.innerHTML = "Resume";
       isPaused = true;
+      pomodoroModal.style.background="rgba(0, 0, 0, 0.4)";
     } else {
       // Resume the timer
       isPaused = false;

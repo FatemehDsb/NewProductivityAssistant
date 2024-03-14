@@ -35,7 +35,9 @@ const displayEvents = () => {
 
     events.forEach((event) => {
         const listItem = document.createElement('li');
-        listItem.textContent = `${event.title} Starts: ${event.startTime.toLocaleString()} Ends: ${event.endTime.toLocaleString()}`;
+        listItem.textContent = `${event.title} 
+                                Starts: ${event.startTime.toLocaleString()} 
+                                Ends: ${event.endTime.toLocaleString()}`;
         
         if (event.endTime < today) {
             listItem.classList.add('pastEvent');
