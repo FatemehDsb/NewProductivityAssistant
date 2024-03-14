@@ -1038,6 +1038,8 @@ window.onload = () => {
   const eventList = document.getElementById("eventList");
   const submit = document.getElementById("submitCalendarBtn");
 
+  
+
   const createEvent = (title, startTime, endTime) => {
     if (startTime >= endTime) {
       alert("Start time cannot be later than or equal to end time!");
@@ -1063,6 +1065,8 @@ window.onload = () => {
     displayEvents();
 };
 
+
+
   const displayEvents = () => {
     eventList.innerHTML = '';
     const today = new Date();
@@ -1085,6 +1089,8 @@ window.onload = () => {
       eventList.appendChild(listItem);
     });
 };
+
+displayEvents();
 
   eventForm?.addEventListener('submit', function(event) {
     event.preventDefault();
