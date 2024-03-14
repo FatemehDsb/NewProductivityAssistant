@@ -75,6 +75,10 @@ h2 {
   margin: 0.2em;
 }
 
+h2 {
+  margin: 0.2em;
+}
+
 .container#indexMain h1{
   color: #ffff;
   text-align: center;
@@ -207,6 +211,7 @@ fieldset {
   width: 20px;
   fill: var(--color-brand-primary-light);
 }
+
 
 .top-header {
   width: 390px;
@@ -708,7 +713,7 @@ justify-content: space-between;
   padding-top: 100px;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-
+  
 }
 
 .pomodoro-modal-content {
