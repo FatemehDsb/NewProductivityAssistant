@@ -1006,23 +1006,27 @@ window.onload = () => {
 
   let habitList = [];
   let updatedEvents = [];
-  let events = JSON.parse(localStorage.getItem("events")) || [];
+
+  let events = JSON.parse(localStorage.getItem('events')) || [];
+  registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+
 
   /**EVENT LIST******************************* */
+  
+    function updateLocalStorage(updatedEvents) {
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if (currentUser && registeredUsers) {
+        currentUser.event = updatedEvents;
+        registeredUsers = registeredUsers.map((user) =>
+          user.id === currentUser.id ? currentUser : user
+        );
+  
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+      } else {
+        console.error("error");
+      }
 
-  function updateLocalStorage(updatedEvents) {
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (currentUser) {
-      currentUser.event = updatedEvents;
-
-      registeredUsers = registeredUsers.map((user) =>
-        user.id === currentUser.id ? currentUser : user
-      );
-
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-    } else {
-      console.error("error");
     }
   }
 
