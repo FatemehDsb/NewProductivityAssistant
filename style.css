@@ -71,6 +71,10 @@ h1 {
   padding: 5px;
 }
 
+h2 {
+  margin: 0.2em;
+}
+
 <<<<<<< HEAD
 h2 {
   margin: 0.2em;
@@ -85,7 +89,6 @@ h2 {
   
 }
 
->>>>>>> 5f5c5367d5380d97245fa737a9cf080e9b1edf5e
 fieldset {
   border: none;
 }
@@ -196,7 +199,6 @@ fieldset {
   }
 }
 
-<<<<<<< HEAD
 #topHeaderRight {
   display: flex;
   gap: 20px;
@@ -1101,5 +1103,4 @@ label {
 .currentEvent {
   font-style: bold;
   background: #f6f7fa;
->>>>>>> 5f5c5367d5380d97245fa737a9cf080e9b1edf5e
 }

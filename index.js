@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //Declaring username and password input
 let usernameInput = document.getElementById("userName");
 let passwordInput = document.getElementById("password");
@@ -40,7 +39,7 @@ window.onload = async () => {
 //WEATHER ENDS
 
 window.onload = () => {
-=======
+
 window.onload = () => {
   //Declaring username and password input
   const pomodoroModal = document.getElementById("pomodoroModal");
@@ -81,7 +80,6 @@ window.onload = () => {
 
   //Uppdatering
   //WEATHER ENDS
->>>>>>> 5f5c5367d5380d97245fa737a9cf080e9b1edf5e
   const saveBtn = document.getElementById("saveTodoBtn");
   //Get inputs
   let titleInput = document.getElementById("input-title");
