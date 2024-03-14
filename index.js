@@ -994,7 +994,9 @@ window.onload = () => {
   //-----CALENDAR EVENTS STARTS!--------------------------------------
   
   let habitList = [];
-  let updatedEvents;
+  let updatedEvents = [];
+  let events = JSON.parse(localStorage.getItem('events')) || [];
+
 
   /**EVENT LIST******************************* */
   
@@ -1013,8 +1015,6 @@ window.onload = () => {
         console.error("error");
       }
     }
-  
-    
 
     /*********************************** */
 
@@ -1042,11 +1042,14 @@ const createEvent = (title, startTime, endTime) => {
         return;
     }
     events.push({title, startTime, endTime});
+
+    localStorage.setItem('events', JSON.stringify(events));
+    updateLocalStorage(events);
+
     displayEvents();
-    
 };
 
-const displayEvents = () => {
+  const displayEvents = () => {
     eventList.innerHTML = '';
     const today = new Date();
 
@@ -1069,9 +1072,7 @@ const displayEvents = () => {
     });
 };
 
-
-
-eventForm?.addEventListener('submit', function(event) {
+  eventForm?.addEventListener('submit', function(event) {
     event.preventDefault();
     const title = eventTitleInput.value;
     const startTime = new Date(eventStartTimeInput.value);
@@ -1079,5 +1080,5 @@ eventForm?.addEventListener('submit', function(event) {
 
     createEvent(title, startTime, endTime);
     eventForm.reset();
-})
+  })
 };
