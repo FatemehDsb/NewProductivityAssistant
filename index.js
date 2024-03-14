@@ -41,7 +41,10 @@ window.onload = async () => {
 window.onload = () => {
   //Declaring username and password input
   const pomodoroModal = document.getElementById("pomodoroModal");
-  pomodoroModal.style.display = "none";
+  if(pomodoroModal){
+
+    pomodoroModal.style.display = "none";
+  }
   let usernameInput = document.getElementById("userName");
   let passwordInput = document.getElementById("password");
   let todosContainer = document.getElementById("todosContainer");
@@ -882,9 +885,11 @@ window.onload = () => {
     }, 1000);
   }
 
-  workButton.addEventListener("click", () => setTimer(25));
-  shortBreakButton.addEventListener("click", () => setTimer(5));
-  longBreakButton.addEventListener("click", () => setTimer(15));
+
+workButton?.addEventListener('click', () => setTimer(25));
+shortBreakButton?.addEventListener('click', () => setTimer(5));
+longBreakButton?.addEventListener('click', () => setTimer(15));
+
 
   //start timer
   startButton?.addEventListener("click", () => {

@@ -227,6 +227,10 @@ fieldset {
   z-index: 2;
 }
 
+#weather-temp {
+  color: var(--color-brand-primary-light)
+}
+
 .fa-user,
 .fa-arrow-right-from-bracket,
 .fa-cloud {
@@ -247,6 +251,7 @@ fieldset {
 }
 #quote {
   margin-bottom: 0;
+  font-size: 14px;
 
 }
 #greeting{
@@ -255,6 +260,7 @@ padding-top: 10px;
 text-align: center;
 font-size: 20px;
 font-weight: bold;
+color: white;
 
 
  
@@ -550,11 +556,11 @@ nav a:hover {
   flex-wrap: wrap;
   width: 80%;
   margin: 1em;
-  border: 1px solid red;
 }
 
 #habitContainer {
   
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   /* border-radius: 10px; */
@@ -587,7 +593,7 @@ nav a:hover {
   flex-direction: row;
   border-radius: 10px;
   /* background: #eeeeee; */
-  margin: 1em;
+  /* margin: 1em; */
   filter: drop-shadow(2px 4px 1px var(--color-shadow));
   gap: 1em;
 }
@@ -718,7 +724,7 @@ justify-content: space-between;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+  max-width: 300px;
   text-align: center;
   border: 1px solid lightgrey;
 }
