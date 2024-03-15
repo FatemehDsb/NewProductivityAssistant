@@ -26,24 +26,60 @@ window.onload = () => {
   const descriptionInput = document.getElementById("description-input");
   const todoStatusInput = document.querySelector('input[id="status-checkbox"]');
   let toDoList = [];
+  let habitList = [];
 
   //WEATHER STARTS
-  if (toDoList) {
+  if (
+    window.location.pathname === "/todo.html" ||
+    window.location.pathname === "/calendar.html"
+  ) {
     let getWeather = async (latitude, longitude) => {
       let response = await axios.get(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
       );
-      return response.data.current_weather.temperature;
+      return {
+        temperature: response.data.current_weather.temperature,
+        weatherCode: response.data.current_weather.weathercode,
+      };
     };
 
     navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
+    const ICON_MAP = new Map();
+
+    addMapping([0, 1], "sun");
+    addMapping([2], "cloud-sun");
+    addMapping([3], "cloud");
+    addMapping([45, 48], "smog");
+    addMapping(
+      [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82],
+      "cloud-showers-heavy"
+    );
+    addMapping([71, 73, 75, 77, 85, 86], "snowflake");
+    addMapping([95, 96, 99], "cloud-bolt");
+
+    function addMapping(values, icon) {
+      values.forEach((value) => {
+        ICON_MAP.set(value, icon);
+      });
+    }
+
     function positionSuccess({ coords }) {
       getWeather(coords.latitude, coords.longitude)
-        .then((temp) => {
+        .then((weatherData) => {
           let weatherTemp = document.getElementById("weatherTemp");
           if (weatherTemp) {
-            weatherTemp.innerHTML = `${temp}°c`;
+            weatherTemp.innerHTML = `${weatherData.temperature}°C`;
+            const weatherIconContainer =
+              document.querySelector(".weather-icon");
+            function getIconUrl(weatherCode) {
+              return `${ICON_MAP.get(weatherCode)}.svg`;
+
+              getIconUrl(weatherCode);
+              currentIcon.src = getIconUrl(weatherCode);
+            }
+          } else {
+            console.error("Element with id 'weatherTemp' not found");
           }
         })
         .catch((err) => {
@@ -56,12 +92,6 @@ window.onload = () => {
         "Please allow us to use your location and refresh the page, or you can't get weather info for your position."
       );
     }
-
-    function getIconUrl(iconCode) {
-      return `icons/${ICON_MAP.get(iconCode)}.svg`;
-    }
-
-    const currentIcon = document.querySelector("[data-current-icon]");
   }
   // WEATHER ENDS
 
@@ -244,7 +274,7 @@ window.onload = () => {
     // Checking if saved toDoItem has statusValue == true or false
     // and putting it in "My todos" or "Completed todos" because of that
     if (toDoItem.statusValue === false) {
-      todosContainer?.prepend(todoCard);
+      todosContainer?.append(todoCard);
     } else {
       completedTodosContainer?.appendChild(todoCard);
       todoInfo.classList.add("completed-todo-info");
@@ -360,7 +390,7 @@ window.onload = () => {
     let finalQuote = quote.content;
     let author = quote.author;
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     const userName = currentUser ? currentUser.newUsername : "Guest";
 
     greeting.innerText = `Hello, ${userName}!`;
@@ -487,7 +517,7 @@ window.onload = () => {
       newPassword,
       toDoList,
       habitList,
-      events,
+      eventList,
     };
 
     registeredUsers.push(newUser);
@@ -527,7 +557,7 @@ window.onload = () => {
     fetchData();
   }
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
   if (currentUser && currentUser.toDoList && currentUser.toDoList.length > 0) {
     currentUser.toDoList.forEach((toDoItem) => {
@@ -615,7 +645,7 @@ window.onload = () => {
         ? a.estimatedTime - b.estimatedTime
         : b.estimatedTime - a.estimatedTime;
     });
-    console.log("Sorted by estimated time:", sortedTodos);
+    // console.log("Sorted by estimated time:", sortedTodos);
 
     renderSortedTodos(sortedTodos);
   };
@@ -971,28 +1001,11 @@ window.onload = () => {
 
   //-----CALENDAR EVENTS STARTS!--------------------------------------
 
-  let habitList = [];
-  let updatedEvents = [];
-
-  let events = JSON.parse(localStorage.getItem("events")) || [];
+  currentUser = JSON.parse(localStorage.getItem("currentUser")) || {};
+  let eventList = currentUser.eventList || []; // Accessing eventList directly from currentUser
   registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
   /**EVENT LIST******************************* */
-
-  function updateLocalStorage(updatedEvents) {
-    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (currentUser && registeredUsers) {
-      currentUser.event = updatedEvents;
-      registeredUsers = registeredUsers.map((user) =>
-        user.id === currentUser.id ? currentUser : user
-      );
-
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
-    } else {
-      console.error("error");
-    }
-  }
 
   /*********************************** */
 
@@ -1000,8 +1013,23 @@ window.onload = () => {
   const eventTitleInput = document.getElementById("eventTitle");
   const eventStartTimeInput = document.getElementById("eventStartTime");
   const eventEndTimeInput = document.getElementById("eventEndTime");
-  const eventList = document.getElementById("eventList");
+  const eventUl = document.getElementById("eventUl");
   // const submit = document.getElementById("submitCalendarBtn");
+
+  function updateEventLocalStorage(updatedEventList) {
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && registeredUsers) {
+      currentUser.eventList = updatedEventList;
+      registeredUsers = registeredUsers.map((user) =>
+        user.id === currentUser.id ? currentUser : user
+      );
+
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+    } else {
+      console.error("Error: currentUser or registeredUsers not found.");
+    }
+  }
 
   const createEvent = (title, startTime, endTime) => {
     if (startTime >= endTime) {
@@ -1009,7 +1037,7 @@ window.onload = () => {
       return;
     }
 
-    const isOverlap = events.some(
+    const isOverlap = currentUser.eventList.some(
       (event) =>
         (startTime >= event.startTime && startTime < event.endTime) ||
         (endTime > event.startTime && endTime <= event.endTime) ||
@@ -1020,25 +1048,24 @@ window.onload = () => {
       alert("Time conflict with other event!");
       return;
     }
-    events.push({ title, startTime, endTime });
 
-    localStorage.setItem("events", JSON.stringify(events));
-    updateLocalStorage(events);
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    updateEventLocalStorage(currentUser.eventList);
 
     displayEvents();
   };
 
   const displayEvents = () => {
-    eventList.innerHTML = "";
+    eventUl.innerHTML = "";
     const today = new Date();
 
-    events.sort((a, b) => a.startTime - b.startTime);
+    eventList.sort((a, b) => a.startTime - b.startTime);
 
-    events.forEach((event) => {
+    eventList.forEach((event) => {
       const listItem = document.createElement("li");
-      listItem.textContent = `${event.title} 
-                                Starts: ${event.startTime.toLocaleString()} 
-                                Ends: ${event.endTime.toLocaleString()}`;
+      listItem.innerHTML = `<b>${event.title}</b><br>
+      Starts: ${event.startTime.toLocaleString()}<br>
+      Ends: ${event.endTime.toLocaleString()}`;
 
       if (event.endTime < today) {
         listItem.classList.add("pastEvent");
@@ -1047,7 +1074,7 @@ window.onload = () => {
       } else {
         listItem.classList.add("currentEvent");
       }
-      eventList.appendChild(listItem);
+      eventUl.appendChild(listItem);
     });
   };
 
@@ -1061,5 +1088,34 @@ window.onload = () => {
 
     createEvent(title, startTime, endTime);
     eventForm.reset();
+
+    let eventItem = { title, startTime, endTime };
+    // eventList.push({ title, startTime, endTime });
+
+    //Create a copy of currentUser to avoid modifying the original object
+    const updatedUser = { ...currentUser };
+
+    if (!updatedUser.eventList) {
+      updatedUser.eventList = []; // Initialize array event if it does not exist
+    }
+
+    //Pushes eventInputValue to updatedUser (earlier currentUser)
+    updatedUser.eventList.push(eventItem);
+
+    //Update registered users array with changes
+    const updatedRegisteredUsers = registeredUsers.map((user) =>
+      user.id === updatedUser.id ? updatedUser : user
+    );
+
+    //Save the updatedUser to JSON string representing currentUser object in the Local Storage
+    localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+
+    //Save the updated registered users array as JSON string to the registeredUsers array localStorage
+    localStorage.setItem(
+      "registeredUsers",
+      JSON.stringify(updatedRegisteredUsers)
+    );
+
+    titleInput.value = "";
   });
 };

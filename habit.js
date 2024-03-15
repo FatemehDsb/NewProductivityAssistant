@@ -1,64 +1,67 @@
+let helper = document.createElement("img");
+
 window.onload = () => {
   //WEATHER STARTS
-
-  let getWeather = async (latitude, longitude) => {
-    let response = await axios.get(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
-    );
-    return {
-      temperature: response.data.current_weather.temperature,
-      weatherCode: response.data.current.weather_code,
+  if (helper) {
+    let getWeather = async (latitude, longitude) => {
+      let response = await axios.get(
+        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+      );
+      return {
+        temperature: response.data.current_weather.temperature,
+        weatherCode: response.data.current_weather.weathercode,
+      };
     };
-  };
 
-  navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
+    navigator.geolocation.getCurrentPosition(positionSuccess, positionError);
 
-  const ICON_MAP = new Map();
+    const ICON_MAP = new Map();
 
-  addMapping([0, 1], "sun");
-  addMapping([2], "cloud-sun");
-  addMapping([3], "cloud");
-  addMapping([45, 48], "smog");
-  addMapping(
-    [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82],
-    "cloud-showers-heavy"
-  );
-  addMapping([71, 73, 75, 77, 85, 86], "snowflake");
-  addMapping([95, 96, 99], "cloud-bolt");
-
-  function addMapping(values, icon) {
-    values.forEach((value) => {
-      ICON_MAP.set(value, icon);
-    });
-  }
-
-  function positionSuccess({ coords }) {
-    getWeather(coords.latitude, coords.longitude)
-      .then(({ temperature, weatherCode }) => {
-        console.log(weatherCode);
-        let weatherTemp = document.getElementById("weatherTemp");
-        const currentIcon = document.querySelector(".weather-icon");
-        if (weatherTemp) {
-          weatherTemp.innerHTML = `${temperature}°c`;
-          const weatherIconContainer = document.querySelector(".weather-icon");
-          function getIconUrl(weatherCode) {
-            return `${ICON_MAP.get(weatherCode)}.svg`;
-          }
-          getIconUrl(weatherCode);
-          currentIcon.src = getIconUrl(weatherCode);
-        } else {
-          console.error("Element with id 'weatherTemp' not found");
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching weather:", err);
-      });
-  }
-
-  function positionError() {
-    alert(
-      "Please allow us to use your location and refresh the page, or you can't get weather info for your position."
+    addMapping([0, 1], "sun");
+    addMapping([2], "cloud-sun");
+    addMapping([3], "cloud");
+    addMapping([45, 48], "smog");
+    addMapping(
+      [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82],
+      "cloud-showers-heavy"
     );
+    addMapping([71, 73, 75, 77, 85, 86], "snowflake");
+    addMapping([95, 96, 99], "cloud-bolt");
+
+    function addMapping(values, icon) {
+      values.forEach((value) => {
+        ICON_MAP.set(value, icon);
+      });
+    }
+
+    function positionSuccess({ coords }) {
+      getWeather(coords.latitude, coords.longitude)
+        .then((weatherData) => {
+          let weatherTemp = document.getElementById("weatherTemp");
+          if (weatherTemp) {
+            weatherTemp.innerHTML = `${weatherData.temperature}°C`;
+            const weatherIconContainer =
+              document.querySelector(".weather-icon");
+            function getIconUrl(weatherCode) {
+              return `${ICON_MAP.get(weatherCode)}.svg`;
+
+              getIconUrl(weatherCode);
+              currentIcon.src = getIconUrl(weatherCode);
+            }
+          } else {
+            console.error("Element with id 'weatherTemp' not found");
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching weather:", err);
+        });
+    }
+
+    function positionError() {
+      alert(
+        "Please allow us to use your location and refresh the page, or you can't get weather info for your position."
+      );
+    }
   }
 
   // WEATHER ENDS

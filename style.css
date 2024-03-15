@@ -198,7 +198,7 @@ fieldset {
 
 #topHeaderRight {
   display: flex;
-  gap: 20px;
+  gap: 10px;
   color: var(--color-brand-primary-light);
 }
 
