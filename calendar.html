@@ -10,6 +10,7 @@
       src="https://kit.fontawesome.com/74a3d29713.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div id="todosTopHeader" class="top-header">
@@ -22,10 +23,14 @@
         ></i>
       </div>
       <div id="topHeaderRight">
-        <i class="fa fa-duotone fa-cloud fa-xl"></i>
+        <div class="weather-icon">
+          <img src="icons/cloud.svg" class="weather-icon" />
+        </div>
+        <div id="weatherTemp">°c</div>
       </div>
     </div>
-    <!--------KNAPPAR--HABITS/TODOS------->
+
+    <!--KNAPPAR--HABITS/TODOS------->
     <nav class="header-container">
       <a href="todo.html" id="todosTab">Todos</a>
       <a href="habit.html" id="habitTab">Habits</a>
@@ -43,7 +48,7 @@
         <button type="submit" id="submitCalendarBtn">Add Event</button>
       </form>
       <h2>Your Events</h2>
-      <ul id="eventList"></ul>
+      <ul id="eventUl"></ul>
     </div>
     <div id="footer" class="todo-footer">
       <i class="fa fa-duotone fa-stopwatch fa-2x" id="openPomodoroBtn"></i>
