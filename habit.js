@@ -1,15 +1,33 @@
-let helper = document.createElement("img");
-
 window.onload = () => {
+  const pomodoroModal = document.getElementById("pomodoroModal");
+
+  let logOutBtn = document.getElementById("logOutBtn");
+  const addHabitBtn = document.getElementById("addHabitBtn");
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const saveBtn = document.getElementById("saveHabitBtn");
+
+  //Get inputs
+  let titleInput = document.getElementById("input-title");
+  const priorityInput = document.getElementById("priorityInput");
+
+  let registeredUsers =
+    JSON.parse(localStorage.getItem("registeredUsers")) || [];
+  let userIdCounter = localStorage.getItem("userIdCounter") || 0;
+
   //WEATHER STARTS
-  if (helper) {
+  if (window.location.pathname === "/habit.html") {
     let getWeather = async (latitude, longitude) => {
       let response = await axios.get(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
       );
+
+      let temperature = response.data.current_weather.temperature;
+      let weatherCode = response.data.current_weather.weathercode;
+
       return {
-        temperature: response.data.current_weather.temperature,
-        weatherCode: response.data.current_weather.weathercode,
+        temperature,
+        weatherCode,
       };
     };
 
@@ -40,14 +58,13 @@ window.onload = () => {
           let weatherTemp = document.getElementById("weatherTemp");
           if (weatherTemp) {
             weatherTemp.innerHTML = `${weatherData.temperature}°C`;
-            const weatherIconContainer =
-              document.querySelector(".weather-icon");
-            function getIconUrl(weatherCode) {
-              return `${ICON_MAP.get(weatherCode)}.svg`;
 
-              getIconUrl(weatherCode);
-              currentIcon.src = getIconUrl(weatherCode);
+            const currentIcon = document.querySelector(".weather-icon");
+            function getIconUrl(weatherCode) {
+              const iconName = ICON_MAP.get(weatherCode);
+              return `icons/${iconName}.svg`;
             }
+            currentIcon.src = getIconUrl(weatherData.weatherCode);
           } else {
             console.error("Element with id 'weatherTemp' not found");
           }
@@ -65,25 +82,6 @@ window.onload = () => {
   }
 
   // WEATHER ENDS
-
-  const pomodoroModal = document.getElementById("pomodoroModal");
-  if (pomodoroModal) {
-    pomodoroModal.style.display = "none";
-  }
-
-  let logOutBtn = document.getElementById("logOutBtn");
-  const addHabitBtn = document.getElementById("addHabitBtn");
-
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const saveBtn = document.getElementById("saveHabitBtn");
-
-  //Get inputs
-  let titleInput = document.getElementById("input-title");
-  const priorityInput = document.getElementById("priorityInput");
-
-  let registeredUsers =
-    JSON.parse(localStorage.getItem("registeredUsers")) || [];
-  let userIdCounter = localStorage.getItem("userIdCounter") || 0;
 
   /**********FUNCTION TO SAVE CHANGES ************************ */
 
@@ -580,6 +578,10 @@ window.onload = () => {
   });
 
   // POMODORA Modal begins here ----------------------------------------
+  if (pomodoroModal) {
+    pomodoroModal.style.display = "none";
+  }
+
   const openPomodoroModalBtn = document.getElementById("openPomodoroBtn");
 
   const pomodoroModalSpan =

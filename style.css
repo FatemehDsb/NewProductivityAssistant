@@ -183,6 +183,12 @@ fieldset {
   .fa-cloud {
     color: var(--color-brand-primary-light);
   }
+  #topHeaderRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-brand-primary-light);
+  }
 }
 
 #habitsTopHeader {
@@ -194,12 +200,12 @@ fieldset {
   .fa-cloud {
     color: var(--color-brand-secondary-light);
   }
-}
-
-#topHeaderRight {
-  display: flex;
-  gap: 10px;
-  color: var(--color-brand-primary-light);
+  #topHeaderRight {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-brand-secondary-light);
+  }
 }
 
 .weather-icon {
@@ -219,10 +225,6 @@ fieldset {
   z-index: 2;
 }
 
-#weatherTemp {
-  color: var(--color-brand-primary-light);
-}
-
 #quoteContainer {
   display: flex;
   flex-direction: column;
@@ -238,6 +240,7 @@ fieldset {
 #quote {
   margin-bottom: 0;
   font-size: 14px;
+  padding: 5px;
 }
 #greeting {
   margin-top: 30px;
@@ -992,6 +995,7 @@ label {
   background: #e1f0fe;
   font-family: "Afacad", sans-serif;
   font-optical-sizing: auto;
+  height: 100%;
 }
 
 .calContainer h1 {
@@ -1024,7 +1028,7 @@ label {
 
 #submitCalendarBtn {
   padding: 0.5rem 1rem;
-  margin: 0.5rem;
+  margin: 1.5rem;
   border: none;
   border-radius: 5px;
   background-color: var(--color-brand-primary-dark);

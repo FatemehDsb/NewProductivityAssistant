@@ -1,11 +1,8 @@
 let events = [];
 
 window.onload = () => {
-  //Declaring username and password input
   const pomodoroModal = document.getElementById("pomodoroModal");
-  if (pomodoroModal) {
-    pomodoroModal.style.display = "none";
-  }
+
   let usernameInput = document.getElementById("userName");
   let passwordInput = document.getElementById("password");
   let todosContainer = document.getElementById("todosContainer");
@@ -37,9 +34,13 @@ window.onload = () => {
       let response = await axios.get(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
       );
+
+      let temperature = response.data.current_weather.temperature;
+      let weatherCode = response.data.current_weather.weathercode;
+
       return {
-        temperature: response.data.current_weather.temperature,
-        weatherCode: response.data.current_weather.weathercode,
+        temperature,
+        weatherCode,
       };
     };
 
@@ -70,14 +71,13 @@ window.onload = () => {
           let weatherTemp = document.getElementById("weatherTemp");
           if (weatherTemp) {
             weatherTemp.innerHTML = `${weatherData.temperature}°C`;
-            const weatherIconContainer =
-              document.querySelector(".weather-icon");
-            function getIconUrl(weatherCode) {
-              return `${ICON_MAP.get(weatherCode)}.svg`;
 
-              getIconUrl(weatherCode);
-              currentIcon.src = getIconUrl(weatherCode);
+            const currentIcon = document.querySelector(".weather-icon");
+            function getIconUrl(weatherCode) {
+              const iconName = ICON_MAP.get(weatherCode);
+              return `icons/${iconName}.svg`;
             }
+            currentIcon.src = getIconUrl(weatherData.weatherCode);
           } else {
             console.error("Element with id 'weatherTemp' not found");
           }
@@ -814,6 +814,10 @@ window.onload = () => {
   }
 
   // POMODORA Modal begins here ----------------------------------------
+  if (pomodoroModal) {
+    pomodoroModal.style.display = "none";
+  }
+
   const openPomodoroModalBtn = document.getElementById("openPomodoroBtn");
 
   const pomodoroModalSpan =
@@ -1005,10 +1009,6 @@ window.onload = () => {
   let eventList = currentUser.eventList || []; // Accessing eventList directly from currentUser
   registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
 
-  /**EVENT LIST******************************* */
-
-  /*********************************** */
-
   const eventForm = document.getElementById("eventForm");
   const eventTitleInput = document.getElementById("eventTitle");
   const eventStartTimeInput = document.getElementById("eventStartTime");
@@ -1016,10 +1016,10 @@ window.onload = () => {
   const eventUl = document.getElementById("eventUl");
   // const submit = document.getElementById("submitCalendarBtn");
 
-  function updateEventLocalStorage(updatedEventList) {
+  function updateEventLocalStorage(eventList) {
     let currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (currentUser && registeredUsers) {
-      currentUser.eventList = updatedEventList;
+      currentUser.eventList = eventList;
       registeredUsers = registeredUsers.map((user) =>
         user.id === currentUser.id ? currentUser : user
       );
@@ -1037,7 +1037,7 @@ window.onload = () => {
       return;
     }
 
-    const isOverlap = currentUser.eventList.some(
+    const isOverlap = eventList.some(
       (event) =>
         (startTime >= event.startTime && startTime < event.endTime) ||
         (endTime > event.startTime && endTime <= event.endTime) ||
@@ -1050,7 +1050,7 @@ window.onload = () => {
     }
 
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    updateEventLocalStorage(currentUser.eventList);
+    updateEventLocalStorage(eventList);
 
     displayEvents();
   };
@@ -1089,8 +1089,8 @@ window.onload = () => {
     createEvent(title, startTime, endTime);
     eventForm.reset();
 
-    let eventItem = { title, startTime, endTime };
-    // eventList.push({ title, startTime, endTime });
+    const eventItem = { title, startTime, endTime };
+    eventList.push(eventItem);
 
     //Create a copy of currentUser to avoid modifying the original object
     const updatedUser = { ...currentUser };
@@ -1116,6 +1116,6 @@ window.onload = () => {
       JSON.stringify(updatedRegisteredUsers)
     );
 
-    titleInput.value = "";
+    // titleInput.value = "";
   });
 };
