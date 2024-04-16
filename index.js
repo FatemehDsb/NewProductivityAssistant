@@ -1,6 +1,6 @@
 let events = [];
 
-window.onload = () => {
+document.addEventListener('DOMContentLoaded', function() {
   const pomodoroModal = document.getElementById("pomodoroModal");
 
   let usernameInput = document.getElementById("userName");
@@ -814,9 +814,9 @@ window.onload = () => {
   }
 
   // POMODORA Modal begins here ----------------------------------------
-  if (pomodoroModal) {
+ 
     pomodoroModal.style.display = "none";
-  }
+  
 
   const openPomodoroModalBtn = document.getElementById("openPomodoroBtn");
 
@@ -886,6 +886,7 @@ window.onload = () => {
   //start timer
   startButton?.addEventListener("click", () => {
     let timerInput = document.getElementById("timerTime");
+    startButton.style.display="none";
 
     if (pomodoroModal) {
       pomodoroModal.style.background = "#9ba9db";
@@ -1118,4 +1119,4 @@ window.onload = () => {
 
     // titleInput.value = "";
   });
-};
+});
