@@ -1,5 +1,5 @@
-let events = [];
 
+let events = [];
 document.addEventListener('DOMContentLoaded', function() {
   const pomodoroModal = document.getElementById("pomodoroModal");
 
@@ -815,8 +815,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // POMODORA Modal begins here ----------------------------------------
  
-    pomodoroModal.style.display = "none";
-  
+    if (pomodoroModal){
+      pomodoroModal.style.display = "none";
+    }
 
   const openPomodoroModalBtn = document.getElementById("openPomodoroBtn");
 
